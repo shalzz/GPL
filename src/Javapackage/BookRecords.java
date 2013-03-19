@@ -16,9 +16,7 @@ import Classes.myQueries;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import javax.imageio.ImageIO;
@@ -258,20 +256,7 @@ String username;
            JOptionPane.showMessageDialog (this, "Please Enter the url");
        }
        else
-       {URL url1=null;
-           try {
-            url1= new URL (url);
-        } catch (java.net.MalformedURLException e) {
-        }
-         Image img= image.resizedplusImage(url1, 200, 300);
-          BufferedImage resizedImage = (BufferedImage)img;
-          try
-          {ImageIO.write(resizedImage, "jpg", new File("src//"+code+".jpg")); }
-          catch(java.io.IOException e)
-          {
-              JOptionPane.showMessageDialog (this, e.getMessage());
-          }
-          
+       {
         try{
               Statement stmt = myQueries.getStmt();
               if(cb1.isSelected())
@@ -290,6 +275,25 @@ String username;
         {
          JOptionPane.showMessageDialog (this, e.getMessage());
         }
+        URL url1=null;
+           try {
+            url1= new URL (url);
+        } catch (java.net.MalformedURLException e) {
+        }
+         Image img= image.resizedplusImage(url1, 200, 300);
+          BufferedImage resizedImage = (BufferedImage)img;
+          try
+          {ImageIO.write(resizedImage, "jpg", new File("src\\"+code+".jpg")); }
+          catch(java.io.IOException e)
+          {
+              JOptionPane.showMessageDialog (this, e.getMessage());
+          }
+          try
+          {ImageIO.write(resizedImage, "jpg", new File("C:\\Users\\Shaleen\\Desktop\\"+code+".jpg")); }
+          catch(java.io.IOException e)
+          {
+              JOptionPane.showMessageDialog (this, e.getMessage());
+          }
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
