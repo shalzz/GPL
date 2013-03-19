@@ -269,7 +269,7 @@ String username;
           {ImageIO.write(resizedImage, "jpg", new File("src//"+code+".jpg")); }
           catch(java.io.IOException e)
           {
-              
+              JOptionPane.showMessageDialog (this, e.getMessage());
           }
           
         try{
