@@ -265,7 +265,7 @@ String username;
                   ResultSet rs=stmt.executeQuery(query);
                   rs.next();
                   code=rs.getInt("max(bookcode)")+1;
-                  t1.setText(""+code);
+                  t8.setText(""+code);
               }
               query="INSERT INTO books VALUES('"+code+"','"+name+"','"+author+"','"+rdate+"','"+pages+"','"+genre+"','"+review+"');";
               stmt.executeUpdate(query);
@@ -288,12 +288,7 @@ String username;
           {
               JOptionPane.showMessageDialog (this, e.getMessage());
           }
-          try
-          {ImageIO.write(resizedImage, "jpg", new File("C:\\Users\\Shaleen\\Desktop\\"+code+".jpg")); }
-          catch(java.io.IOException e)
-          {
-              JOptionPane.showMessageDialog (this, e.getMessage());
-          }
+          
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
