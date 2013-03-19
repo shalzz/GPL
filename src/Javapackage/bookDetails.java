@@ -140,11 +140,11 @@ public class bookDetails extends javax.swing.JFrame {
         l2.setFont(new java.awt.Font("Century Gothic", 0, 14));
         getContentPane().add(l2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 180, 15));
 
-        l3.setFont(new java.awt.Font("Century Gothic", 0, 14));
-        getContentPane().add(l3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 200, 15));
+        l3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        getContentPane().add(l3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 320, 15));
 
-        l4.setFont(new java.awt.Font("Century Gothic", 0, 14));
-        getContentPane().add(l4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 193, 15));
+        l4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        getContentPane().add(l4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 193, 20));
 
         l5.setFont(new java.awt.Font("Century Gothic", 0, 14));
         getContentPane().add(l5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 193, 15));
