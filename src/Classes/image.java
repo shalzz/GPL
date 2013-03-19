@@ -53,7 +53,7 @@ public class image {
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.drawImage(image, 0, 0, width, height, null); 
+        g.drawImage(image, 0, 0, width, (int)(height/aspectRatio), null); 
         g.dispose();
         return new ImageIcon(resizedImage);
     }

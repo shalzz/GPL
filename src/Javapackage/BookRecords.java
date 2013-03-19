@@ -15,8 +15,13 @@ import Classes.image;
 import Classes.myQueries;
 import com.mysql.jdbc.Statement;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
@@ -264,9 +269,15 @@ String username;
             url1= new URL (url);
         } catch (java.net.MalformedURLException e) {
         }
-     
-           Image img= image.resizedplusImage(url1, code, pages);
-           
+         Image img= image.resizedplusImage(url1, 200, 300);
+          BufferedImage resizedImage = (BufferedImage)img;
+          try
+          {ImageIO.write(resizedImage, "jpg", new File("src//"+code+".jpg")); }
+          catch(java.io.IOException e)
+          {
+              
+          }
+          
         try{
               Statement stmt = myQueries.getStmt();
               if(cb1.isSelected())
