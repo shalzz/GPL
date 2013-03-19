@@ -179,6 +179,7 @@ public class bookDetails extends javax.swing.JFrame {
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setLayoutOrientation(javax.swing.JList.HORIZONTAL_WRAP);
+        jList1.setSelectionBackground(new java.awt.Color(51, 204, 255));
         jList1.setVisibleRowCount(1);
         jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {

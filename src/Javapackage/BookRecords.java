@@ -223,7 +223,7 @@ String username;
        String url=t9.getText();
        try
        {
-           pages=Integer.parseInt(t9.getText());
+           pages=Integer.parseInt(t5.getText());
        }
        catch(NumberFormatException e)
        {
@@ -310,7 +310,7 @@ String username;
     private void cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb1ActionPerformed
 if(cb1.isSelected()==true)
     {
-        t1.setEditable(false);  
+        t8.setEditable(false);  
         JOptionPane.showMessageDialog (this, "Warning! This may result in duplicate entry of the same book");
     }
 else
