@@ -83,7 +83,7 @@ String username;
         setTitle("Gurgaon Public Library");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14));
         jLabel1.setText("Book Code");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, -1, -1));
 
@@ -91,7 +91,7 @@ String username;
         jLabel3.setText("Book Author");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14));
         jLabel4.setText("Book Cover URL");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, -1, -1));
 
@@ -103,7 +103,7 @@ String username;
         getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 460, 140, -1));
         getContentPane().add(t3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 250, -1));
 
-        jButton1.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Century Gothic", 2, 12));
         jButton1.setText("Insert");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +112,7 @@ String username;
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, 100, -1));
 
-        cb1.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        cb1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cb1.setText("Auto Assign");
         cb1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,12 +129,6 @@ String username;
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14));
         jLabel7.setText("Pages");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, -1));
-
-        t9.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                t9KeyTyped(evt);
-            }
-        });
         getContentPane().add(t9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 250, -1));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14));
@@ -166,7 +160,7 @@ String username;
         jLabel10.setText("Book Code");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Century Gothic", 2, 12));
         jButton2.setText("Delete Book");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,7 +169,7 @@ String username;
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 510, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 14));
         jLabel11.setText("Review");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, -1, -1));
 
@@ -320,14 +314,6 @@ else
 
     }//GEN-LAST:event_cb1ActionPerformed
 
-    private void t9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t9KeyTyped
-        char kc = evt.getKeyChar();
-        if(!(kc>='0'&& kc<='9'))
-        {
-            evt.consume();
-        }
-    }//GEN-LAST:event_t9KeyTyped
-
     private void jMenu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MousePressed
        MainPage a = new MainPage(username);
         a.setVisible(true);
@@ -377,7 +363,11 @@ else
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void t5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t5KeyTyped
-        // TODO add your handling code here:
+         char kc = evt.getKeyChar();
+        if(!(kc>='0'&& kc<='9'))
+        {
+            evt.consume();
+        }
     }//GEN-LAST:event_t5KeyTyped
 
     /**
