@@ -264,6 +264,7 @@ String username;
             url1= new URL (url);
         } catch (java.net.MalformedURLException e) {
         }
+     
            Image img= image.resizedplusImage(url1, code, pages);
            
         try{

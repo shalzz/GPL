@@ -46,7 +46,8 @@ public class image {
             image = ImageIO.read(url);
         } catch (Exception e) {
         }
-        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        double aspectRatio = (double) image.getWidth(null)/(double) image.getHeight(null);
+        BufferedImage resizedImage = new BufferedImage(width, (int)(height/aspectRatio), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = resizedImage.createGraphics();
         g.setComposite(AlphaComposite.Src);
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
