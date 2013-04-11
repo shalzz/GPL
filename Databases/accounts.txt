@@ -1,2 +1,3 @@
 create table accounts(IssuerId integer,username Varchar(10),BookCode integer Primary Key,Bookname Varchar(50),IssueDate date,ReturnDate date);
+
 #Create "Account" Table.
