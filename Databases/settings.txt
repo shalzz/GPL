@@ -1,3 +1,3 @@
+#Create "Settings" Table.
 create table settings(fine integer,issuetime integer,maxbooks integer);
 insert into settings value(1,7,3);
-#Create "Settings" Table.
