@@ -206,7 +206,7 @@ public class bookDetails extends javax.swing.JFrame {
         int i=0,bookcode=0;
         try{
     Statement stmt = myQueries.getStmt();
-   String query="SELECT bookcode FROM books ;";
+   String query="SELECT bookcode FROM books order by bookcode;";
    ResultSet rs = stmt.executeQuery(query);
    while(rs.next())
    {
