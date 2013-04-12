@@ -211,7 +211,7 @@ public class bookDetails extends javax.swing.JFrame {
    while(rs.next())
    {
        
-       if(i==value)
+       if(i==value)//check to ensure column index(mysql) and imageindex(jList1 index) match.
        {
            bookcode=rs.getInt("bookcode");
            break;
