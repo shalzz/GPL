@@ -44,9 +44,9 @@ public class AboutUs extends javax.swing.JFrame {
         initComponents();
         
         try {
-            url = new URL("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/c18.18.230.230/s160x160/419363_3167451192663_1223662012_n.jpg");
-            url1 = new URL("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash3/c31.31.389.389/s160x160/531508_10151267169827294_311403727_n.jpg");
-            url2 = new URL("https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/c171.49.618.618/s160x160/521902_2302249813376_2126182857_n.jpg");
+            url = new URL("https://graph.facebook.com/shaleen.jain3/picture?type=normal");
+            url2 = new URL("https://graph.facebook.com/abhik.das.92/picture?type=large");
+            url1 = new URL("https://graph.facebook.com/anushree1802/picture?type=normal");
         } catch (java.net.MalformedURLException e) {
         }
         
