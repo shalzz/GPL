@@ -111,7 +111,7 @@ public class StartPage extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 220, 80, -1));
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(240, 240, 240));
         jLabel3.setText("Password");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 170, 80, -1));
@@ -123,7 +123,7 @@ public class StartPage extends javax.swing.JFrame {
         });
         getContentPane().add(p1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 170, 150, -1));
 
-        jButton2.setFont(new java.awt.Font("Century Gothic", 0, 12));
+        jButton2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButton2.setText("Sign Up");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,17 +132,17 @@ public class StartPage extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 220, 90, -1));
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Username");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 80, 20));
 
-        t1.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        t1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 140, 150, -1));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 28));
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 28)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 51));
-        jLabel1.setText("Gurgaon Public Library");
+        jLabel1.setText("GNU Public Library");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 320, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/6515527-L.jpg"))); // NOI18N
@@ -163,8 +163,8 @@ public class StartPage extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/frozen-wave-HD_wallpapers.jpg"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 610));
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-1016)/2, (screenSize.height-648)/2, 1016, 648);
+        setSize(new java.awt.Dimension(1016, 648));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
