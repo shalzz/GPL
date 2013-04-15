@@ -27,7 +27,7 @@ package Javapackage;
 
 import Classes.md5hash;
 import Classes.myQueries;
-import java.sql.Statement;
+import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 

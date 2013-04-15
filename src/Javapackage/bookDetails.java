@@ -21,7 +21,7 @@ package Javapackage;
 
 import Classes.image;
 import Classes.myQueries;
-import java.sql.Statement;
+import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
