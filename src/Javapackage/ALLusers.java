@@ -26,7 +26,7 @@
 package Javapackage;
 
 import Classes.myQueries;
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

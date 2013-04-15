@@ -28,7 +28,7 @@ package Javapackage;
 
 import Classes.image;
 import Classes.myQueries;
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -26,7 +26,7 @@
 package Javapackage;
 
 import Classes.myQueries;
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.Date;
