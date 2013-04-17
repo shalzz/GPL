@@ -27,6 +27,7 @@
 package Javapackage;
 
 import Classes.image;
+import Classes.jarLocation;
 import Classes.myQueries;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -297,7 +298,9 @@ String username;
          Image img= image.resizedplusImage(url1, 200, 300);
           BufferedImage resizedImage = (BufferedImage)img;
           try
-          {ImageIO.write(resizedImage, "jpg", new File("src\\"+code+".jpg")); }
+          {
+              String path = jarLocation.getLocation(this);
+              ImageIO.write(resizedImage, "jpg", new File(path+"\\images"+code+".jpg")); }
           catch(java.io.IOException e)
           {
               JOptionPane.showMessageDialog (this, e.getMessage());
