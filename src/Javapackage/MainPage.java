@@ -395,20 +395,20 @@ public class MainPage extends javax.swing.JFrame {
         if (query != null) 
         {
             try {
-                Statement stmt = myQueries.getStmt();
-                ResultSet rs = stmt.executeQuery(query);
+                
+                ResultSet rs = myQueries.excQuery(query);
                 rs.next();
                 if(!(username.equals("all")))
                 {
                 username = rs.getString("username");
                 query = "select fine from settings;";
-                ResultSet rs0 = stmt.executeQuery(query);
+                ResultSet rs0 = myQueries.excQuery(query);
                 rs0.next();
                 fine = rs0.getInt("fine");
                
 
                 query = "SELECT * FROM accounts where username='" + username + "';";
-                ResultSet rs1 = stmt.executeQuery(query);
+                ResultSet rs1 = myQueries.excQuery(query);
                 model.setRowCount(0);
                 while (rs1.next())
                 {
@@ -447,12 +447,12 @@ public class MainPage extends javax.swing.JFrame {
                 else
                 {
                 query = "select fine from settings;";
-                ResultSet rs0 = stmt.executeQuery(query);
+                ResultSet rs0 = myQueries.excQuery(query);
                 rs0.next();
                 fine = rs0.getInt("fine");
                 
                     query = "SELECT * FROM accounts order by username;";
-                ResultSet rs1 = stmt.executeQuery(query);
+                ResultSet rs1 = myQueries.excQuery(query);
                 model.setRowCount(0);
                 while (rs1.next()) 
                 {
@@ -553,17 +553,17 @@ public class MainPage extends javax.swing.JFrame {
         if (row != -1 && query1 != null)
         {
           try {
-                Statement stmt = myQueries.getStmt();
-                ResultSet rs1 = stmt.executeQuery(query1);
+                
+                ResultSet rs1 = myQueries.excQuery(query1);
                 rs1.next();
                 issuerid = rs1.getInt("issuerid");
                 username = rs1.getString("username");
                 query = "select count(*) from accounts where username = '" + username + "';";
-                ResultSet rs2 = stmt.executeQuery(query);
+                ResultSet rs2 = myQueries.excQuery(query);
                 rs2.next();
                 count = rs2.getInt("count(*)");
                 query = "select * from settings;";
-                ResultSet rs3 = stmt.executeQuery(query);
+                ResultSet rs3 = myQueries.excQuery(query);
                 rs3.next();
                 int issuetime = rs3.getInt("issuetime");
                 int maxbooks = rs3.getInt("maxbooks");
@@ -588,7 +588,7 @@ public class MainPage extends javax.swing.JFrame {
                     String idate = "" + iyear + "/" + imonth + "/" + idayOfMonth;
                     String rdate = "" + ryear + "/" + rmonth + "/" + rdayOfMonth;
                     query = "insert into accounts values(" + issuerid + ",'" + username + "'," + bookcode + ",'" + bookname + "','" + idate + "','" + rdate + "');";
-                    stmt.executeUpdate(query);
+                    myQueries.excUpdate(query);
                     JOptionPane.showMessageDialog(this, "Book Succesfully issued");
                 }
             } 
@@ -659,13 +659,13 @@ public class MainPage extends javax.swing.JFrame {
         {
             try 
             {
-                Statement stmt = myQueries.getStmt();
-                ResultSet rs = stmt.executeQuery(query1);
+                
+                ResultSet rs = myQueries.excQuery(query1);
                 rs.next();
                 issuerid = rs.getInt("issuerid");
                 username = rs.getString("username");
                 query = "delete from accounts where bookcode=" + bookcode + " and bookname='" + bookname + "'and issuerid=" + issuerid + " and username='" + username + "';";
-                stmt.executeUpdate(query);
+                myQueries.excUpdate(query);
                 jButton1.doClick();
                 JOptionPane.showMessageDialog(this, "Book Succesfully Returned");
             } 
@@ -683,11 +683,11 @@ public class MainPage extends javax.swing.JFrame {
         String genre1 = t8.getText();
         String query;
         try {
-            Statement stmt = myQueries.getStmt();
+           
             if (!(genre1.isEmpty())) 
             {
                 query = "SELECT * FROM books where genre like '" + genre1 + "%';";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 model.setRowCount(0);
                 while (rs.next())
                 {
@@ -700,7 +700,7 @@ public class MainPage extends javax.swing.JFrame {
             }else 
             {
                 query = "SELECT * FROM books;";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 model.setRowCount(0);
                 while (rs.next()) {
                     int Bookid = rs.getInt("Bookcode");
@@ -723,11 +723,11 @@ public class MainPage extends javax.swing.JFrame {
         String author1 = t7.getText();
         String query;
         try {
-            Statement stmt = myQueries.getStmt();
+            
             if (!(author1.isEmpty()))
             {
                 query = "SELECT * FROM books where author like '" + author1 + "%';";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) 
                 {
@@ -740,7 +740,7 @@ public class MainPage extends javax.swing.JFrame {
             } else 
             {
                 query = "SELECT * FROM books;";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) 
                 {
@@ -764,11 +764,11 @@ public class MainPage extends javax.swing.JFrame {
         String bookname = t6.getText();
         String query;
         try {
-            Statement stmt = myQueries.getStmt();
+           
             if (!(bookname.isEmpty())) 
             {
                 query = "SELECT * FROM books where bookname like '" + bookname + "%';";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) 
                 {
@@ -781,7 +781,7 @@ public class MainPage extends javax.swing.JFrame {
             } else
             {
                 query = "SELECT * FROM books;";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) 
                 {
@@ -823,11 +823,11 @@ public class MainPage extends javax.swing.JFrame {
         }
 
         try {
-            Statement stmt = myQueries.getStmt();
+            
             if (!(n == 1))
             {
                 query = "SELECT * FROM books where bookcode like '" + bookcode + "%';";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) 
                 {
@@ -840,7 +840,7 @@ public class MainPage extends javax.swing.JFrame {
             } else 
             {
                 query = "SELECT * FROM books;";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) 
                 {
@@ -901,9 +901,9 @@ public class MainPage extends javax.swing.JFrame {
         jScrollPane2.setVisible(true);
         DefaultTableModel model1 = (DefaultTableModel) jTable2.getModel();
         try {
-            Statement stmt = myQueries.getStmt();
+            
             String query = "SELECT * FROM books;";
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = myQueries.excQuery(query);
             model1.setRowCount(0);
             while (rs.next()) 
             {

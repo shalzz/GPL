@@ -27,7 +27,6 @@ package Javapackage;
 
 import Classes.md5hash;
 import Classes.myQueries;
-import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -187,9 +186,9 @@ String username;
        String newpass;
        String query;
    try{
-              Statement stmt = myQueries.getStmt();
+              
               query="select password from users where username='"+username+"';";
-              ResultSet rs =stmt.executeQuery(query);
+              ResultSet rs =myQueries.excQuery(query);
               rs.next();
               String BDoldpass=rs.getString("password");
      if(!(oldpass.isEmpty()&&a.isEmpty()&&b.isEmpty()))
@@ -200,7 +199,7 @@ String username;
             newpass=a;
             newpass=md5hash.passwordsalted(newpass);
             query="update users set password='"+newpass+"' where username='"+username+"'and password='"+oldpass+"'and type='issuer';";
-            stmt.executeUpdate(query);
+            myQueries.excUpdate(query);
             JOptionPane.showMessageDialog (this,"Password Successfully Changed");
              }
              else
@@ -263,10 +262,10 @@ TnC a = new TnC();
         
         else{
         try{
-            Statement stmt = myQueries.getStmt();
+            
             String query="update users set address='"+add+"' ,phoneno="+phone+" where username='"+username+"';";
 
-            stmt.executeUpdate(query);
+            myQueries.excUpdate(query);
             JOptionPane.showMessageDialog (this,"Information added");
         }
         catch(Exception e)

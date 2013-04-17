@@ -22,7 +22,6 @@ package Javapackage;
 
 import Classes.md5hash;
 import Classes.myQueries;
-import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -53,9 +52,9 @@ String username;
          username = username1;
          try 
          {
-             Statement stmt = myQueries.getStmt();
+             
              String query = "select * from settings;";
-             ResultSet rs = stmt.executeQuery(query);
+             ResultSet rs = myQueries.excQuery(query);
              rs.next();
              int issuetime = rs.getInt("issuetime");
              int fine = rs.getInt("fine");
@@ -363,9 +362,9 @@ String username;
        String newpass;
        String query;
         try{
-              Statement stmt = myQueries.getStmt();
+              
              query="select password from users where username='"+username+"';";
-              ResultSet rs =stmt.executeQuery(query);
+              ResultSet rs =myQueries.excQuery(query);
               rs.next();
               String BDoldpass=rs.getString("password");
           if(BDoldpass.equals(oldpass))     
@@ -374,7 +373,7 @@ String username;
             newpass=a;
             newpass=md5hash.passwordsalted(newpass);
             query="update users set password='"+newpass+"' where username='"+username+"'and password='"+oldpass+"'and type='issuer';";
-            stmt.executeUpdate(query);
+            myQueries.excUpdate(query);
             JOptionPane.showMessageDialog (this,"Password Successfully Changed");
              }
              else
@@ -400,14 +399,14 @@ String username;
        String query=null;
        username=t4.getText();
         try{
-              Statement stmt = myQueries.getStmt();
+              
              if((a.equals(b)))
         { 
             newpass=a;
             newpass=md5hash.passwordsalted(newpass);
             query="update users set password='"+newpass+"' where username='"+username+"'and type='issuer';";
         }
-              stmt.executeUpdate(query);
+              myQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this,"Password Successfully Changed");
        }
       catch(Exception e)
@@ -421,10 +420,10 @@ String username;
       String add=ta1.getText();
       String phone=t6.getText();
       try{
-              Statement stmt = myQueries.getStmt();
+              
              String query="update users set address='"+add+"',phoneno='"+phone+"' where username='"+username+"'and type='issuer';";
         
-              stmt.executeUpdate(query);
+              myQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this,"User Info Successfully Changed");
        }
       catch(Exception e)
@@ -461,9 +460,9 @@ String username;
        }
        else{
        try{
-              Statement stmt = myQueries.getStmt();
+              
               String query="update settings set fine='"+fine+"',issuetime='"+issuetime+"',maxbooks="+maxbooks+";";
-              stmt.executeUpdate(query);
+              myQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this,"Settings Changed");
        }
       catch(Exception e)
@@ -490,9 +489,9 @@ String username;
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
       int r = JOptionPane.showConfirmDialog(this,"Are you sure you want to deactivate your account?", "Alert!", JOptionPane.YES_NO_OPTION);
         try { 
-            Statement stmt = myQueries.getStmt();
+            
             String query="select count(*) from users where type = 'admin'";
-            ResultSet rs =stmt.executeQuery(query);  
+            ResultSet rs =myQueries.excQuery(query);  
             rs.next();
             int count =rs.getInt("count(*)");
             if(count>1)    
@@ -500,7 +499,7 @@ String username;
                 if(r==0)
                 {
                  query = "Delete from users where username='"+username+"'";
-                stmt.executeUpdate(query);  
+                myQueries.excUpdate(query);  
                 JOptionPane.showMessageDialog(this, "Account succesfully Deactivated");
                 }
             }else

@@ -28,7 +28,6 @@ package Javapackage;
 
 import Classes.image;
 import Classes.myQueries;
-import com.mysql.jdbc.Statement;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -273,17 +272,17 @@ String username;
        else
        {
         try{
-              Statement stmt = myQueries.getStmt();
+              
               if(cb1.isSelected())
               {
                   query="select  max(bookcode) from books;";
-                  ResultSet rs=stmt.executeQuery(query);
+                  ResultSet rs=myQueries.excQuery(query);
                   rs.next();
                   code=rs.getInt("max(bookcode)")+1;
                   t8.setText(""+code);
               }
               query="INSERT INTO books VALUES('"+code+"','"+name+"','"+author+"','"+rdate+"','"+pages+"','"+genre+"','"+review+"');";
-              stmt.executeUpdate(query);
+              myQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this, "Book Record Succesfully inserted");
        }
       catch(Exception e)
@@ -363,9 +362,9 @@ else
         {
             try
         {
-        Statement stmt = myQueries.getStmt();
+        
         query="Delete from books where bookcode='"+bookcode+"';";
-        stmt.executeUpdate(query);  
+        myQueries.excUpdate(query);  
         JOptionPane.showMessageDialog(this, "Book Record succesfully Deleted");
         }
         catch(Exception e)

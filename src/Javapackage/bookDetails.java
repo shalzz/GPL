@@ -21,7 +21,6 @@ package Javapackage;
 
 import Classes.image;
 import Classes.myQueries;
-import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -45,9 +44,9 @@ public class bookDetails extends javax.swing.JFrame {
         DefaultListModel listModel = new DefaultListModel();
          try
     {
-   Statement stmt = myQueries.getStmt();
+   
    String query="SELECT * FROM books where bookcode ='"+bookcode+"';";
-   ResultSet rs = stmt.executeQuery(query);
+   ResultSet rs = myQueries.excQuery(query);
    rs.next();
 
   String bookname = rs.getString("bookname");
@@ -67,7 +66,7 @@ public class bookDetails extends javax.swing.JFrame {
   
   
   query="SELECT bookcode FROM books order by  bookcode;";
-        ResultSet rs1 = stmt.executeQuery(query);
+        ResultSet rs1 = myQueries.excQuery(query);
         int j=0;
         while(rs1.next())
         {
@@ -220,9 +219,9 @@ public class bookDetails extends javax.swing.JFrame {
         int value=jList1.getSelectedIndex();
         int i=0,bookcode=0;
         try{
-    Statement stmt = myQueries.getStmt();
+    
    String query="SELECT bookcode FROM books order by bookcode;";
-   ResultSet rs = stmt.executeQuery(query);
+   ResultSet rs = myQueries.excQuery(query);
    while(rs.next())
    {
        
@@ -239,9 +238,9 @@ public class bookDetails extends javax.swing.JFrame {
         }
          try
     {
-   Statement stmt1 = myQueries.getStmt();
+   
    String query="SELECT * FROM books where bookcode ='"+bookcode+"';";
-   ResultSet rs = stmt1.executeQuery(query);
+   ResultSet rs = myQueries.excQuery(query);
    rs.next();
 
   String bookname = rs.getString("bookname");

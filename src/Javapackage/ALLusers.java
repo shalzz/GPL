@@ -26,7 +26,6 @@
 package Javapackage;
 
 import Classes.myQueries;
-import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -51,9 +50,9 @@ public class ALLusers extends javax.swing.JFrame {
         DefaultTableModel model1 = (DefaultTableModel) jTable1.getModel();
         try {
 
-            Statement stmt = myQueries.getStmt();
+            
             String query = "SELECT issuerid,username,type,fname FROM users order by fname;";
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = myQueries.excQuery(query);
             model1.setRowCount(0);
             while (rs.next()) 
             {
@@ -235,9 +234,9 @@ public class ALLusers extends javax.swing.JFrame {
         {
             try 
             {
-                Statement stmt = myQueries.getStmt();
+                
                 String query = "SELECT * FROM users where fname ='" + fname + "';";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 rs.next();
 
                 int issuerid = rs.getInt("issuerid");
@@ -279,9 +278,9 @@ public class ALLusers extends javax.swing.JFrame {
             {
                 if(r==0)
                 {
-                Statement stmt = myQueries.getStmt();
+                
                 String query = "Delete from users where username='"+username1+"'and type= 'issuer';";
-                stmt.executeUpdate(query);  
+                myQueries.excUpdate(query);  
                 JOptionPane.showMessageDialog(this, "Account succesfully deleted");
                 model1.removeRow(jTable1.getSelectedRow());
                 }
@@ -300,9 +299,9 @@ public class ALLusers extends javax.swing.JFrame {
         {
             try 
             {
-                Statement stmt = myQueries.getStmt();
+                
                 String query = "SELECT * FROM users where fname ='" + fname + "';";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 rs.next();
 
                 int issuerid = rs.getInt("issuerid");

@@ -183,9 +183,9 @@ public class StartPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please Enter your Password");
         } else {
             try {
-                Statement stmt = myQueries.getStmt();
+                
                 String query = "select username,password,type from users where username='" + user + "';";
-                ResultSet rs = stmt.executeQuery(query);
+                ResultSet rs = myQueries.excQuery(query);
                 rs.next();
                 String DBuser = rs.getString("username");
                 String DBpassword = rs.getString("password");

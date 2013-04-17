@@ -23,7 +23,6 @@ package Javapackage;
 
 import Classes.md5hash;
 import Classes.myQueries;
-import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -156,9 +155,9 @@ public class signup extends javax.swing.JFrame {
        String type="admin";
        int issuerid=0;
        try{
-              Statement stmt = myQueries.getStmt();
+              
               String query="select max(issuerId) from users;";
-              ResultSet rs=stmt.executeQuery(query);
+              ResultSet rs=myQueries.excQuery(query);
               rs.next();
               issuerid=rs.getInt("max(issuerId)")+1;
               }
@@ -183,9 +182,9 @@ public class signup extends javax.swing.JFrame {
           if(a.equals(b)&&!(a.isEmpty()||b.isEmpty()))
           { passwordmd5=md5hash.passwordsalted(password);
            try{
-              Statement stmt = myQueries.getStmt();
+              
               String query="INSERT INTO users VALUES("+issuerid+",'"+name+"','"+secname+"','"+username+"','"+passwordmd5+"','"+gender+"','Null','0000000000','"+type+"');";
-              stmt.executeUpdate(query);
+              myQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this,"Account Successfully created");
               }
                catch(Exception e)
