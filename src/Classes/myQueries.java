@@ -32,12 +32,12 @@ import javax.swing.JOptionPane;
 public class myQueries {
 
     public static void excUpdate(String query) {
-        Statement stmt;
+        
         try {
             Class.forName("java.sql.DriverManager");
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "DPS");
-            stmt = (Statement) con.createStatement();
-            myQueries.excUpdate(query);
+            Statement stmt = (Statement) con.createStatement();
+            stmt.executeUpdate(query);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
