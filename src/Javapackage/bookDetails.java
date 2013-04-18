@@ -1,28 +1,33 @@
 /*
-    GPL(GNU Public Library) is a Library Management System.
-    Copyright (C) 2012-2013  Shaleen Jain
+ GPL(GNU Public Library) is a Library Management System.
+ Copyright (C) 2012-2013  Shaleen Jain
 
-    This file is part of GPL.
+ This file is part of GPL.
 
-    GPL is a free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ GPL is a free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package Javapackage;
 
 import Classes.image;
 import Classes.jarLocation;
 import Classes.myQueries;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
 import java.sql.ResultSet;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -32,62 +37,107 @@ import javax.swing.JOptionPane;
  * @author Shaleen
  */
 public class bookDetails extends javax.swing.JFrame {
-String path = jarLocation.getLocation(this);
+
+    String path = jarLocation.getLocation(this);
+
     /**
      * Creates new form bookDetails
      */
     public bookDetails() {
         initComponents();
-        
-}
+
+    }
+
     public bookDetails(int bookcode) {
         initComponents();
         DefaultListModel listModel = new DefaultListModel();
-         try
-    {
-   
-   String query="SELECT * FROM books where bookcode ='"+bookcode+"';";
-   ResultSet rs = myQueries.excQuery(query);
-   rs.next();
+        try {
 
-  String bookname = rs.getString("bookname");
-  String author = rs.getString("author");
-  String rdate = rs.getString("releasedate");
-  int pages = rs.getInt("pages");
-  String genre = rs.getString("genre");
-  String review = rs.getString("review");
-  l1.setIcon(new ImageIcon(path+"\\images\\"+bookcode+".jpg"));
-  l2.setText(bookcode+"");
-  l3.setText(bookname);
-  l4.setText(author);
-  l5.setText(rdate);
-  l6.setText(""+pages);
-  l7.setText(genre);
-  ta1.setText(review);
-  
-  
-  query="SELECT bookcode FROM books order by  bookcode;";
-        ResultSet rs1 = myQueries.excQuery(query);
-        int j=0;
-        while(rs1.next())
-        {
-       int bookcode1=rs1.getInt("bookcode");
-       ImageIcon img=new ImageIcon(path+"\\images\\"+bookcode1+".jpg");
-       double aspectRatio = (double) img.getIconWidth()/(double) img.getIconHeight();
-        listModel.add(j, (Object)image.resizedplusImageIcon(img, 120, (int)(70/aspectRatio)));
-        j++;
+            String query = "SELECT * FROM books where bookcode ='" + bookcode + "';";
+            ResultSet rs = myQueries.excQuery(query);
+            rs.next();
+
+            String bookname = rs.getString("bookname");
+            String author = rs.getString("author");
+            String rdate = rs.getString("releasedate");
+            int pages = rs.getInt("pages");
+            String genre = rs.getString("genre");
+            String review = rs.getString("review");
+            try 
+            {
+                l1.setIcon(new ImageIcon(getClass().getResource(path + "\\images\\" + bookcode + ".jpg")));
+            } 
+            catch (NullPointerException e)
+            {
+                rs = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                String url = rs.getString("imgURL");
+                URL url1 = new URL(url);
+                l1.setIcon(image.resizedplusImageIcon(url1, 200, 300));
+                //write the image on the drive
+                Image img = image.resizedplusImage(url1, 200, 300);
+                BufferedImage resizedImage = (BufferedImage) img;
+                try 
+                {
+                    new File(path + "\\images").mkdir();
+                    ImageIO.write(resizedImage, "jpg", new File(path + "\\images\\" + bookcode + ".jpg"));
+                } 
+                catch (java.io.IOException f)
+                {
+                    JOptionPane.showMessageDialog(null, f.getMessage());
+                }
+            }
+            l2.setText(bookcode + "");
+            l3.setText(bookname);
+            l4.setText(author);
+            l5.setText(rdate);
+            l6.setText("" + pages);
+            l7.setText(genre);
+            ta1.setText(review);
+
+
+            query = "SELECT bookcode FROM books order by  bookcode;";
+            ResultSet rs1 = myQueries.excQuery(query);
+            int j = 0;
+            while (rs1.next()) {
+                int bookcode1 = rs1.getInt("bookcode");
+                ImageIcon img=null;
+                try
+                {
+                    img = new ImageIcon(getClass().getResource(path + "\\images\\" + bookcode1 + ".jpg"));
+                }
+                catch(NullPointerException e)
+                {
+                    rs = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                String url = rs.getString("imgURL");
+                URL url1 = new URL(url);
+                img = image.resizedplusImageIcon(url1, 200, 300);
+               
+                //write the image on the drive
+                Image img1 = image.resizedplusImage(url1, 200, 300);
+                BufferedImage resizedImage = (BufferedImage) img1;
+                try 
+                {
+                    new File(path + "\\images").mkdir();
+                    ImageIO.write(resizedImage, "jpg", new File(path + "\\images\\" + bookcode + ".jpg"));
+                } 
+                catch (java.io.IOException f)
+                {
+                    JOptionPane.showMessageDialog(null, f.getMessage());
+                }
+                }
+                double aspectRatio = (double) img.getIconWidth() / (double) img.getIconHeight();
+                listModel.add(j, (Object) image.resizedplusImageIcon(img, 120, (int) (70 / aspectRatio)));
+                j++;
+            }
+            jList1.setModel(listModel);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        jList1.setModel(listModel);
 
-    }
-         catch(Exception e)
-    {
-        JOptionPane.showMessageDialog (null, e.getMessage());
-    }
-         
-         jList1.setSelectedIndex(bookcode-1001);
-         jList1.ensureIndexIsVisible(jList1.getSelectedIndex()); 
-         
+        jList1.setSelectedIndex(bookcode - 1001);
+        jList1.ensureIndexIsVisible(jList1.getSelectedIndex());
+
     }
 
     /**
@@ -213,55 +263,72 @@ String path = jarLocation.getLocation(this);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-        int value=jList1.getSelectedIndex();
-        int i=0,bookcode=0;
-        try{
-    
-   String query="SELECT bookcode FROM books order by bookcode;";
-   ResultSet rs = myQueries.excQuery(query);
-   while(rs.next())
-   {
-       
-       if(i==value)//check to ensure column index(mysql) and imageindex(jList1 index) match.
-       {
-           bookcode=rs.getInt("bookcode");
-           break;
-       }
-       i++;
-   }
-        }catch(Exception e)
-        {
-            
-        }
-         try
-    {
-   
-   String query="SELECT * FROM books where bookcode ='"+bookcode+"';";
-   ResultSet rs = myQueries.excQuery(query);
-   rs.next();
+        int value = jList1.getSelectedIndex();
+        int i = 0, bookcode = 0;
+        try {
 
-  String bookname = rs.getString("bookname");
-  String author = rs.getString("author");
-  String rdate = rs.getString("releasedate");
-  int pages = rs.getInt("pages");
-  String genre = rs.getString("genre");
-  String review = rs.getString("review");
-  l1.setIcon(new ImageIcon(path+"\\images\\"+bookcode+".jpg"));
-  l2.setText(bookcode+"");
-  l3.setText(bookname);
-  l4.setText(author);
-  l5.setText(rdate);
-  l6.setText(""+pages);
-  l7.setText(genre);
-  ta1.setText(review);
-    }catch(Exception e)
-    {
-        JOptionPane.showMessageDialog (null, e.getMessage());
-    }
+            String query = "SELECT bookcode FROM books order by bookcode;";
+            ResultSet rs = myQueries.excQuery(query);
+            while (rs.next()) {
+
+                if (i == value)//check to ensure column index(mysql) and imageindex(jList1 index) match.
+                {
+                    bookcode = rs.getInt("bookcode");
+                    break;
+                }
+                i++;
+            }
+        } catch (Exception e) {
+        }
+        try {
+
+            String query = "SELECT * FROM books where bookcode ='" + bookcode + "';";
+            ResultSet rs = myQueries.excQuery(query);
+            rs.next();
+
+            String bookname = rs.getString("bookname");
+            String author = rs.getString("author");
+            String rdate = rs.getString("releasedate");
+            int pages = rs.getInt("pages");
+            String genre = rs.getString("genre");
+            String review = rs.getString("review");
+            try 
+            {
+                l1.setIcon(new ImageIcon(getClass().getResource(path + "\\images\\" + bookcode + ".jpg")));
+            } 
+            catch (NullPointerException e)
+            {
+                rs = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                String url = rs.getString("imgURL");
+                URL url1 = new URL(url);
+                l1.setIcon(image.resizedplusImageIcon(url1, 200, 300));
+                //write the image on the drive
+                Image img = image.resizedplusImage(url1, 200, 300);
+                BufferedImage resizedImage = (BufferedImage) img;
+                try 
+                {
+                    new File(path + "\\images").mkdir();
+                    ImageIO.write(resizedImage, "jpg", new File(path + "\\images\\" + bookcode + ".jpg"));
+                } 
+                catch (java.io.IOException f)
+                {
+                    JOptionPane.showMessageDialog(null, f.getMessage());
+                }
+            }
+            l2.setText(bookcode + "");
+            l3.setText(bookname);
+            l4.setText(author);
+            l5.setText(rdate);
+            l6.setText("" + pages);
+            l7.setText(genre);
+            ta1.setText(review);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_jList1ValueChanged
 
     /**
