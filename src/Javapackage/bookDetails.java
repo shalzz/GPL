@@ -20,6 +20,7 @@
 package Javapackage;
 
 import Classes.image;
+import Classes.jarLocation;
 import Classes.myQueries;
 import java.sql.ResultSet;
 import javax.swing.DefaultListModel;
@@ -31,7 +32,7 @@ import javax.swing.JOptionPane;
  * @author Shaleen
  */
 public class bookDetails extends javax.swing.JFrame {
-
+String path = jarLocation.getLocation(this);
     /**
      * Creates new form bookDetails
      */
@@ -55,7 +56,7 @@ public class bookDetails extends javax.swing.JFrame {
   int pages = rs.getInt("pages");
   String genre = rs.getString("genre");
   String review = rs.getString("review");
-  l1.setIcon(new ImageIcon("src\\"+bookcode+".jpg"));
+  l1.setIcon(new ImageIcon(path+"\\images\\"+bookcode+".jpg"));
   l2.setText(bookcode+"");
   l3.setText(bookname);
   l4.setText(author);
@@ -71,7 +72,7 @@ public class bookDetails extends javax.swing.JFrame {
         while(rs1.next())
         {
        int bookcode1=rs1.getInt("bookcode");
-       ImageIcon img=new ImageIcon("src\\"+bookcode1+".jpg");
+       ImageIcon img=new ImageIcon(path+"\\images\\"+bookcode1+".jpg");
        double aspectRatio = (double) img.getIconWidth()/(double) img.getIconHeight();
         listModel.add(j, (Object)image.resizedplusImageIcon(img, 120, (int)(70/aspectRatio)));
         j++;
@@ -249,7 +250,7 @@ public class bookDetails extends javax.swing.JFrame {
   int pages = rs.getInt("pages");
   String genre = rs.getString("genre");
   String review = rs.getString("review");
-  l1.setIcon(new ImageIcon("src\\"+bookcode+".jpg"));
+  l1.setIcon(new ImageIcon(path+"\\images\\"+bookcode+".jpg"));
   l2.setText(bookcode+"");
   l3.setText(bookname);
   l4.setText(author);
