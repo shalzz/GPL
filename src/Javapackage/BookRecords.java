@@ -282,7 +282,7 @@ String username;
                   code=rs.getInt("max(bookcode)")+1;
                   t8.setText(""+code);
               }
-              query="INSERT INTO books VALUES('"+code+"','"+name+"','"+author+"','"+rdate+"','"+pages+"','"+genre+"','"+review+"');";
+              query="INSERT INTO books VALUES('"+code+"','"+name+"','"+author+"','"+rdate+"','"+pages+"','"+genre+"','"+review+"','"+url+"');";
               myQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this, "Book Record Succesfully inserted");
        }
@@ -300,7 +300,8 @@ String username;
           try
           {
               String path = jarLocation.getLocation(this);
-              ImageIO.write(resizedImage, "jpg", new File(path+"\\images"+code+".jpg")); }
+              new File(path+"\\images").mkdir();
+              ImageIO.write(resizedImage, "jpg", new File(path+"\\images\\"+code+".jpg")); }
           catch(java.io.IOException e)
           {
               JOptionPane.showMessageDialog (this, e.getMessage());

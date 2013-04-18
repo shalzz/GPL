@@ -17,7 +17,7 @@ public class jarLocation {
         URL url = parentComponent.getClass().getProtectionDomain().getCodeSource().getLocation();
         String loc = url.toString();
         int index = loc.lastIndexOf("GPL")+4;
-        String path = loc.substring(0, index);
+        String path = loc.substring(6, index);
         return path;
     }
 }
