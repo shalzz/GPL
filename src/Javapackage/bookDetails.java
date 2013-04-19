@@ -65,12 +65,14 @@ public class bookDetails extends javax.swing.JFrame {
             String review = rs.getString("review");
             try 
             {
-                l1.setIcon(new ImageIcon(getClass().getResource(path + "\\images\\" + bookcode + ".jpg")));
+                l1.setIcon(new ImageIcon(getClass().getResource(path + "images/" + bookcode + ".jpg")));
             } 
             catch (NullPointerException e)
             {
-                rs = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
-                String url = rs.getString("imgURL");
+                System.out.println(path + "images/" + bookcode + ".jpg");
+                /*ResultSet rs1 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                rs1.next();
+                String url = rs1.getString("imgURL");
                 URL url1 = new URL(url);
                 l1.setIcon(image.resizedplusImageIcon(url1, 200, 300));
                 //write the image on the drive
@@ -79,12 +81,13 @@ public class bookDetails extends javax.swing.JFrame {
                 try 
                 {
                     new File(path + "\\images").mkdir();
-                    ImageIO.write(resizedImage, "jpg", new File(path + "\\images\\" + bookcode + ".jpg"));
+                    ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode + ".jpg"));
                 } 
                 catch (java.io.IOException f)
                 {
                     JOptionPane.showMessageDialog(null, f.getMessage());
                 }
+                */
             }
             l2.setText(bookcode + "");
             l3.setText(bookname);
@@ -103,12 +106,14 @@ public class bookDetails extends javax.swing.JFrame {
                 ImageIcon img=null;
                 try
                 {
-                    img = new ImageIcon(getClass().getResource(path + "\\images\\" + bookcode1 + ".jpg"));
+                    img = new ImageIcon(getClass().getResource(path + "images\\" + bookcode1 + ".jpg"));
                 }
                 catch(NullPointerException e)
                 {
-                    rs = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
-                String url = rs.getString("imgURL");
+                    System.out.println("hi! 2");
+                ResultSet rs2 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                rs2.next();
+                String url = rs2.getString("imgURL");
                 URL url1 = new URL(url);
                 img = image.resizedplusImageIcon(url1, 200, 300);
                
@@ -118,7 +123,7 @@ public class bookDetails extends javax.swing.JFrame {
                 try 
                 {
                     new File(path + "\\images").mkdir();
-                    ImageIO.write(resizedImage, "jpg", new File(path + "\\images\\" + bookcode + ".jpg"));
+                    ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode + ".jpg"));
                 } 
                 catch (java.io.IOException f)
                 {
@@ -298,12 +303,14 @@ public class bookDetails extends javax.swing.JFrame {
             String review = rs.getString("review");
             try 
             {
-                l1.setIcon(new ImageIcon(getClass().getResource(path + "\\images\\" + bookcode + ".jpg")));
+                l1.setIcon(new ImageIcon(getClass().getResource(path + "images\\" + bookcode + ".jpg")));
             } 
             catch (NullPointerException e)
             {
-                rs = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
-                String url = rs.getString("imgURL");
+                System.out.println("hi! 3");
+                ResultSet rs1 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                rs1.next();
+                String url = rs1.getString("imgURL");
                 URL url1 = new URL(url);
                 l1.setIcon(image.resizedplusImageIcon(url1, 200, 300));
                 //write the image on the drive
@@ -312,7 +319,7 @@ public class bookDetails extends javax.swing.JFrame {
                 try 
                 {
                     new File(path + "\\images").mkdir();
-                    ImageIO.write(resizedImage, "jpg", new File(path + "\\images\\" + bookcode + ".jpg"));
+                    ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode + ".jpg"));
                 } 
                 catch (java.io.IOException f)
                 {

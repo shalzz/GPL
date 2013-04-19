@@ -301,7 +301,7 @@ String username;
           {
               String path = jarLocation.getLocation(this);
               new File(path+"\\images").mkdir();
-              ImageIO.write(resizedImage, "jpg", new File(path+"\\images\\"+code+".jpg")); }
+              ImageIO.write(resizedImage, "jpg", new File(path+"images\\"+code+".jpg")); }
           catch(java.io.IOException e)
           {
               JOptionPane.showMessageDialog (this, e.getMessage());
