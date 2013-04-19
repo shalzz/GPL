@@ -63,14 +63,12 @@ public class bookDetails extends javax.swing.JFrame {
             int pages = rs.getInt("pages");
             String genre = rs.getString("genre");
             String review = rs.getString("review");
-            try 
+            l1.setIcon(new ImageIcon(path + "images/" + bookcode + ".jpg"));
+            
+            File dir= new File(path + "images/" + bookcode + ".jpg");
+            if (!dir.canRead()) 
             {
-                l1.setIcon(new ImageIcon(getClass().getResource(path + "images/" + bookcode + ".jpg")));
-            } 
-            catch (NullPointerException e)
-            {
-                System.out.println(path + "images/" + bookcode + ".jpg");
-                /*ResultSet rs1 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                ResultSet rs1 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
                 rs1.next();
                 String url = rs1.getString("imgURL");
                 URL url1 = new URL(url);
@@ -83,12 +81,13 @@ public class bookDetails extends javax.swing.JFrame {
                     new File(path + "\\images").mkdir();
                     ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode + ".jpg"));
                 } 
-                catch (java.io.IOException f)
+                catch (java.io.IOException f) 
                 {
                     JOptionPane.showMessageDialog(null, f.getMessage());
                 }
-                */
             }
+               
+            
             l2.setText(bookcode + "");
             l3.setText(bookname);
             l4.setText(author);
@@ -103,15 +102,12 @@ public class bookDetails extends javax.swing.JFrame {
             int j = 0;
             while (rs1.next()) {
                 int bookcode1 = rs1.getInt("bookcode");
-                ImageIcon img=null;
-                try
-                {
-                    img = new ImageIcon(getClass().getResource(path + "images\\" + bookcode1 + ".jpg"));
-                }
-                catch(NullPointerException e)
-                {
-                    System.out.println("hi! 2");
-                ResultSet rs2 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                ImageIcon img = new ImageIcon(path + "images\\" + bookcode1 + ".jpg");
+                
+                dir= new File(path + "images/" + bookcode1 + ".jpg");
+                if (!dir.canRead()) 
+                {                      
+                ResultSet rs2 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode1 + ";");
                 rs2.next();
                 String url = rs2.getString("imgURL");
                 URL url1 = new URL(url);
@@ -123,7 +119,7 @@ public class bookDetails extends javax.swing.JFrame {
                 try 
                 {
                     new File(path + "\\images").mkdir();
-                    ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode + ".jpg"));
+                    ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode1 + ".jpg"));
                 } 
                 catch (java.io.IOException f)
                 {
@@ -301,13 +297,11 @@ public class bookDetails extends javax.swing.JFrame {
             int pages = rs.getInt("pages");
             String genre = rs.getString("genre");
             String review = rs.getString("review");
-            try 
-            {
-                l1.setIcon(new ImageIcon(getClass().getResource(path + "images\\" + bookcode + ".jpg")));
-            } 
-            catch (NullPointerException e)
-            {
-                System.out.println("hi! 3");
+            l1.setIcon(new ImageIcon(path + "images\\" + bookcode + ".jpg"));
+             
+            File dir= new File(path + "images/" + bookcode + ".jpg");
+            if (!dir.canRead()) 
+            {   
                 ResultSet rs1 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
                 rs1.next();
                 String url = rs1.getString("imgURL");
