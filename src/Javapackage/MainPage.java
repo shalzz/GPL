@@ -26,6 +26,7 @@ import java.awt.*;
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.prefs.Preferences;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 /*
@@ -43,7 +44,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Shaleen
  */
 public class MainPage extends javax.swing.JFrame {
-
+    Preferences prefs = Preferences.userNodeForPackage(this.getClass());   
+    private static final String SETUP_HAS_RUN = "setupHasRun";
     /** Creates new form MainPage */
     String username1;
 
@@ -109,18 +111,19 @@ public class MainPage extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gurgaon Public Library");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel1.setText(" Issuer Name");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, -1, -1));
         getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, 83, -1));
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel2.setText("Issuer ID");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
 
@@ -177,7 +180,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Century Gothic", 2, 12));
+        jButton2.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         jButton2.setText("Return Book");
         jButton2.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to Return the Selected Book</p>\n</body>\n</html>");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +190,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 230, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Century Gothic", 2, 12));
+        jButton3.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         jButton3.setText("Issue Book");
         jButton3.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to Issue the Selected Book</p>\n</body>\n</html>");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -197,11 +200,11 @@ public class MainPage extends javax.swing.JFrame {
         });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 100, -1));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 20));
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         jLabel7.setText("Search book By");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel5.setText("Book Code");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
 
@@ -217,7 +220,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         getContentPane().add(t5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 70, -1));
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel6.setText("Book Name");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
 
@@ -235,11 +238,11 @@ public class MainPage extends javax.swing.JFrame {
         });
         getContentPane().add(t7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 80, -1));
 
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setText("Book author");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel9.setText("Genre");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, -1, -1));
 
@@ -278,14 +281,14 @@ public class MainPage extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 357, 1000, 240));
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel3.setText("Welcome Administrator!");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, -1, 20));
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14));
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 30, 70, 20));
 
-        jButton5.setFont(new java.awt.Font("Century Gothic", 2, 12));
+        jButton5.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         jButton5.setText("Clear");
         jButton5.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to Clear the search box</p>\n</body>\n</html>");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -295,7 +298,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
 
-        jButton6.setFont(new java.awt.Font("Century Gothic", 2, 12));
+        jButton6.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         jButton6.setText("Show details");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,7 +307,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 110, -1));
 
-        jButton4.setFont(new java.awt.Font("Century Gothic", 2, 12));
+        jButton4.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         jButton4.setText("View all Books");
         jButton4.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">View books available for issue</p>\n</body>\n</html>");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -341,6 +344,14 @@ public class MainPage extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu3);
 
+        jMenu5.setText("Run Setup");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu5MousePressed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu5);
+
         jMenu1.setText("Log Out");
         jMenu1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jMenu1.setInheritsPopupMenu(true);
@@ -353,8 +364,8 @@ public class MainPage extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-1016)/2, (screenSize.height-661)/2, 1016, 661);
+        setSize(new java.awt.Dimension(1016, 661));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -944,6 +955,11 @@ public class MainPage extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenu1MousePressed
 
+    private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
+       prefs.putBoolean(SETUP_HAS_RUN, false);
+       JOptionPane.showMessageDialog(this,"Setup will run next time you open the app");
+    }//GEN-LAST:event_jMenu5MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -982,6 +998,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

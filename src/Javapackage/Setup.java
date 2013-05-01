@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class Setup extends javax.swing.JFrame {
 
     static String ourNodeName = "/GPL";
-    Preferences prefs = Preferences.userNodeForPackage(this.getClass());
+    Preferences prefs = Preferences.userNodeForPackage(this.getClass());   
     private static final String SETUP_HAS_RUN = "setupHasRun";
     private static final String DBMS_TYPE = "DbmsType";
     private static final String SERVER_URL = "serverURL";
@@ -252,9 +252,12 @@ public class Setup extends javax.swing.JFrame {
             a.setVisible(true);
             this.dispose();
             prefs.putBoolean(SETUP_HAS_RUN, false);
+            
         } else {
             l2.setText("<html>\n" + "<body>\n" + "Welcome!<br>This Wizard will help you setup this program.<br>Click next to continue..\n" + "</body>\n" + "</html>");
             jButton1.setVisible(true);
+            System.out.println(this.getClass());
+            
         }
 
 
@@ -387,13 +390,18 @@ public class Setup extends javax.swing.JFrame {
 
         }
         String query1 = "create table accounts(IssuerId integer,username Varchar(10),BookCode integer Primary Key,Bookname Varchar(50),IssueDate date,ReturnDate date);";
-        String query2 = "create table settings(fine integer,issuetime integer,maxbooks integer);\n" + "insert into settings value(1,7,3);";
+        String query2 = "create table settings(fine integer,issuetime integer,maxbooks integer);\n" + "insert into settings values(1,7,3);";
         String query3 = "create table users(issuerId integer(5) ,fname varchar(15), lname varchar(15),username varchar(20) Primary key,password varchar(32),gender varchar(10),address varchar(40), phoneno long , type varchar(10));\n"
                 + "Insert into users values (100,\"admin\",\"admin\",\"admin\",\"c75af13c992650118785608ba2506a3\",\"Male\",\"7/87,Dallas Street,Houston\",9764578654,\"admin\");";
         myQueries.excUpdate(query1);
         myQueries.excUpdate(query2);
         myQueries.excUpdate(query3);
         prefs.putBoolean(SETUP_HAS_RUN, true);
+        JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");
+        JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");
+        StartPage a = new StartPage();
+            a.setVisible(true);
+            this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

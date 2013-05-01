@@ -35,10 +35,9 @@ import javax.swing.JOptionPane;
  *
  * Created on Jul 17, 2012, 1:33:24 PM
  */
-
 /**
  *
- * @@author Shaleen,Abhik,Anushree
+ * @author Shaleen,Abhik,Anushree
  */
 public class Options extends javax.swing.JFrame {
 String username;

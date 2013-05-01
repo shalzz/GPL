@@ -23,6 +23,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,31 +32,79 @@ import javax.swing.JOptionPane;
  */
 public class myQueries {
 
+    static final Preferences prefs = Preferences.userRoot().node("/Javapackage");
+    private static final String DBMS_TYPE = "DbmsType";
+    private static final String Dbmstype = prefs.get(DBMS_TYPE, "sqlite");
+    private static final String SERVER_URL = "serverURL";
+    private static final String serverurl = prefs.get(SERVER_URL, null);
+    private static final String DB_NAME = "DatabaseName";
+    private static final String dbname = prefs.get(DB_NAME, "project");
+
     public static void excUpdate(String query) {
-        
-        try {
-            Class.forName("java.sql.DriverManager");
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "DPS");
-            Statement stmt = (Statement) con.createStatement();
-            stmt.executeUpdate(query);
+        if (Dbmstype.equals("mysql")) {
+            try {
+                int i = serverurl.indexOf(',');
+                String url = serverurl.substring(0, i);
+                int j = serverurl.indexOf(',', i + 1);
+                String username = serverurl.substring(i, j);
+                String password = serverurl.substring(j);
+                Class.forName("java.sql.DriverManager");
+                Connection con = (Connection) DriverManager.getConnection(url, username, password);
+                Statement stmt = (Statement) con.createStatement();
+                stmt.executeUpdate(query);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        } else {
+            try {
+                // load the sqlite-JDBC driver using the current class loader
+                Class.forName("org.sqlite.JDBC");
+                // create a database connection
+                java.sql.Connection con = (java.sql.Connection) DriverManager.getConnection("jdbc:sqlite:databases\\" + dbname + ".db");
+                java.sql.Statement stmt1 = (java.sql.Statement) con.createStatement();
+                stmt1.setQueryTimeout(30);  // set timeout to 30 sec.
+                stmt1.executeUpdate(query);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
-
     }
 
     public static ResultSet excQuery(String query) {
-        Statement stmt;
-        ResultSet rs = null;
-        try {
-            Class.forName("java.sql.DriverManager");
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "DPS");
-            stmt = (Statement) con.createStatement();
-            rs = stmt.executeQuery(query);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        ResultSet rs = null;
+        if (Dbmstype.equals("mysql")) {
+            try {
+                Statement stmt;
+                int i = serverurl.indexOf(',');
+                String url = serverurl.substring(0, i);
+                int j = serverurl.indexOf(',', i + 1);
+                String username = serverurl.substring(i, j);
+                String password = serverurl.substring(j);
+                Class.forName("java.sql.DriverManager");
+                Connection con = (Connection) DriverManager.getConnection(url, username, password);
+                stmt = (Statement) con.createStatement();
+                rs = stmt.executeQuery(query);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        } else {
+            java.sql.Statement stmt1;
+            try {
+                // load the sqlite-JDBC driver using the current class loader
+                Class.forName("org.sqlite.JDBC");
+                // create a database connection
+                java.sql.Connection con = (java.sql.Connection) DriverManager.getConnection("jdbc:sqlite:databases\\" + dbname + ".db");
+                stmt1 = (java.sql.Statement) con.createStatement();
+                stmt1.setQueryTimeout(30);  // set timeout to 30 sec.
+                rs = stmt1.executeQuery(query);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
         }
         return rs;
     }
