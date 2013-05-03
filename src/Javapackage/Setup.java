@@ -1,6 +1,21 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+    GPL(GNU Public Library) is a Library Management System.
+    Copyright (C) 2012-2013  Shaleen Jain
+
+    This file is part of GPL.
+
+    GPL is a free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package Javapackage;
 
@@ -18,12 +33,12 @@ import javax.swing.JOptionPane;
  */
 public class Setup extends javax.swing.JFrame {
 
-    static String ourNodeName = "/GPL";
     Preferences prefs = Preferences.userNodeForPackage(this.getClass());   
     private static final String SETUP_HAS_RUN = "setupHasRun";
     private static final String DBMS_TYPE = "DbmsType";
     private static final String SERVER_URL = "serverURL";
     private static final String DB_NAME = "DatabaseName";
+
 
     /**
      * Creates new form Setup
@@ -91,7 +106,7 @@ public class Setup extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -130,12 +145,12 @@ public class Setup extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 460, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, -1, -1));
 
         buttonGroup1.add(rb2);
         rb2.setText("Local SQLite Database");
         rb2.setOpaque(false);
-        jPanel1.add(rb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 140, -1));
+        jPanel1.add(rb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 160, -1));
 
         buttonGroup1.add(rb1);
         rb1.setText("Online MySQL Database");
@@ -159,7 +174,7 @@ public class Setup extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, -1, -1));
+        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, -1, -1));
 
         jLabel6.setText("Server URL:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, -1));
@@ -251,13 +266,11 @@ public class Setup extends javax.swing.JFrame {
             StartPage a = new StartPage();
             a.setVisible(true);
             this.dispose();
-            prefs.putBoolean(SETUP_HAS_RUN, false);
+            
             
         } else {
             l2.setText("<html>\n" + "<body>\n" + "Welcome!<br>This Wizard will help you setup this program.<br>Click next to continue..\n" + "</body>\n" + "</html>");
-            jButton1.setVisible(true);
-            System.out.println(this.getClass());
-            
+            jButton1.setVisible(true);           
         }
 
 
@@ -305,9 +318,11 @@ public class Setup extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try{prefs.flush();}
         catch(Exception e)
-        {
-          
-        }
+        {}
+        File dir1 = new File(jarLocation.getLocation(Setup.this) + "databases/");
+                if (!dir1.canRead()) {
+                    dir1.mkdir();
+                }
         if (rb3.isSelected()) {
             jProgressBar1.setVisible(true);
             rb3.setVisible(false);
@@ -316,6 +331,7 @@ public class Setup extends javax.swing.JFrame {
             if (!dir.canRead()) {
                 dir.mkdir();
             }
+            
             for (int bc = 1001; bc <= 1051; bc++) {
                 //calulate the percentage of loop progress
                 float progress = (((float) bc - 1000) / 51) * 100;
@@ -397,10 +413,13 @@ public class Setup extends javax.swing.JFrame {
         myQueries.excUpdate(query2);
         myQueries.excUpdate(query3);
         prefs.putBoolean(SETUP_HAS_RUN, true);
-        JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");
-        JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");
+        JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");       
+        try{prefs.flush();}
+        catch(Exception e)
+        {}
         StartPage a = new StartPage();
             a.setVisible(true);
+            JOptionPane.showMessageDialog(a, "An imperative admin account has been created for you.\n Please use the following info to login\n Username: admin\n Password: password");
             this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 

@@ -19,8 +19,10 @@
  */
 package Classes;
 
+import Javapackage.Setup;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
+import java.io.File;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.prefs.Preferences;
@@ -60,7 +62,7 @@ public class myQueries {
             try {
                 // load the sqlite-JDBC driver using the current class loader
                 Class.forName("org.sqlite.JDBC");
-                // create a database connection
+                // create a database connection                
                 java.sql.Connection con = (java.sql.Connection) DriverManager.getConnection("jdbc:sqlite:databases\\" + dbname + ".db");
                 java.sql.Statement stmt1 = (java.sql.Statement) con.createStatement();
                 stmt1.setQueryTimeout(30);  // set timeout to 30 sec.

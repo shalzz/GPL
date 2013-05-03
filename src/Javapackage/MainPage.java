@@ -956,8 +956,8 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MousePressed
 
     private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
-       prefs.putBoolean(SETUP_HAS_RUN, false);
-       JOptionPane.showMessageDialog(this,"Setup will run next time you open the app");
+       Setup a= new Setup();
+       a.setVisible(true);
     }//GEN-LAST:event_jMenu5MousePressed
 
     /**

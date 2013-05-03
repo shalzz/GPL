@@ -196,7 +196,8 @@ public class StartPage extends javax.swing.JFrame {
             } catch (Exception e) {
                 if (e.getMessage().equals("Illegal operation on empty result set.")) {
                     JOptionPane.showMessageDialog(this, "No such Username Exists");
-                } else {
+                } 
+                else {
                     JOptionPane.showMessageDialog(this, e.getMessage());
                 }
             }
