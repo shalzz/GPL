@@ -19,10 +19,8 @@
  */
 package Classes;
 
-import Javapackage.Setup;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
-import java.io.File;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.prefs.Preferences;
@@ -34,7 +32,7 @@ import javax.swing.JOptionPane;
  */
 public class myQueries {
 
-    static final Preferences prefs = Preferences.userRoot().node("/Javapackage");
+    static final Preferences prefs = Preferences.systemRoot().node("/Javapackage");
     private static final String DBMS_TYPE = "DbmsType";
     private static final String Dbmstype = prefs.get(DBMS_TYPE, "sqlite");
     private static final String SERVER_URL = "serverURL";

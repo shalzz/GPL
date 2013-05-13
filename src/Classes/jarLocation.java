@@ -28,7 +28,7 @@ import java.net.URL;
  */
 public class jarLocation {
 
-    public static String getLocationunfixed(Component parentComponent) {
+    public static String getLocationUnfixed(Component parentComponent) {
         URL url = parentComponent.getClass().getProtectionDomain().getCodeSource().getLocation();
         String loc = url.toString();
         int index = loc.lastIndexOf("GPL")+4;
