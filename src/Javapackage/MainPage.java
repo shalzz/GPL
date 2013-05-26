@@ -19,6 +19,7 @@
  */
 package Javapackage;
 
+import Classes.jarLocation;
 import Classes.myQueries;
 import java.awt.*;
 import java.sql.ResultSet;
@@ -43,7 +44,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MainPage extends javax.swing.JFrame {
 
-    Preferences prefs = Preferences.systemNodeForPackage(this.getClass());
+    Preferences prefs = Preferences.userNodeForPackage(this.getClass());
     private static final String SETUP_HAS_RUN = "setupHasRun";
     /**
      * Creates new form MainPage
@@ -482,7 +483,7 @@ public class MainPage extends javax.swing.JFrame {
                     }
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                e.printStackTrace(jarLocation.getLogPath());
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -663,7 +664,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_t8CaretUpdate
 
@@ -699,7 +700,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_t7CaretUpdate
 
@@ -735,7 +736,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_t6CaretUpdate
 
@@ -785,7 +786,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_t5CaretUpdate
 
@@ -838,7 +839,7 @@ public class MainPage extends javax.swing.JFrame {
                 model1.addRow(new Object[]{Bookid, Bookname, author, genre});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 

@@ -20,6 +20,7 @@
 
 package Javapackage;
 
+import Classes.jarLocation;
 import Classes.md5hash;
 import Classes.myQueries;
 import java.sql.ResultSet;
@@ -198,7 +199,7 @@ public class StartPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "No such Username Exists");
                 } 
                 else {
-                    JOptionPane.showMessageDialog(this, e.getMessage());
+                    e.printStackTrace(jarLocation.getLogPath());
                 }
             }
 

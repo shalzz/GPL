@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
  */
 public class myQueries {
 
-    static final Preferences prefs = Preferences.systemRoot().node("/Javapackage");
+    static final Preferences prefs = Preferences.userRoot().node("/Javapackage");
     private static final String DBMS_TYPE = "DbmsType";
     private static final String Dbmstype = prefs.get(DBMS_TYPE, "sqlite");
     private static final String SERVER_URL = "serverURL";
@@ -54,7 +54,7 @@ public class myQueries {
                 stmt.executeUpdate(query);
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
+                e.printStackTrace(jarLocation.getLogPath());
             }
         } else {
             try {
@@ -67,7 +67,7 @@ public class myQueries {
                 stmt1.executeUpdate(query);
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
+                e.printStackTrace(jarLocation.getLogPath());
             }
         }
     }
@@ -89,7 +89,7 @@ public class myQueries {
                 rs = stmt.executeQuery(query);
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
+                e.printStackTrace(jarLocation.getLogPath());
             }
         } else {
             java.sql.Statement stmt1;
@@ -103,7 +103,7 @@ public class myQueries {
                 rs = stmt1.executeQuery(query);
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
+                e.printStackTrace(jarLocation.getLogPath());
             }
         }
         return rs;

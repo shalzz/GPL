@@ -300,7 +300,7 @@ String username;
           try
           {
               String path = jarLocation.getLocation(this);
-              new File(path+"\\images").mkdir();
+              new File(path+"\\images").mkdirs();
               ImageIO.write(resizedImage, "jpg", new File(path+"images\\"+code+".jpg")); }
           catch(java.io.IOException e)
           {

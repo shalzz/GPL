@@ -33,7 +33,7 @@ import javax.swing.JOptionPane;
  */
 public class Setup extends javax.swing.JFrame {
 
-    Preferences prefs = Preferences.systemNodeForPackage(this.getClass());
+    Preferences prefs = Preferences.userNodeForPackage(this.getClass());
     private static final String SETUP_HAS_RUN = "setupHasRun";
     private static final String DBMS_TYPE = "DbmsType";
     private static final String SERVER_URL = "serverURL";
@@ -339,17 +339,17 @@ public class Setup extends javax.swing.JFrame {
                 prefs.flush();
             } catch (Exception e) {
             }
-            File dir1 = new File(jarLocation.getLocation(this) + "databases/");
+            File dir1 = new File(jarLocation.getLocation(this) + "databases\\");
             if (!dir1.canRead()) {
-                dir1.mkdir();
+                dir1.mkdirs();
             }
             if (rb3.isSelected()) {
                 jProgressBar1.setVisible(true);
                 rb3.setVisible(false);
                 rb4.setVisible(false);
-                File dir = new File(jarLocation.getLocation(this) + "images/");
+                File dir = new File(jarLocation.getLocation(this) + "images\\");
                 if (!dir.canRead()) {
-                    dir.mkdir();
+                    dir.mkdirs();
                 }
 
                 for (int bc = 1001; bc <= 1051; bc++) {
@@ -359,12 +359,12 @@ public class Setup extends javax.swing.JFrame {
                     jProgressBar1.setValue(value);
                     //copy images
                     l5.setText("Copying images...");
-                    File imageDir = new File(jarLocation.getLocation(this) + "images/" + bc + ".jpg");
+                    File imageDir = new File(jarLocation.getLocation(this) + "images\\" + bc + ".jpg");
                     try {
                         RenderedImage img = ImageIO.read(new File("src\\" + bc + ".jpg"));
                         ImageIO.write(img, "jpg", imageDir);
-                    } catch (java.io.IOException e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage());
+                    } catch (java.io.IOException e) {                       
+                        e.printStackTrace(System.out);
                     }
                 }
                 //Insert Records
@@ -422,7 +422,7 @@ public class Setup extends javax.swing.JFrame {
                         + "Insert into books values (1049,\"The Hunger Games\",\"Suzanne Collins\",\"September 14, 2008\",374,\"Fiction\",\"The Hunger Games is a 2008 young adult novel by American writer Suzanne Collins. It is written in the voice of 16-year-old Katniss Everdeen, who lives in the post-apocalyptic nation of Panem, where the countries of North America once existed. The Capitol, a highly advanced metropolis, exercises political control over the rest of the nation.\",\"null\");\n"
                         + "Insert into books values (1050,\"The Discovery Of India\",\"Jawaharlal Nehru\",\"1946\",584,\"Historical\",\"The Discovery of India was written by India s first Prime Minister Jawaharlal Nehru during his imprisonment in 1942-1946 at Ahmednagar in the Ahmednagar Fort.\",\"null\");\n"
                         + "Insert into books values (1051,\"The Curious Incident of the Dog in the Night-Time\",\"Mark Haddon\",\"May 2003\",226,\"Mystery novel\",\"The Curious Incident of the Dog in the Night-Time is a 2003 mystery novel by British writer Mark Haddon. Its title quotes the fictional detective Sherlock Holmes in Arthur Conan Doyle s 1892 short story  Silver Blaze . Haddon and The Curious Incident won the Whitbread Book Awards for Best Novel and Book of the Year,[1] the Commonwealth Writers  Prize for Best First Book.[2] and the Guardian Children s Fiction Prize.[3]\",\"null\");";
-               //</editor-fold>
+                //</editor-fold>
                 myQueries.excUpdate(queries);
 
 

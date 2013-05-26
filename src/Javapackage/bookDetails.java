@@ -76,7 +76,7 @@ public class bookDetails extends javax.swing.JFrame {
                 Image img = image.resizedplusImage(url1, 200, 300);
                 BufferedImage resizedImage = (BufferedImage) img;
                 try {
-                    new File(path + "\\images").mkdir();
+                    new File(path + "\\images").mkdirs();
                     ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode + ".jpg"));
                 } catch (java.io.IOException f) {
                     JOptionPane.showMessageDialog(null, f.getMessage());
@@ -112,7 +112,7 @@ public class bookDetails extends javax.swing.JFrame {
                     Image img1 = image.resizedplusImage(url1, 200, 300);
                     BufferedImage resizedImage = (BufferedImage) img1;
                     try {
-                        new File(path + "\\images").mkdir();
+                        new File(path + "\\images").mkdirs();
                         ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode1 + ".jpg"));
                     } catch (java.io.IOException f) {
                         JOptionPane.showMessageDialog(null, f.getMessage());
@@ -125,7 +125,7 @@ public class bookDetails extends javax.swing.JFrame {
             jList1.setModel(listModel);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
 
         jList1.setSelectedIndex(bookcode - 1001);
@@ -302,7 +302,7 @@ public class bookDetails extends javax.swing.JFrame {
                 Image img = image.resizedplusImage(url1, 200, 300);
                 BufferedImage resizedImage = (BufferedImage) img;
                 try {
-                    new File(path + "\\images").mkdir();
+                    new File(path + "\\images").mkdirs();
                     ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode + ".jpg"));
                 } catch (java.io.IOException f) {
                     JOptionPane.showMessageDialog(null, f.getMessage());
@@ -316,7 +316,7 @@ public class bookDetails extends javax.swing.JFrame {
             l7.setText(genre);
             ta1.setText(review);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_jList1ValueChanged
 

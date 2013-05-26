@@ -25,6 +25,7 @@
  */
 package Javapackage;
 
+import Classes.jarLocation;
 import Classes.myQueries;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -62,7 +63,7 @@ public class ALLusers extends javax.swing.JFrame {
         }
         catch (Exception e) 
         {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }
 
@@ -259,7 +260,7 @@ public class ALLusers extends javax.swing.JFrame {
             }
             catch (Exception e)
             {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                e.printStackTrace(jarLocation.getLogPath());
             }
         }
     }//GEN-LAST:event_jTable1MousePressed
@@ -287,7 +288,7 @@ public class ALLusers extends javax.swing.JFrame {
             }
             catch (Exception e)
             {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                e.printStackTrace(jarLocation.getLogPath());
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -324,7 +325,7 @@ public class ALLusers extends javax.swing.JFrame {
             }
             catch (Exception e)
             {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                e.printStackTrace(jarLocation.getLogPath());
             }
         }
     }//GEN-LAST:event_jTable1KeyPressed

@@ -20,7 +20,11 @@
 package Classes;
 
 import java.awt.Component;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.util.Calendar;
 
 /**
  *
@@ -42,5 +46,17 @@ public class jarLocation {
         String path = loc.substring(6, index);
         path=path.replace('/', '\\');        
         return path;
+    }
+    public static PrintWriter getLogPath(){
+        File file = new File("log.txt");
+        PrintWriter s = null;
+        try {
+            s = new PrintWriter(file);
+        } catch (FileNotFoundException f) {
+            file.getParentFile().mkdirs();
+        }Calendar curdate;
+         curdate = Calendar.getInstance();
+        s.println(curdate);
+        return s;
     }
 }

@@ -20,6 +20,7 @@
 
 package Javapackage;
 
+import Classes.jarLocation;
 import Classes.md5hash;
 import Classes.myQueries;
 import java.sql.ResultSet;
@@ -71,7 +72,7 @@ String username;
          } 
          catch (Exception e) 
          {
-             JOptionPane.showMessageDialog(null, e.getMessage());
+             e.printStackTrace(jarLocation.getLogPath());
          }
     }
 
@@ -508,7 +509,7 @@ String username;
             }
             catch (Exception e)
             {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                e.printStackTrace(jarLocation.getLogPath());
             }
     }//GEN-LAST:event_jButton6ActionPerformed
 

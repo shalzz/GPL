@@ -25,6 +25,7 @@
  */
 package Javapackage;
 
+import Classes.jarLocation;
 import Classes.myQueries;
 import java.sql.ResultSet;
 import java.util.Calendar;
@@ -321,7 +322,7 @@ public class MainPageissuer extends javax.swing.JFrame {
                 FineDue = 0;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
 }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -407,7 +408,7 @@ public class MainPageissuer extends javax.swing.JFrame {
                 model1.addRow(new Object[]{Bookid, Bookname, author, genre});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -450,7 +451,7 @@ public class MainPageissuer extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_t5CaretUpdate
 
@@ -486,7 +487,7 @@ public class MainPageissuer extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_t6CaretUpdate
 
@@ -522,7 +523,7 @@ public class MainPageissuer extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_t7CaretUpdate
 
@@ -558,7 +559,7 @@ public class MainPageissuer extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            e.printStackTrace(jarLocation.getLogPath());
         }
     }//GEN-LAST:event_t8CaretUpdate
 
