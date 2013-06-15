@@ -381,24 +381,34 @@ public class MainPage extends javax.swing.JFrame {
         int n = 0;
         String username = t2.getText();
 
-        try {
+        try 
+        {
             issuerId = Integer.parseInt(t1.getText());
-        } catch (NumberFormatException e) {
+        } 
+        catch (NumberFormatException e) 
+        {
             n = 1;
         }
 
-        if (n == 1) {
-            if (username.isEmpty()) {
+        if (n == 1) 
+        {
+            if (username.isEmpty())
+            {
                 JOptionPane.showMessageDialog(this, "Please enter IssuerID or IssuerName");
-            } else {
+            } 
+            else 
+            {
                 query = "select username,issuerid from users where username='" + username + "';";
             }
-        } else {
+        } 
+        else 
+        {
             query = "select username,issuerid from users where issuerId='" + issuerId + "';";
         }
-        if (query != null) {
-            try {
-
+        if (query != null) 
+        {
+            try
+            {
                 ResultSet rs = myQueries.excQuery(query);
                 rs.next();
                 if (!(username.equals("all"))) {
@@ -442,7 +452,9 @@ public class MainPage extends javax.swing.JFrame {
                         model.addRow(new Object[]{Bookid, Bookname, idate, rdate, FineDue});
                         FineDue = 0;
                     }
-                } else {
+                } 
+                else 
+                {
                     query = "select fine from settings;";
                     ResultSet rs0 = myQueries.excQuery(query);
                     rs0.next();
@@ -482,8 +494,10 @@ public class MainPage extends javax.swing.JFrame {
                         FineDue = 0;
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace(jarLocation.getLogPath());
+            } 
+            catch (Exception e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -664,7 +678,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(jarLocation.getLogPath());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_t8CaretUpdate
 
@@ -700,7 +714,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(jarLocation.getLogPath());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_t7CaretUpdate
 
@@ -736,7 +750,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(jarLocation.getLogPath());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_t6CaretUpdate
 
@@ -786,7 +800,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(jarLocation.getLogPath());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_t5CaretUpdate
 
@@ -839,7 +853,7 @@ public class MainPage extends javax.swing.JFrame {
                 model1.addRow(new Object[]{Bookid, Bookname, author, genre});
             }
         } catch (Exception e) {
-            e.printStackTrace(jarLocation.getLogPath());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 

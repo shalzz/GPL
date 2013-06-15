@@ -125,7 +125,7 @@ public class bookDetails extends javax.swing.JFrame {
             jList1.setModel(listModel);
 
         } catch (Exception e) {
-            e.printStackTrace(jarLocation.getLogPath());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
 
         jList1.setSelectedIndex(bookcode - 1001);
@@ -316,7 +316,7 @@ public class bookDetails extends javax.swing.JFrame {
             l7.setText(genre);
             ta1.setText(review);
         } catch (Exception e) {
-            e.printStackTrace(jarLocation.getLogPath());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_jList1ValueChanged
 

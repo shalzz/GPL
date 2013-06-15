@@ -199,7 +199,7 @@ public class StartPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "No such Username Exists");
                 } 
                 else {
-                    e.printStackTrace(jarLocation.getLogPath());
+                    JOptionPane.showMessageDialog(this, e.getMessage());
                 }
             }
 

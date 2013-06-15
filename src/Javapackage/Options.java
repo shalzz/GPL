@@ -72,7 +72,7 @@ String username;
          } 
          catch (Exception e) 
          {
-             e.printStackTrace(jarLocation.getLogPath());
+             JOptionPane.showMessageDialog(this, e.getMessage());
          }
     }
 
@@ -509,7 +509,7 @@ String username;
             }
             catch (Exception e)
             {
-                e.printStackTrace(jarLocation.getLogPath());
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
     }//GEN-LAST:event_jButton6ActionPerformed
 

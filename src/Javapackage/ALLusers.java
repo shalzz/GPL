@@ -63,7 +63,7 @@ public class ALLusers extends javax.swing.JFrame {
         }
         catch (Exception e) 
         {
-            e.printStackTrace(jarLocation.getLogPath());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
 
@@ -260,7 +260,7 @@ public class ALLusers extends javax.swing.JFrame {
             }
             catch (Exception e)
             {
-                e.printStackTrace(jarLocation.getLogPath());
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
         }
     }//GEN-LAST:event_jTable1MousePressed
@@ -288,7 +288,7 @@ public class ALLusers extends javax.swing.JFrame {
             }
             catch (Exception e)
             {
-                e.printStackTrace(jarLocation.getLogPath());
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -325,7 +325,7 @@ public class ALLusers extends javax.swing.JFrame {
             }
             catch (Exception e)
             {
-                e.printStackTrace(jarLocation.getLogPath());
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
         }
     }//GEN-LAST:event_jTable1KeyPressed

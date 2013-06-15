@@ -262,13 +262,16 @@ public class Setup extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         boolean oldValue = prefs.getBoolean(SETUP_HAS_RUN, false);
         System.out.println(this.getClass());
-        if (oldValue) {
+        if (oldValue)
+        {
             StartPage a = new StartPage();
             a.setVisible(true);
             this.dispose();
             prefs.putBoolean(SETUP_HAS_RUN, false);
 
-        } else {
+        }
+        else 
+        {
             l2.setText("<html>\n" + "<body>\n" + "Welcome!<br>This Wizard will help you setup this program.<br>Click next to continue..\n" + "</body>\n" + "</html>");
             jButton1.setVisible(true);
         }
@@ -283,34 +286,50 @@ public class Setup extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (rb1.isSelected()) {
+        if (rb1.isSelected()) 
+        {
             jPanel1.setVisible(false);
             jPanel2.setVisible(true);
             jButton3.setVisible(true);
             prefs.put(DBMS_TYPE, "mysql");
-        } else if (rb2.isSelected()) {
+        } 
+        else if (rb2.isSelected()) 
+        {
             jPanel1.setVisible(false);
             jPanel3.setVisible(true);
             jButton4.setVisible(true);
             prefs.put(DBMS_TYPE, "sqlite");
-        } else {
+        } 
+        else 
+        {
             JOptionPane.showMessageDialog(this, "Please select one of the options");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (t1.getText().isEmpty()) {
+        if (t1.getText().isEmpty()) 
+        {
             JOptionPane.showMessageDialog(this, "Please enter the server url");
-        } else if (t2.getText().isEmpty()) {
+        } 
+        else if (t2.getText().isEmpty()) 
+        {
             JOptionPane.showMessageDialog(this, "Please enter the port no");
-        } else if (t3.getText().isEmpty()) {
+        } 
+        else if (t3.getText().isEmpty()) 
+        {
             JOptionPane.showMessageDialog(this, "Please enter the username");
-        } else if (t4.getText().isEmpty()) {
+        } 
+        else if (t4.getText().isEmpty()) 
+        {
             JOptionPane.showMessageDialog(this, "Please enter the password");
-        } else if (t4.getText().isEmpty()) {
+        } 
+        else if (t4.getText().isEmpty()) 
+        {
             JOptionPane.showMessageDialog(this, "Please enter the database name");
-        } else {
+        } 
+        else 
+        {
             String url = "jdbc:mysql://" + t1.getText() + ":" + t2.getText() + t5.getText();
             String user = t3.getText();
             String password = t4.getText();
@@ -322,9 +341,12 @@ public class Setup extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (t6.getText().isEmpty()) {
+        if (t6.getText().isEmpty()) 
+        {
             JOptionPane.showMessageDialog(this, "Please enter the database name");
-        } else {
+        } 
+        else 
+        {
             String dbname = t6.getText();
             prefs.put(DB_NAME, dbname);
             jPanel3.setVisible(false);
@@ -335,36 +357,46 @@ public class Setup extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (rb3.isSelected() || rb4.isSelected()) {
-            try {
+            try 
+            {
                 prefs.flush();
-            } catch (Exception e) {
+            } 
+            catch (Exception e)
+            {
             }
-            File dir1 = new File(jarLocation.getLocation(this) + "databases\\");
-            if (!dir1.canRead()) {
+            File dir1 = new File(jarLocation.getLocation(this) + "\\databases\\");
+            if (!dir1.canRead()) 
+            {
                 dir1.mkdirs();
             }
-            if (rb3.isSelected()) {
+            if (rb3.isSelected()) 
+            {
                 jProgressBar1.setVisible(true);
                 rb3.setVisible(false);
                 rb4.setVisible(false);
-                File dir = new File(jarLocation.getLocation(this) + "images\\");
-                if (!dir.canRead()) {
+                File dir = new File(jarLocation.getLocation(this) + "\\images\\");
+                if (!dir.canRead())
+                {
                     dir.mkdirs();
                 }
 
-                for (int bc = 1001; bc <= 1051; bc++) {
+                for (int bc = 1001; bc <= 1051; bc++) 
+                {
                     //calulate the percentage of loop progress
                     float progress = (((float) bc - 1000) / 51) * 100;
                     int value = Math.round(progress);
                     jProgressBar1.setValue(value);
                     //copy images
                     l5.setText("Copying images...");
-                    File imageDir = new File(jarLocation.getLocation(this) + "images\\" + bc + ".jpg");
-                    try {
-                        RenderedImage img = ImageIO.read(new File("src\\" + bc + ".jpg"));
+                    File imageDir = new File(jarLocation.getLocation(this) + "\\images\\" + bc + ".jpg");
+                    try 
+                    {
+                        RenderedImage img = ImageIO.read(new File( "C:\\Users\\Shaleen\\Documents\\NetBeansProjects\\GPL\\src\\"+ bc + ".jpg"));
                         ImageIO.write(img, "jpg", imageDir);
-                    } catch (java.io.IOException e) {                       
-                        e.printStackTrace(System.out);
+                    }
+                    catch (java.io.IOException e) 
+                    {
+                        JOptionPane.showMessageDialog(this, e.getMessage());
                     }
                 }
                 //Insert Records
@@ -436,15 +468,20 @@ public class Setup extends javax.swing.JFrame {
             myQueries.excUpdate(query3);
             prefs.putBoolean(SETUP_HAS_RUN, true);
             JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");
-            try {
+            try
+            {
                 prefs.flush();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
             }
             StartPage a = new StartPage();
             a.setVisible(true);
             JOptionPane.showMessageDialog(a, "An imperative admin account has been created for you.\n Please use the following info to login\n Username: admin\n Password: password");
             this.dispose();
-        } else {
+        }
+        else
+        {
             JOptionPane.showMessageDialog(this, "Please select one of the options");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -456,7 +493,7 @@ public class Setup extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

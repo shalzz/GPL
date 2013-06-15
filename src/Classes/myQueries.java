@@ -24,7 +24,6 @@ import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.prefs.Preferences;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -54,7 +53,7 @@ public class myQueries {
                 stmt.executeUpdate(query);
 
             } catch (Exception e) {
-                e.printStackTrace(jarLocation.getLogPath());
+                 System.out.println(e.getMessage());
             }
         } else {
             try {
@@ -67,7 +66,7 @@ public class myQueries {
                 stmt1.executeUpdate(query);
 
             } catch (Exception e) {
-                e.printStackTrace(jarLocation.getLogPath());
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -89,7 +88,7 @@ public class myQueries {
                 rs = stmt.executeQuery(query);
 
             } catch (Exception e) {
-                e.printStackTrace(jarLocation.getLogPath());
+                 System.out.println(e.getMessage());
             }
         } else {
             java.sql.Statement stmt1;
@@ -103,7 +102,7 @@ public class myQueries {
                 rs = stmt1.executeQuery(query);
 
             } catch (Exception e) {
-                e.printStackTrace(jarLocation.getLogPath());
+                 System.out.println(e.getMessage());
             }
         }
         return rs;
