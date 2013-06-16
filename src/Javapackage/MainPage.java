@@ -19,8 +19,7 @@
  */
 package Javapackage;
 
-import Classes.jarLocation;
-import Classes.myQueries;
+import myClasses.MyQueries;
 import java.awt.*;
 import java.sql.ResultSet;
 import java.util.Calendar;
@@ -28,6 +27,8 @@ import java.util.Date;
 import java.util.prefs.Preferences;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -46,6 +47,7 @@ public class MainPage extends javax.swing.JFrame {
 
     Preferences prefs = Preferences.userNodeForPackage(this.getClass());
     private static final String SETUP_HAS_RUN = "setupHasRun";
+    final static Logger logger = LoggerFactory.getLogger(MainPage.class);
     /**
      * Creates new form MainPage
      */
@@ -409,18 +411,18 @@ public class MainPage extends javax.swing.JFrame {
         {
             try
             {
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 rs.next();
                 if (!(username.equals("all"))) {
                     username = rs.getString("username");
                     query = "select fine from settings;";
-                    ResultSet rs0 = myQueries.excQuery(query);
+                    ResultSet rs0 = MyQueries.excQuery(query);
                     rs0.next();
                     fine = rs0.getInt("fine");
 
 
                     query = "SELECT * FROM accounts where username='" + username + "';";
-                    ResultSet rs1 = myQueries.excQuery(query);
+                    ResultSet rs1 = MyQueries.excQuery(query);
                     model.setRowCount(0);
                     while (rs1.next()) {
                         int Bookid = rs1.getInt("Bookcode");
@@ -456,12 +458,12 @@ public class MainPage extends javax.swing.JFrame {
                 else 
                 {
                     query = "select fine from settings;";
-                    ResultSet rs0 = myQueries.excQuery(query);
+                    ResultSet rs0 = MyQueries.excQuery(query);
                     rs0.next();
                     fine = rs0.getInt("fine");
 
                     query = "SELECT * FROM accounts order by username;";
-                    ResultSet rs1 = myQueries.excQuery(query);
+                    ResultSet rs1 = MyQueries.excQuery(query);
                     model.setRowCount(0);
                     while (rs1.next()) {
                         int Bookid = rs1.getInt("Bookcode");
@@ -497,7 +499,7 @@ public class MainPage extends javax.swing.JFrame {
             } 
             catch (Exception e)
             {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                logger.error("Error Description:", e);
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -548,16 +550,16 @@ public class MainPage extends javax.swing.JFrame {
         if (row != -1 && query1 != null) {
             try {
 
-                ResultSet rs1 = myQueries.excQuery(query1);
+                ResultSet rs1 = MyQueries.excQuery(query1);
                 rs1.next();
                 issuerid = rs1.getInt("issuerid");
                 username = rs1.getString("username");
                 query = "select count(*) from accounts where username = '" + username + "';";
-                ResultSet rs2 = myQueries.excQuery(query);
+                ResultSet rs2 = MyQueries.excQuery(query);
                 rs2.next();
                 count = rs2.getInt("count(*)");
                 query = "select * from settings;";
-                ResultSet rs3 = myQueries.excQuery(query);
+                ResultSet rs3 = MyQueries.excQuery(query);
                 rs3.next();
                 int issuetime = rs3.getInt("issuetime");
                 int maxbooks = rs3.getInt("maxbooks");
@@ -580,7 +582,7 @@ public class MainPage extends javax.swing.JFrame {
                     String idate = "" + iyear + "/" + imonth + "/" + idayOfMonth;
                     String rdate = "" + ryear + "/" + rmonth + "/" + rdayOfMonth;
                     query = "insert into accounts values(" + issuerid + ",'" + username + "'," + bookcode + ",'" + bookname + "','" + idate + "','" + rdate + "');";
-                    myQueries.excUpdate(query);
+                    MyQueries.excUpdate(query);
                     JOptionPane.showMessageDialog(this, "Book Succesfully issued");
                 }
             } catch (Exception f) {
@@ -632,12 +634,12 @@ public class MainPage extends javax.swing.JFrame {
         if (row != -1 && query1 != null) {
             try {
 
-                ResultSet rs = myQueries.excQuery(query1);
+                ResultSet rs = MyQueries.excQuery(query1);
                 rs.next();
                 issuerid = rs.getInt("issuerid");
                 username = rs.getString("username");
                 query = "delete from accounts where bookcode=" + bookcode + " and bookname='" + bookname + "'and issuerid=" + issuerid + " and username='" + username + "';";
-                myQueries.excUpdate(query);
+                MyQueries.excUpdate(query);
                 jButton1.doClick();
                 JOptionPane.showMessageDialog(this, "Book Succesfully Returned");
             } catch (Exception f) {
@@ -656,7 +658,7 @@ public class MainPage extends javax.swing.JFrame {
 
             if (!(genre1.isEmpty())) {
                 query = "SELECT * FROM books where genre like '" + genre1 + "%';";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 model.setRowCount(0);
                 while (rs.next()) {
                     int Bookid = rs.getInt("Bookcode");
@@ -667,7 +669,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             } else {
                 query = "SELECT * FROM books;";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 model.setRowCount(0);
                 while (rs.next()) {
                     int Bookid = rs.getInt("Bookcode");
@@ -678,7 +680,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_t8CaretUpdate
 
@@ -692,7 +694,7 @@ public class MainPage extends javax.swing.JFrame {
 
             if (!(author1.isEmpty())) {
                 query = "SELECT * FROM books where author like '" + author1 + "%';";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) {
                     int Bookid = rs.getInt("Bookcode");
@@ -703,7 +705,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             } else {
                 query = "SELECT * FROM books;";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) {
                     int Bookid = rs.getInt("Bookcode");
@@ -714,7 +716,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_t7CaretUpdate
 
@@ -728,7 +730,7 @@ public class MainPage extends javax.swing.JFrame {
 
             if (!(bookname.isEmpty())) {
                 query = "SELECT * FROM books where bookname like '" + bookname + "%';";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) {
                     int Bookid = rs.getInt("Bookcode");
@@ -739,7 +741,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             } else {
                 query = "SELECT * FROM books;";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) {
                     int Bookid = rs.getInt("Bookcode");
@@ -750,7 +752,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_t6CaretUpdate
 
@@ -778,7 +780,7 @@ public class MainPage extends javax.swing.JFrame {
 
             if (!(n == 1)) {
                 query = "SELECT * FROM books where bookcode like '" + bookcode + "%';";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) {
                     int Bookid = rs.getInt("Bookcode");
@@ -789,7 +791,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             } else {
                 query = "SELECT * FROM books;";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
                 while (rs.next()) {
                     int Bookid = rs.getInt("Bookcode");
@@ -800,7 +802,7 @@ public class MainPage extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_t5CaretUpdate
 
@@ -843,7 +845,7 @@ public class MainPage extends javax.swing.JFrame {
         try {
 
             String query = "SELECT * FROM books;";
-            ResultSet rs = myQueries.excQuery(query);
+            ResultSet rs = MyQueries.excQuery(query);
             model1.setRowCount(0);
             while (rs.next()) {
                 int Bookid = rs.getInt("Bookcode");
@@ -853,7 +855,7 @@ public class MainPage extends javax.swing.JFrame {
                 model1.addRow(new Object[]{Bookid, Bookname, author, genre});
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 

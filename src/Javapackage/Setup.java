@@ -19,13 +19,15 @@
  */
 package Javapackage;
 
-import Classes.jarLocation;
-import Classes.myQueries;
+import myClasses.JarLocation;
+import myClasses.MyQueries;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.util.prefs.Preferences;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -38,6 +40,10 @@ public class Setup extends javax.swing.JFrame {
     private static final String DBMS_TYPE = "DbmsType";
     private static final String SERVER_URL = "serverURL";
     private static final String DB_NAME = "DatabaseName";
+    static final Preferences prefs1 = Preferences.userRoot().node("/Javapackage");
+    private static final String Dbmstype = prefs1.get(DBMS_TYPE, "sqlite");
+    private static final String dbname = prefs1.get(DB_NAME, "project");
+    final static Logger logger = LoggerFactory.getLogger(Setup.class);
 
     /**
      * Creates new form Setup
@@ -165,6 +171,7 @@ public class Setup extends javax.swing.JFrame {
 
         l3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         l3.setText(" Please enter the MySQL Database Details:");
+        l3.setToolTipText("\n");
         jPanel2.add(l3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
         jButton3.setText("Start");
@@ -187,14 +194,22 @@ public class Setup extends javax.swing.JFrame {
         jLabel9.setText("Password:");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, -1, -1));
 
-        t1.setToolTipText("Eg:localhost,www.sql.com");
+        t1.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Eg:localhost,www.sql.com</p>\n</body>\n</html>\n");
         jPanel2.add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 90, -1));
+
+        t2.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Eg:3306,80</p>\n</body>\n</html>");
         jPanel2.add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 90, -1));
+
+        t3.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Eg:root</p>\n</body>\n</html>");
         jPanel2.add(t3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 90, -1));
+
+        t4.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Eg:123</p>\n</body>\n</html>");
         jPanel2.add(t4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 90, -1));
 
         jLabel10.setText("Database name:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
+
+        t5.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Eg:test</p>\n</body>\n</html>");
         jPanel2.add(t5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 90, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
@@ -330,7 +345,7 @@ public class Setup extends javax.swing.JFrame {
         } 
         else 
         {
-            String url = "jdbc:mysql://" + t1.getText() + ":" + t2.getText() + t5.getText();
+            String url = "jdbc:mysql://" + t1.getText() + ":" + t2.getText() +"/"+ t5.getText();
             String user = t3.getText();
             String password = t4.getText();
             prefs.put(SERVER_URL, url + "," + user + "," + password);
@@ -356,7 +371,8 @@ public class Setup extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (rb3.isSelected() || rb4.isSelected()) {
+        if (rb3.isSelected() || rb4.isSelected()) 
+        {
             try 
             {
                 prefs.flush();
@@ -364,7 +380,7 @@ public class Setup extends javax.swing.JFrame {
             catch (Exception e)
             {
             }
-            File dir1 = new File(jarLocation.getLocation(this) + "\\databases\\");
+            File dir1 = new File(JarLocation.getLocation(this) + "\\databases\\");
             if (!dir1.canRead()) 
             {
                 dir1.mkdirs();
@@ -374,7 +390,7 @@ public class Setup extends javax.swing.JFrame {
                 jProgressBar1.setVisible(true);
                 rb3.setVisible(false);
                 rb4.setVisible(false);
-                File dir = new File(jarLocation.getLocation(this) + "\\images\\");
+                File dir = new File(JarLocation.getLocation(this) + "\\images\\");
                 if (!dir.canRead())
                 {
                     dir.mkdirs();
@@ -388,7 +404,7 @@ public class Setup extends javax.swing.JFrame {
                     jProgressBar1.setValue(value);
                     //copy images
                     l5.setText("Copying images...");
-                    File imageDir = new File(jarLocation.getLocation(this) + "\\images\\" + bc + ".jpg");
+                    File imageDir = new File(JarLocation.getLocation(this) + "\\images\\" + bc + ".jpg");
                     try 
                     {
                         RenderedImage img = ImageIO.read(new File( "C:\\Users\\Shaleen\\Documents\\NetBeansProjects\\GPL\\src\\"+ bc + ".jpg"));
@@ -396,14 +412,28 @@ public class Setup extends javax.swing.JFrame {
                     }
                     catch (java.io.IOException e) 
                     {
-                        JOptionPane.showMessageDialog(this, e.getMessage());
+                        logger.error("Error Description:", e);
                     }
                 }
                 //Insert Records
+                
+                if (Dbmstype.equals("mysql"))
+                {
+                    String query="drop table accounts\n" +
+                                 "drop table settings\n" +
+                                 "drop table users\n" +
+                                 "drop table books";
+                    MyQueries.excUpdate(query);
+                }
+                String q1="create table settings(fine integer,issuetime integer,maxbooks integer);"; 
+                String q2="create table users(issuerId integer(5) ,fname varchar(15), lname varchar(15),username varchar(20) Primary key,password varchar(32),gender varchar(10),address varchar(40), phoneno long , type varchar(10));";
+                String q3="create table books( bookcode integer Primary Key,bookname varchar(50),author varchar(40),Releasedate varchar(25),Pages integer,genre varchar(30),review varchar(1000),imgurl varchar(150));";
+                MyQueries.excUpdate(q1);
+                MyQueries.excUpdate(q2);
+                MyQueries.excUpdate(q3);
                 l5.setText("Inserting Records");
                 //<editor-fold defaultstate="collapsed" desc=" Book Records ">
-                String queries = "create table books( bookcode integer Primary Key,bookname varchar(50),author varchar(40),Releasedate varchar(25),Pages integer,genre varchar(30),review varchar(1000),imgurl varchar(150));\n"
-                        + "Insert into books values (1001,\"Harry Potter and the Sorcerers Stone\",\"J. K. Rowling\",\"26 June 1997\",223,\"Fantasy\",\"Harry Potter and the Philosopher s Stone is the first novel in the Harry Potter series written by J. K. Rowling and featuring Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Lord Voldemort, who killed Harrys parents when Harry was one year old. \",\"null\");\n"
+                String queries = "Insert into books values (1001,\"Harry Potter and the Sorcerers Stone\",\"J. K. Rowling\",\"26 June 1997\",223,\"Fantasy\",\"Harry Potter and the Philosopher s Stone is the first novel in the Harry Potter series written by J. K. Rowling and featuring Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Lord Voldemort, who killed Harrys parents when Harry was one year old. \",\"null\");\n"
                         + "Insert into books values (1002,\"Harry Potter and the Chamber of Secrets\",\"J. K. Rowling\",\"2 July 1998\",251,\"Fantasy\",\"Harry Potter and the Chamber of Secrets begins as Harry spends a miserable summer with his only remaining family, the Dursleys. During a dinner party hosted by his uncle and aunt, Harry is visited by Dobby, a house-elf. Dobby warns Harry not to return to Hogwarts, the magical school for wizards that Harry attended the previous year, explaining that terrible things will happen there. Harry politely disregards the warning, and Dobby wreaks havoc in the kitchen, infuriating the Dursleys.\",\"null\");\n"
                         + "Insert into books values (1003,\"Harry Potter and the Prisoner of Azkaban\",\"J. K. Rowling\",\"8 July 1999\",317,\"Fantasy\",\"Harry Potter and the Prisoner of Azkaban is the third novel in the Harry Potter series written by J. K. Rowling. The book was published on 8 July 1999. The novel won the 1999 Whitbread Children s Book Award, the Bram Stoker Award, the 2000 Locus Award for Best Fantasy Novel, and was short-listed for other awards, including the Hugo. A film based on the novel was released on 31 May 2004, in the United Kingdom and 4 June 2004 in the U.S. and many other countries.\",\"null\");\n"
                         + "Insert into books values (1004,\"Harry Potter and the Goblet of Fire\",\"J. K. Rowling\",\"8 July 2000\",635,\"Fantasy\",\"Harry Potter and the Goblet of Fire is the fourth novel in the Harry Potter series written by British author J. K. Rowling. Set during the protagonist Harry Potter s fourth year at Hogwarts School of Witchcraft and Wizardry, it follows the mystery surrounding the entry of Harry s name into the Triwizard Tournament, in which he is forced to compete.\",\"null\");\n"
@@ -455,17 +485,16 @@ public class Setup extends javax.swing.JFrame {
                         + "Insert into books values (1050,\"The Discovery Of India\",\"Jawaharlal Nehru\",\"1946\",584,\"Historical\",\"The Discovery of India was written by India s first Prime Minister Jawaharlal Nehru during his imprisonment in 1942-1946 at Ahmednagar in the Ahmednagar Fort.\",\"null\");\n"
                         + "Insert into books values (1051,\"The Curious Incident of the Dog in the Night-Time\",\"Mark Haddon\",\"May 2003\",226,\"Mystery novel\",\"The Curious Incident of the Dog in the Night-Time is a 2003 mystery novel by British writer Mark Haddon. Its title quotes the fictional detective Sherlock Holmes in Arthur Conan Doyle s 1892 short story  Silver Blaze . Haddon and The Curious Incident won the Whitbread Book Awards for Best Novel and Book of the Year,[1] the Commonwealth Writers  Prize for Best First Book.[2] and the Guardian Children s Fiction Prize.[3]\",\"null\");";
                 //</editor-fold>
-                myQueries.excUpdate(queries);
+                MyQueries.excUpdate(queries);
 
 
             }
             String query1 = "create table accounts(IssuerId integer,username Varchar(10),BookCode integer Primary Key,Bookname Varchar(50),IssueDate date,ReturnDate date);";
-            String query2 = "create table settings(fine integer,issuetime integer,maxbooks integer);\n" + "insert into settings values(1,7,3);";
-            String query3 = "create table users(issuerId integer(5) ,fname varchar(15), lname varchar(15),username varchar(20) Primary key,password varchar(32),gender varchar(10),address varchar(40), phoneno long , type varchar(10));\n"
-                    + "Insert into users values (100,\"admin\",\"admin\",\"admin\",\"c75af13c992650118785608ba2506a3\",\"Male\",\"7/87,Dallas Street,Houston\",9764578654,\"admin\");";
-            myQueries.excUpdate(query1);
-            myQueries.excUpdate(query2);
-            myQueries.excUpdate(query3);
+            String query2 =  "insert into settings values(1,7,3);";
+            String query3 =  "Insert into users values (100,\"admin\",\"admin\",\"admin\",\"c75af13c992650118785608ba2506a3\",\"Male\",\"7/87,Dallas Street,Houston\",9764578654,\"admin\");";
+            MyQueries.excUpdate(query1);
+            MyQueries.excUpdate(query2);
+            MyQueries.excUpdate(query3);
             prefs.putBoolean(SETUP_HAS_RUN, true);
             JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");
             try

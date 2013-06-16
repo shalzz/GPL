@@ -25,11 +25,12 @@
  */
 package Javapackage;
 
-import Classes.jarLocation;
-import Classes.myQueries;
+import myClasses.MyQueries;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -38,6 +39,7 @@ import javax.swing.table.DefaultTableModel;
 public class ALLusers extends javax.swing.JFrame {
 
     String username;
+    final static Logger logger = LoggerFactory.getLogger(ALLusers.class);
 
     /** Creates new form ALLusers */
     public ALLusers() {
@@ -53,7 +55,7 @@ public class ALLusers extends javax.swing.JFrame {
 
             
             String query = "SELECT issuerid,username,type,fname FROM users order by fname;";
-            ResultSet rs = myQueries.excQuery(query);
+            ResultSet rs = MyQueries.excQuery(query);
             model1.setRowCount(0);
             while (rs.next()) 
             {
@@ -63,7 +65,7 @@ public class ALLusers extends javax.swing.JFrame {
         }
         catch (Exception e) 
         {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            logger.error("Error Description:", e);
         }
     }
 
@@ -237,7 +239,7 @@ public class ALLusers extends javax.swing.JFrame {
             {
                 
                 String query = "SELECT * FROM users where fname ='" + fname + "';";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 rs.next();
 
                 int issuerid = rs.getInt("issuerid");
@@ -260,7 +262,7 @@ public class ALLusers extends javax.swing.JFrame {
             }
             catch (Exception e)
             {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                logger.error("Error Description:", e);
             }
         }
     }//GEN-LAST:event_jTable1MousePressed
@@ -281,14 +283,14 @@ public class ALLusers extends javax.swing.JFrame {
                 {
                 
                 String query = "Delete from users where username='"+username1+"'and type= 'issuer';";
-                myQueries.excUpdate(query);  
+                MyQueries.excUpdate(query);  
                 JOptionPane.showMessageDialog(this, "Account succesfully deleted");
                 model1.removeRow(jTable1.getSelectedRow());
                 }
             }
             catch (Exception e)
             {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                logger.error("Error Description:", e);
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -302,7 +304,7 @@ public class ALLusers extends javax.swing.JFrame {
             {
                 
                 String query = "SELECT * FROM users where fname ='" + fname + "';";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 rs.next();
 
                 int issuerid = rs.getInt("issuerid");
@@ -325,7 +327,7 @@ public class ALLusers extends javax.swing.JFrame {
             }
             catch (Exception e)
             {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                logger.error("Error Description:", e);
             }
         }
     }//GEN-LAST:event_jTable1KeyPressed

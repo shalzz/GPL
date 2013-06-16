@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Classes;
+package myClasses;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
@@ -32,7 +32,7 @@ import javax.swing.ImageIcon;
  *
  * @author Shaleen
  */
-public class image {
+public class Img {
     
     public static ImageIcon resizedImage(URL url,int width,int height) {
         Image image=null;

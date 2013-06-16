@@ -20,11 +20,12 @@
 
 package Javapackage;
 
-import Classes.jarLocation;
-import Classes.md5hash;
-import Classes.myQueries;
+import myClasses.Md5Hash;
+import myClasses.MyQueries;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
  * To change this template, choose Tools | Templates
@@ -41,7 +42,9 @@ import javax.swing.JOptionPane;
  * @author Shaleen,Abhik,Anushree
  */
 public class Options extends javax.swing.JFrame {
-String username;
+    
+    String username;
+    final static Logger logger = LoggerFactory.getLogger(Options.class);
     /** Creates new form Options */
     public Options() {
         initComponents();
@@ -54,7 +57,7 @@ String username;
          {
              
              String query = "select * from settings;";
-             ResultSet rs = myQueries.excQuery(query);
+             ResultSet rs = MyQueries.excQuery(query);
              rs.next();
              int issuetime = rs.getInt("issuetime");
              int fine = rs.getInt("fine");
@@ -72,7 +75,7 @@ String username;
          } 
          catch (Exception e) 
          {
-             JOptionPane.showMessageDialog(this, e.getMessage());
+             logger.error("Error Description:", e);
          }
     }
 
@@ -356,7 +359,7 @@ String username;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
  String oldpass = new String(p1.getPassword());
-      oldpass= md5hash.passwordsalted(oldpass);
+      oldpass= Md5Hash.passwordsalted(oldpass);
       String a= new String (p2.getPassword());
        String b= new String (p3.getPassword());
        String newpass;
@@ -364,16 +367,16 @@ String username;
         try{
               
              query="select password from users where username='"+username+"';";
-              ResultSet rs =myQueries.excQuery(query);
+              ResultSet rs =MyQueries.excQuery(query);
               rs.next();
               String BDoldpass=rs.getString("password");
           if(BDoldpass.equals(oldpass))     
           {   if((a.equals(b)))
             { 
             newpass=a;
-            newpass=md5hash.passwordsalted(newpass);
+            newpass=Md5Hash.passwordsalted(newpass);
             query="update users set password='"+newpass+"' where username='"+username+"'and password='"+oldpass+"'and type='issuer';";
-            myQueries.excUpdate(query);
+            MyQueries.excUpdate(query);
             JOptionPane.showMessageDialog (this,"Password Successfully Changed");
              }
              else
@@ -403,10 +406,10 @@ String username;
              if((a.equals(b)))
         { 
             newpass=a;
-            newpass=md5hash.passwordsalted(newpass);
+            newpass=Md5Hash.passwordsalted(newpass);
             query="update users set password='"+newpass+"' where username='"+username+"'and type='issuer';";
         }
-              myQueries.excUpdate(query);
+              MyQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this,"Password Successfully Changed");
        }
       catch(Exception e)
@@ -423,7 +426,7 @@ String username;
               
              String query="update users set address='"+add+"',phoneno='"+phone+"' where username='"+username+"'and type='issuer';";
         
-              myQueries.excUpdate(query);
+              MyQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this,"User Info Successfully Changed");
        }
       catch(Exception e)
@@ -462,7 +465,7 @@ String username;
        try{
               
               String query="update settings set fine='"+fine+"',issuetime='"+issuetime+"',maxbooks="+maxbooks+";";
-              myQueries.excUpdate(query);
+              MyQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this,"Settings Changed");
        }
       catch(Exception e)
@@ -491,7 +494,7 @@ String username;
         try { 
             
             String query="select count(*) from users where type = 'admin'";
-            ResultSet rs =myQueries.excQuery(query);  
+            ResultSet rs =MyQueries.excQuery(query);  
             rs.next();
             int count =rs.getInt("count(*)");
             if(count>1)    
@@ -499,7 +502,7 @@ String username;
                 if(r==0)
                 {
                  query = "Delete from users where username='"+username+"'";
-                myQueries.excUpdate(query);  
+                MyQueries.excUpdate(query);  
                 JOptionPane.showMessageDialog(this, "Account succesfully Deactivated");
                 }
             }else
@@ -509,7 +512,7 @@ String username;
             }
             catch (Exception e)
             {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                logger.error("Error Description:", e);
             }
     }//GEN-LAST:event_jButton6ActionPerformed
 

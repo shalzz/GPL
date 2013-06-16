@@ -17,19 +17,21 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Classes;
+package myClasses;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.prefs.Preferences;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author students
  */
-public class myQueries {
+public class MyQueries {
 
     static final Preferences prefs = Preferences.userRoot().node("/Javapackage");
     private static final String DBMS_TYPE = "DbmsType";
@@ -38,6 +40,7 @@ public class myQueries {
     private static final String serverurl = prefs.get(SERVER_URL, null);
     private static final String DB_NAME = "DatabaseName";
     private static final String dbname = prefs.get(DB_NAME, "project");
+    final static Logger logger = LoggerFactory.getLogger(MyQueries.class);
 
     public static void excUpdate(String query) {
         if (Dbmstype.equals("mysql")) {
@@ -45,15 +48,14 @@ public class myQueries {
                 int i = serverurl.indexOf(',');
                 String url = serverurl.substring(0, i);
                 int j = serverurl.indexOf(',', i + 1);
-                String username = serverurl.substring(i, j);
-                String password = serverurl.substring(j);
-                Class.forName("java.sql.DriverManager");
+                String username = serverurl.substring(i+1, j);
+                String password = serverurl.substring(j+1);
                 Connection con = (Connection) DriverManager.getConnection(url, username, password);
                 Statement stmt = (Statement) con.createStatement();
                 stmt.executeUpdate(query);
 
             } catch (Exception e) {
-                 System.out.println(e.getMessage());
+                 logger.error("Error Description:", e);
             }
         } else {
             try {
@@ -66,7 +68,7 @@ public class myQueries {
                 stmt1.executeUpdate(query);
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                logger.error("Error Description:", e);
             }
         }
     }
@@ -80,15 +82,15 @@ public class myQueries {
                 int i = serverurl.indexOf(',');
                 String url = serverurl.substring(0, i);
                 int j = serverurl.indexOf(',', i + 1);
-                String username = serverurl.substring(i, j);
-                String password = serverurl.substring(j);
+                String username = serverurl.substring(i+1, j);
+                String password = serverurl.substring(j+1);
                 Class.forName("java.sql.DriverManager");
                 Connection con = (Connection) DriverManager.getConnection(url, username, password);
                 stmt = (Statement) con.createStatement();
                 rs = stmt.executeQuery(query);
 
             } catch (Exception e) {
-                 System.out.println(e.getMessage());
+                 logger.error("Error Description:", e);
             }
         } else {
             java.sql.Statement stmt1;
@@ -102,7 +104,7 @@ public class myQueries {
                 rs = stmt1.executeQuery(query);
 
             } catch (Exception e) {
-                 System.out.println(e.getMessage());
+                 logger.error("Error Description:", e);
             }
         }
         return rs;

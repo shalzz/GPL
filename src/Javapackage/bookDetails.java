@@ -19,9 +19,9 @@
  */
 package Javapackage;
 
-import Classes.image;
-import Classes.jarLocation;
-import Classes.myQueries;
+import myClasses.Img;
+import myClasses.JarLocation;
+import myClasses.MyQueries;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -31,6 +31,8 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -38,7 +40,8 @@ import javax.swing.JOptionPane;
  */
 public class bookDetails extends javax.swing.JFrame {
 
-    String path = jarLocation.getLocation(this);
+    String path = JarLocation.getLocation(this);
+    final static Logger logger = LoggerFactory.getLogger(bookDetails.class);
 
     /**
      * Creates new form bookDetails
@@ -54,7 +57,7 @@ public class bookDetails extends javax.swing.JFrame {
         try {
 
             String query = "SELECT * FROM books where bookcode ='" + bookcode + "';";
-            ResultSet rs = myQueries.excQuery(query);
+            ResultSet rs = MyQueries.excQuery(query);
             rs.next();
 
             String bookname = rs.getString("bookname");
@@ -67,13 +70,13 @@ public class bookDetails extends javax.swing.JFrame {
 
             File dir = new File(path + "images/" + bookcode + ".jpg");
             if (!dir.canRead()) {
-                ResultSet rs1 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                ResultSet rs1 = MyQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
                 rs1.next();
                 String url = rs1.getString("imgURL");
                 URL url1 = new URL(url);
-                l1.setIcon(image.resizedplusImageIcon(url1, 200, 300));
-                //write the image on the drive
-                Image img = image.resizedplusImage(url1, 200, 300);
+                l1.setIcon(Img.resizedplusImageIcon(url1, 200, 300));
+                //write the Img on the drive
+                Image img = Img.resizedplusImage(url1, 200, 300);
                 BufferedImage resizedImage = (BufferedImage) img;
                 try {
                     new File(path + "\\images").mkdirs();
@@ -94,7 +97,7 @@ public class bookDetails extends javax.swing.JFrame {
 
 
             query = "SELECT bookcode FROM books order by  bookcode;";
-            ResultSet rs1 = myQueries.excQuery(query);
+            ResultSet rs1 = MyQueries.excQuery(query);
             int j = 0;
             while (rs1.next()) {
                 int bookcode1 = rs1.getInt("bookcode");
@@ -102,14 +105,14 @@ public class bookDetails extends javax.swing.JFrame {
 
                 dir = new File(path + "images/" + bookcode1 + ".jpg");
                 if (!dir.canRead()) {
-                    ResultSet rs2 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode1 + ";");
+                    ResultSet rs2 = MyQueries.excQuery("select imgURL from books where bookcode=" + bookcode1 + ";");
                     rs2.next();
                     String url = rs2.getString("imgURL");
                     URL url1 = new URL(url);
-                    img = image.resizedplusImageIcon(url1, 200, 300);
+                    img = Img.resizedplusImageIcon(url1, 200, 300);
 
-                    //write the image on the drive
-                    Image img1 = image.resizedplusImage(url1, 200, 300);
+                    //write the Img on the drive
+                    Image img1 = Img.resizedplusImage(url1, 200, 300);
                     BufferedImage resizedImage = (BufferedImage) img1;
                     try {
                         new File(path + "\\images").mkdirs();
@@ -119,13 +122,20 @@ public class bookDetails extends javax.swing.JFrame {
                     }
                 }
                 double aspectRatio = (double) img.getIconWidth() / (double) img.getIconHeight();
-                listModel.add(j, (Object) image.resizedplusImageIcon(img, 120, (int) (70 / aspectRatio)));
+                try
+                {
+                listModel.add(j, (Object) Img.resizedplusImageIcon(img, 120, (int) (70 / aspectRatio)));
+                }
+                catch(Exception e)
+                {
+                    logger.error("Error Description:", e);
+                }
                 j++;
             }
             jList1.setModel(listModel);
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            logger.error("Error Description:", e);
         }
 
         jList1.setSelectedIndex(bookcode - 1001);
@@ -265,7 +275,7 @@ public class bookDetails extends javax.swing.JFrame {
         try {
 
             String query = "SELECT bookcode FROM books order by bookcode;";
-            ResultSet rs = myQueries.excQuery(query);
+            ResultSet rs = MyQueries.excQuery(query);
             while (rs.next()) {
 
                 if (i == value)//check to ensure column index(mysql) and imageindex(jList1 index) match.
@@ -280,7 +290,7 @@ public class bookDetails extends javax.swing.JFrame {
         try {
 
             String query = "SELECT * FROM books where bookcode ='" + bookcode + "';";
-            ResultSet rs = myQueries.excQuery(query);
+            ResultSet rs = MyQueries.excQuery(query);
             rs.next();
 
             String bookname = rs.getString("bookname");
@@ -293,13 +303,13 @@ public class bookDetails extends javax.swing.JFrame {
 
             File dir = new File(path + "images/" + bookcode + ".jpg");
             if (!dir.canRead()) {
-                ResultSet rs1 = myQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
+                ResultSet rs1 = MyQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
                 rs1.next();
                 String url = rs1.getString("imgURL");
                 URL url1 = new URL(url);
-                l1.setIcon(image.resizedplusImageIcon(url1, 200, 300));
-                //write the image on the drive
-                Image img = image.resizedplusImage(url1, 200, 300);
+                l1.setIcon(Img.resizedplusImageIcon(url1, 200, 300));
+                //write the Img on the drive
+                Image img = Img.resizedplusImage(url1, 200, 300);
                 BufferedImage resizedImage = (BufferedImage) img;
                 try {
                     new File(path + "\\images").mkdirs();
@@ -316,7 +326,7 @@ public class bookDetails extends javax.swing.JFrame {
             l7.setText(genre);
             ta1.setText(review);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_jList1ValueChanged
 

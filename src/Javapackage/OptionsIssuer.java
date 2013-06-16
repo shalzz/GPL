@@ -25,8 +25,8 @@
  */
 package Javapackage;
 
-import Classes.md5hash;
-import Classes.myQueries;
+import myClasses.Md5Hash;
+import myClasses.MyQueries;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -180,7 +180,7 @@ String username;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String oldpass = new String(p1.getPassword());
-      oldpass= md5hash.passwordsalted(oldpass);
+      oldpass= Md5Hash.passwordsalted(oldpass);
       String a= new String (p2.getPassword());
        String b= new String (p3.getPassword());
        String newpass;
@@ -188,7 +188,7 @@ String username;
    try{
               
               query="select password from users where username='"+username+"';";
-              ResultSet rs =myQueries.excQuery(query);
+              ResultSet rs =MyQueries.excQuery(query);
               rs.next();
               String BDoldpass=rs.getString("password");
      if(!(oldpass.isEmpty()&&a.isEmpty()&&b.isEmpty()))
@@ -197,9 +197,9 @@ String username;
           {   if((a.equals(b)))
             { 
             newpass=a;
-            newpass=md5hash.passwordsalted(newpass);
+            newpass=Md5Hash.passwordsalted(newpass);
             query="update users set password='"+newpass+"' where username='"+username+"'and password='"+oldpass+"'and type='issuer';";
-            myQueries.excUpdate(query);
+            MyQueries.excUpdate(query);
             JOptionPane.showMessageDialog (this,"Password Successfully Changed");
              }
              else
@@ -265,7 +265,7 @@ TnC a = new TnC();
             
             String query="update users set address='"+add+"' ,phoneno="+phone+" where username='"+username+"';";
 
-            myQueries.excUpdate(query);
+            MyQueries.excUpdate(query);
             JOptionPane.showMessageDialog (this,"Information added");
         }
         catch(Exception e)

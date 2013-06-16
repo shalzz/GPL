@@ -20,11 +20,12 @@
 
 package Javapackage;
 
-import Classes.jarLocation;
-import Classes.md5hash;
-import Classes.myQueries;
+import myClasses.Md5Hash;
+import myClasses.MyQueries;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
  * To change this template, choose Tools | Templates
@@ -41,6 +42,8 @@ import javax.swing.JOptionPane;
  * @author Shaleen,Abhik,Anushree
  */
 public class StartPage extends javax.swing.JFrame {
+    
+    final static Logger logger = LoggerFactory.getLogger(StartPage.class);
 
     /** Creates new form StartPage */
     public StartPage() {
@@ -164,7 +167,7 @@ public class StartPage extends javax.swing.JFrame {
         String user = t1.getText();
         String pass = new String(p1.getPassword());
         String username;
-        pass = md5hash.passwordsalted(pass);
+        pass = Md5Hash.passwordsalted(pass);
         if (user.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please Enter your Username");
         } else if (pass.equals("b1f4f9a523e36fd969f4573e25af4540")) {
@@ -173,7 +176,7 @@ public class StartPage extends javax.swing.JFrame {
             try {
                 
                 String query = "select username,password,type from users where username='" + user + "';";
-                ResultSet rs = myQueries.excQuery(query);
+                ResultSet rs = MyQueries.excQuery(query);
                 rs.next();
                 String DBuser = rs.getString("username");
                 String DBpassword = rs.getString("password");
@@ -199,7 +202,7 @@ public class StartPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "No such Username Exists");
                 } 
                 else {
-                    JOptionPane.showMessageDialog(this, e.getMessage());
+                    logger.error("Error Description:", e);
                 }
             }
 

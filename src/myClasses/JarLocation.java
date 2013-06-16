@@ -17,20 +17,16 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Classes;
+package myClasses;
 
 import java.awt.Component;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.net.URL;
-import java.util.Calendar;
 
 /**
  *
  * @author Shaleen
  */
-public class jarLocation {
+public class JarLocation {
 
     public static String getLocationUnfixed(Component parentComponent) {
         URL url = parentComponent.getClass().getProtectionDomain().getCodeSource().getLocation();
@@ -39,6 +35,7 @@ public class jarLocation {
         String path = loc.substring(6, index);
         return path;
     }
+    
     public static String getLocation(Component parentComponent) {
         URL url = parentComponent.getClass().getProtectionDomain().getCodeSource().getLocation();
         String loc = url.toString();
@@ -46,17 +43,5 @@ public class jarLocation {
         String path = loc.substring(6, index);
         path=path.replace('/', '\\');        
         return path;
-    }
-    public static PrintWriter getLogPath(){
-        File file = new File("log.txt");
-        PrintWriter s = null;
-        try {
-            s = new PrintWriter(file);
-        } catch (FileNotFoundException f) {
-            file.getParentFile().mkdirs();
-        }Calendar curdate;
-         curdate = Calendar.getInstance();
-        s.println(curdate);
-        return s;
     }
 }

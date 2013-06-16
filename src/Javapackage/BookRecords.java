@@ -26,9 +26,9 @@
 
 package Javapackage;
 
-import Classes.image;
-import Classes.jarLocation;
-import Classes.myQueries;
+import myClasses.Img;
+import myClasses.JarLocation;
+import myClasses.MyQueries;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -277,13 +277,13 @@ String username;
               if(cb1.isSelected())
               {
                   query="select  max(bookcode) from books;";
-                  ResultSet rs=myQueries.excQuery(query);
+                  ResultSet rs=MyQueries.excQuery(query);
                   rs.next();
                   code=rs.getInt("max(bookcode)")+1;
                   t8.setText(""+code);
               }
               query="INSERT INTO books VALUES('"+code+"','"+name+"','"+author+"','"+rdate+"','"+pages+"','"+genre+"','"+review+"','"+url+"');";
-              myQueries.excUpdate(query);
+              MyQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this, "Book Record Succesfully inserted");
        }
       catch(Exception e)
@@ -295,11 +295,11 @@ String username;
             url1= new URL (url);
         } catch (java.net.MalformedURLException e) {
         }
-         Image img= image.resizedplusImage(url1, 200, 300);
+         Image img= Img.resizedplusImage(url1, 200, 300);
           BufferedImage resizedImage = (BufferedImage)img;
           try
           {
-              String path = jarLocation.getLocation(this);
+              String path = JarLocation.getLocation(this);
               new File(path+"\\images").mkdirs();
               ImageIO.write(resizedImage, "jpg", new File(path+"images\\"+code+".jpg")); }
           catch(java.io.IOException e)
@@ -368,7 +368,7 @@ else
         {
         
         query="Delete from books where bookcode='"+bookcode+"';";
-        myQueries.excUpdate(query);  
+        MyQueries.excUpdate(query);  
         JOptionPane.showMessageDialog(this, "Book Record succesfully Deleted");
         }
         catch(Exception e)

@@ -21,8 +21,8 @@
 package Javapackage;
 
 
-import Classes.md5hash;
-import Classes.myQueries;
+import myClasses.Md5Hash;
+import myClasses.MyQueries;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -157,7 +157,7 @@ public class signup extends javax.swing.JFrame {
        try{
               
               String query="select max(issuerId) from users;";
-              ResultSet rs=myQueries.excQuery(query);
+              ResultSet rs=MyQueries.excQuery(query);
               rs.next();
               issuerid=rs.getInt("max(issuerId)")+1;
               }
@@ -180,11 +180,11 @@ public class signup extends javax.swing.JFrame {
        else
       {
           if(a.equals(b)&&!(a.isEmpty()||b.isEmpty()))
-          { passwordmd5=md5hash.passwordsalted(password);
+          { passwordmd5=Md5Hash.passwordsalted(password);
            try{
               
               String query="INSERT INTO users VALUES("+issuerid+",'"+name+"','"+secname+"','"+username+"','"+passwordmd5+"','"+gender+"','Null','0000000000','"+type+"');";
-              myQueries.excUpdate(query);
+              MyQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this,"Account Successfully created");
               }
                catch(Exception e)

@@ -17,14 +17,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package Classes;
+package myClasses;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 /**
  *
  * @author Shaleen
  */
-public class md5hash {
+public class Md5Hash {
     public static String  password(String password)
     { 
         String passwordmd5=null;

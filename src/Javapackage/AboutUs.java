@@ -25,7 +25,7 @@
  */
 package Javapackage;
 
-import Classes.image;
+import myClasses.Img;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.net.URI;
@@ -50,9 +50,9 @@ public class AboutUs extends javax.swing.JFrame {
         } catch (java.net.MalformedURLException e) {
         }
         
-        pht2.setIcon(image.resizedplusImageIcon(url, 100, 100));
-        pht1.setIcon(image.resizedplusImageIcon(url1, 100, 100));
-        pht3.setIcon(image.resizedplusImageIcon(url2, 100, 100));
+        pht2.setIcon(Img.resizedplusImageIcon(url, 100, 100));
+        pht1.setIcon(Img.resizedplusImageIcon(url1, 100, 100));
+        pht3.setIcon(Img.resizedplusImageIcon(url2, 100, 100));
 
     }
 
