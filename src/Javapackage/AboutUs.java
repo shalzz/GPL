@@ -30,6 +30,9 @@ import java.awt.Cursor;
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URL;
+import javax.swing.SwingWorker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -38,22 +41,50 @@ import java.net.URL;
 public class AboutUs extends javax.swing.JFrame {
 
     URL url,url1,url2;
+    final static Logger logger = LoggerFactory.getLogger(StartPage.class);
+    
+    // Create a swingworker thread 
+        public class WorkerThread extends SwingWorker<Void, Void> {
+
+        @Override
+        protected Void doInBackground() {
+
+            try
+            {
+                //get the images
+                 url = new URL("https://graph.facebook.com/shaleen.jain3/picture?width=100&height=100");
+                 url2 = new URL("https://graph.facebook.com/abhik.das.92/picture?width=100&height=100");
+                 url1 = new URL("https://graph.facebook.com/anushree1802/picture?width=100&height=100");
+            }
+            catch (java.net.MalformedURLException e) 
+            {
+                logger.error("Error Description:", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            try 
+            {
+                //set the images
+                pht2.setIcon(Img.enhancedImage(url));
+                pht1.setIcon(Img.enhancedImage(url1));
+                pht3.setIcon(Img.enhancedImage(url2));
+            } 
+            catch (Exception ignore)
+            {
+            }
+        }
+    }
 
     /** Creates new form AboutUs */
     public AboutUs() {
         initComponents();
-        
-        try {
-            url = new URL("https://graph.facebook.com/shaleen.jain3/picture?type=normal");
-            url2 = new URL("https://graph.facebook.com/abhik.das.92/picture?type=large");
-            url1 = new URL("https://graph.facebook.com/anushree1802/picture?type=normal");
-        } catch (java.net.MalformedURLException e) {
-        }
-        
-        pht2.setIcon(Img.resizedplusImageIcon(url, 100, 100));
-        pht1.setIcon(Img.resizedplusImageIcon(url1, 100, 100));
-        pht3.setIcon(Img.resizedplusImageIcon(url2, 100, 100));
-
+        // execute the worker thread
+        WorkerThread task=new WorkerThread();
+        task.execute();
+      
     }
 
     /** This method is called from within the constructor to
@@ -81,16 +112,16 @@ public class AboutUs extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 28));
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 28)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 255, 153));
         jLabel2.setText("Gurgaon Public Library");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 320, -1));
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 22));
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 22)); // NOI18N
         jLabel4.setText("Sub programmers:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 240, 30));
 
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18));
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setText("<html> <body> Anushary Gupta</body> </html>");
         jLabel5.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to visit my facebook page</p>\n</body>\n</html>");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,14 +136,38 @@ public class AboutUs extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 540, 160, 30));
+
+        pht1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pht1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pht1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pht1MousePressed(evt);
+            }
+        });
         getContentPane().add(pht1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 100, 100));
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 22));
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 22)); // NOI18N
         jLabel6.setText("Lead programmers:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 240, 30));
+
+        pht2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pht2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pht2MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pht2MousePressed(evt);
+            }
+        });
         getContentPane().add(pht2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 100, 100));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18));
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel7.setText("<html>\n<body>\nShaleen Jain\n</body>\n</html>");
         jLabel7.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to visit my facebook page</p>\n</body>\n</html>");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,7 +183,7 @@ public class AboutUs extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 140, 20));
 
-        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14));
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setText("Email: shaleen.jain95@gmail.com");
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -142,9 +197,21 @@ public class AboutUs extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, -1, -1));
+
+        pht3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pht3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pht3MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pht3MousePressed(evt);
+            }
+        });
         getContentPane().add(pht3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 100, 100));
 
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18));
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel9.setText("<html> <body> Abhik Das</body> </html>");
         jLabel9.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to visit my facebook page</p>\n</body>\n</html>");
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -172,10 +239,10 @@ public class AboutUs extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 670));
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-1000)/2, (screenSize.height-694)/2, 1000, 694);
+        setSize(new java.awt.Dimension(1000, 694));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+   
     private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
         setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_jLabel5MouseEntered
@@ -247,6 +314,57 @@ public class AboutUs extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pht2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht2MouseEntered
+       setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_pht2MouseEntered
+
+    private void pht2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht2MouseExited
+         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_pht2MouseExited
+
+    private void pht3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht3MouseEntered
+       setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_pht3MouseEntered
+
+    private void pht3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht3MouseExited
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_pht3MouseExited
+
+    private void pht1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht1MouseEntered
+       setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_pht1MouseEntered
+
+    private void pht1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht1MouseExited
+         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_pht1MouseExited
+
+    private void pht2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht2MousePressed
+        try {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI uri = new URI("https://www.facebook.com/shaleen.jain3");
+            desktop.browse(uri);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_pht2MousePressed
+
+    private void pht3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht3MousePressed
+       try {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI uri = new URI("https://www.facebook.com/abhik.das.92?fref=ts");
+            desktop.browse(uri);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_pht3MousePressed
+
+    private void pht1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht1MousePressed
+       try {
+            Desktop desktop = java.awt.Desktop.getDesktop();
+            URI uri = new URI("https://www.facebook.com/anushree1802?fref=ts");
+            desktop.browse(uri);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_pht1MousePressed
     /**
      * @param args the command line arguments
      */

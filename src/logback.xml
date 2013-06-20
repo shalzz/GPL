@@ -5,7 +5,7 @@
     <file>GPL.log</file>
     <append>true</append>
     <encoder>
-      <pattern>%date [%thread] %level %logger{10} %line %msg%n</pattern>
+      <pattern>%date [%thread] %level %logger{10} %line %ex{2} %msg%n</pattern>
     </encoder>
   </appender>
 

@@ -102,7 +102,7 @@ public class Img {
         return new ImageIcon(resizedImage);
     }
     
-    public static ImageIcon enhancedImage(URL url,int width,int height) {
+    public static ImageIcon enhancedImage(URL url) {
         Image image=null;
         try {
             image = ImageIO.read(url);

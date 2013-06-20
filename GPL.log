@@ -1,0 +1,28 @@
+2013-06-18 12:06:52,234 [AWT-EventQueue-0] ERROR m.MyQueries 71 java.sql.SQLException: path to 'databases\aw.db': 'C:\Users\Shaleen\Documents\NetBeansProjects\GPL\databases' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+ Error Description:
+2013-06-18 12:06:52,234 [AWT-EventQueue-0] ERROR m.MyQueries 71 java.sql.SQLException: path to 'databases\aw.db': 'C:\Users\Shaleen\Documents\NetBeansProjects\GPL\databases' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+ Error Description:
+2013-06-18 12:06:52,234 [AWT-EventQueue-0] ERROR m.MyQueries 71 java.sql.SQLException: path to 'databases\aw.db': 'C:\Users\Shaleen\Documents\NetBeansProjects\GPL\databases' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+ Error Description:
+2013-06-18 12:06:52,234 [AWT-EventQueue-0] ERROR m.MyQueries 71 java.sql.SQLException: path to 'databases\aw.db': 'C:\Users\Shaleen\Documents\NetBeansProjects\GPL\databases' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+ Error Description:
+2013-06-18 12:06:52,249 [AWT-EventQueue-0] DEBUG J.Setup 411  exectuing worker
+2013-06-18 12:06:52,265 [AWT-EventQueue-0] DEBUG J.Setup 413  exectuted worker
+2013-06-18 12:06:52,827 [SwingWorker-pool-1-thread-1] ERROR m.MyQueries 71 java.sql.SQLException: path to 'databases\aw.db': 'C:\Users\Shaleen\Documents\NetBeansProjects\GPL\databases' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+ Error Description:
+2013-06-18 12:06:52,827 [AWT-EventQueue-0] DEBUG J.Setup 424  GUI Should be updated
