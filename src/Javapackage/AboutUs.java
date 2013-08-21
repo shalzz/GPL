@@ -28,9 +28,15 @@ package Javapackage;
 import myClasses.Img;
 import java.awt.Cursor;
 import java.awt.Desktop;
+import java.awt.Image;
+import java.awt.image.RenderedImage;
+import java.io.File;
 import java.net.URI;
 import java.net.URL;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.SwingWorker;
+import myClasses.JarLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,27 +46,38 @@ import org.slf4j.LoggerFactory;
  */
 public class AboutUs extends javax.swing.JFrame {
 
-    URL url,url1,url2;
+    URL url1;
     final static Logger logger = LoggerFactory.getLogger(StartPage.class);
     
     // Create a swingworker thread 
-        public class WorkerThread extends SwingWorker<Void, Void> {
+        public class WorkerThread extends SwingWorker<String, Void> {
 
+            Image img1;
         @Override
-        protected Void doInBackground() {
-
+        protected String doInBackground() {
+         
             try
             {
                 //get the images
-                 url = new URL("https://graph.facebook.com/shaleen.jain3/picture?width=100&height=100");
-                 url2 = new URL("https://graph.facebook.com/abhik.das.92/picture?width=100&height=100");
-                 url1 = new URL("https://graph.facebook.com/anushree1802/picture?width=100&height=100");
+                 url1 = new URL("https://graph.facebook.com/shaleen.jain3/picture?width=100&height=100");
+                 img1=Img.enhancedImage(url1);                
             }
             catch (java.net.MalformedURLException e) 
             {
                 logger.error("Error Description:", e);
+                return "error";
             }
-            return null;
+            
+            try
+            {
+                ImageIO.write((RenderedImage)img1, "jpg", new File(JarLocation.getLocation(new AboutUs())+"\\images\\shalzz.jpg"));
+            }
+            catch(java.io.IOException e)
+            {
+                logger.error("Error Description:", e);
+            }
+            
+         return "done";
         }
 
         @Override
@@ -68,12 +85,11 @@ public class AboutUs extends javax.swing.JFrame {
             try 
             {
                 //set the images
-                pht2.setIcon(Img.enhancedImage(url));
-                pht1.setIcon(Img.enhancedImage(url1));
-                pht3.setIcon(Img.enhancedImage(url2));
+                pht1.setIcon(new ImageIcon(img1));                                
             } 
-            catch (Exception ignore)
+            catch (Exception e)
             {
+                logger.error("Error Description:", e);
             }
         }
     }
@@ -82,9 +98,12 @@ public class AboutUs extends javax.swing.JFrame {
     public AboutUs() {
         initComponents();
         // execute the worker thread
+        if(new File(JarLocation.getLocation(this)+"\\images\\shalzz.jpg").canRead())
+        {
+            pht1.setIcon(new ImageIcon(JarLocation.getLocation(this)+"\\images\\shalzz.jpg"));
+        }
         WorkerThread task=new WorkerThread();
-        task.execute();
-      
+        task.execute(); 
     }
 
     /** This method is called from within the constructor to
@@ -96,47 +115,19 @@ public class AboutUs extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         pht1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        pht2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        pht3 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 28)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 255, 153));
-        jLabel2.setText("Gurgaon Public Library");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 320, -1));
-
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 22)); // NOI18N
-        jLabel4.setText("Sub programmers:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 240, 30));
-
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel5.setText("<html> <body> Anushary Gupta</body> </html>");
-        jLabel5.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to visit my facebook page</p>\n</body>\n</html>");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel5MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel5MousePressed(evt);
-            }
-        });
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 540, 160, 30));
-
+        pht1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loading.gif"))); // NOI18N
+        pht1.setText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to go to the facebook page</p>\n</body>\n</html>");
         pht1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pht1MouseEntered(evt);
@@ -148,28 +139,20 @@ public class AboutUs extends javax.swing.JFrame {
                 pht1MousePressed(evt);
             }
         });
-        getContentPane().add(pht1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 100, 100));
+        getContentPane().add(pht1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 100, 100));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 28)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 255, 153));
+        jLabel2.setText("Gurgaon Public Library");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 320, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 22)); // NOI18N
         jLabel6.setText("Lead programmers:");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 240, 30));
 
-        pht2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pht2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pht2MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pht2MousePressed(evt);
-            }
-        });
-        getContentPane().add(pht2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 100, 100));
-
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel7.setText("<html>\n<body>\nShaleen Jain\n</body>\n</html>");
-        jLabel7.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to visit my facebook page</p>\n</body>\n</html>");
+        jLabel7.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to go to the facebook page</p>\n</body>\n</html>");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jLabel7MouseEntered(evt);
@@ -198,35 +181,6 @@ public class AboutUs extends javax.swing.JFrame {
         });
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, -1, -1));
 
-        pht3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pht3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pht3MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pht3MousePressed(evt);
-            }
-        });
-        getContentPane().add(pht3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 100, 100));
-
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel9.setText("<html> <body> Abhik Das</body> </html>");
-        jLabel9.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to visit my facebook page</p>\n</body>\n</html>");
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel9MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel9MouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel9MousePressed(evt);
-            }
-        });
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 140, 30));
-
         jButton1.setText("Close");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,29 +191,13 @@ public class AboutUs extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
+        jLabel1.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to go to the facebook page</p>\n</body>\n</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 670));
 
         setSize(new java.awt.Dimension(1000, 694));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
    
-    private void jLabel5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_jLabel5MouseEntered
-
-    private void jLabel5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_jLabel5MouseExited
-
-    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
-        try {
-            Desktop desktop = java.awt.Desktop.getDesktop();
-            URI uri = new URI("https://www.facebook.com/anushree1802?fref=ts");
-            desktop.browse(uri);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jLabel5MousePressed
-
     private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
          setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_jLabel7MouseEntered
@@ -294,42 +232,9 @@ public class AboutUs extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel8MousePressed
 
-    private void jLabel9MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseEntered
-        setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_jLabel9MouseEntered
-
-    private void jLabel9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseExited
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_jLabel9MouseExited
-
-    private void jLabel9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MousePressed
-        try {
-            Desktop desktop = java.awt.Desktop.getDesktop();
-            URI uri = new URI("https://www.facebook.com/abhik.das.92?fref=ts");
-            desktop.browse(uri);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jLabel9MousePressed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void pht2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht2MouseEntered
-       setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_pht2MouseEntered
-
-    private void pht2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht2MouseExited
-         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_pht2MouseExited
-
-    private void pht3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht3MouseEntered
-       setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_pht3MouseEntered
-
-    private void pht3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht3MouseExited
-        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_pht3MouseExited
 
     private void pht1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht1MouseEntered
        setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -339,28 +244,10 @@ public class AboutUs extends javax.swing.JFrame {
          setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_pht1MouseExited
 
-    private void pht2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht2MousePressed
+    private void pht1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht1MousePressed
         try {
             Desktop desktop = java.awt.Desktop.getDesktop();
             URI uri = new URI("https://www.facebook.com/shaleen.jain3");
-            desktop.browse(uri);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_pht2MousePressed
-
-    private void pht3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht3MousePressed
-       try {
-            Desktop desktop = java.awt.Desktop.getDesktop();
-            URI uri = new URI("https://www.facebook.com/abhik.das.92?fref=ts");
-            desktop.browse(uri);
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_pht3MousePressed
-
-    private void pht1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht1MousePressed
-       try {
-            Desktop desktop = java.awt.Desktop.getDesktop();
-            URI uri = new URI("https://www.facebook.com/anushree1802?fref=ts");
             desktop.browse(uri);
         } catch (Exception e) {
         }
@@ -408,14 +295,9 @@ public class AboutUs extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel pht1;
-    private javax.swing.JLabel pht2;
-    private javax.swing.JLabel pht3;
     // End of variables declaration//GEN-END:variables
 }

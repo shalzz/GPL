@@ -33,7 +33,7 @@ import javax.swing.ImageIcon;
  * @author Shaleen
  */
 public class Img {
-    
+    // resizes from url, returns imageIcon
     public static ImageIcon resizedImage(URL url,int width,int height) {
         Image image=null;
         try {
@@ -46,7 +46,7 @@ public class Img {
         g.dispose();
         return new ImageIcon(resizedImage);
     }
-    
+    // resizes imageIcon, returns imageIcon
  public static ImageIcon resizedImage(ImageIcon img,int width,int height) {
         Image image = img.getImage();
         BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -55,6 +55,7 @@ public class Img {
         g.dispose();
         return new ImageIcon(resizedImage);
     }
+ // resizes from url, enhances, returns imageIcon
     public static ImageIcon resizedplusImageIcon(URL url,int width,int height) {
         Image image=null;
         try {
@@ -72,6 +73,7 @@ public class Img {
         g.dispose();
         return new ImageIcon(resizedImage);
     }
+    // resizes from url, enhances, returns Image
     public static Image resizedplusImage(URL url,int width,int height) {
         Image image=null;
         try {
@@ -88,7 +90,7 @@ public class Img {
         g.dispose();
         return resizedImage;
     }
-    
+    //resizes imageIcon, enhances, returns imageIcon
     public static ImageIcon resizedplusImageIcon(ImageIcon img,int width,int height) {
         Image image = img.getImage();
         BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -101,8 +103,8 @@ public class Img {
         g.dispose();
         return new ImageIcon(resizedImage);
     }
-    
-    public static ImageIcon enhancedImage(URL url) {
+    // enhance from url, returns imageIcon
+    public static ImageIcon enhancedImageIcon(URL url) {
         Image image=null;
         try {
             image = ImageIO.read(url);
@@ -116,6 +118,22 @@ public class Img {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.dispose();
         return new ImageIcon(resizedImage);
+    }
+       // enhance from url, returns Image
+    public static Image enhancedImage(URL url) {
+        Image image=null;
+        try {
+            image = ImageIO.read(url);
+        } catch (Exception e) {
+        }
+        BufferedImage resizedImage = (BufferedImage)image;
+        Graphics2D g = resizedImage.createGraphics();
+        g.setComposite(AlphaComposite.Src);
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.dispose();
+        return resizedImage;
     }
     
    
