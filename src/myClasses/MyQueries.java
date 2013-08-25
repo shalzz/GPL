@@ -19,9 +19,7 @@
  */
 package myClasses;
 
-import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.prefs.Preferences;
 import org.slf4j.Logger;
@@ -43,29 +41,30 @@ public class MyQueries {
     final static Logger logger = LoggerFactory.getLogger(MyQueries.class);
 
     public static void excUpdate(String query) {
-        if (Dbmstype.equals("mysql")) {
-            try {
+        if (Dbmstype.equals("mysql"))
+        {
+            try 
+            {
                 int i = serverurl.indexOf(',');
                 String url = serverurl.substring(0, i);
                 int j = serverurl.indexOf(',', i + 1);
                 String username = serverurl.substring(i+1, j);
                 String password = serverurl.substring(j+1);
-                Connection con = (Connection) DriverManager.getConnection(url, username, password);
-                Statement stmt = (Statement) con.createStatement();
+                
+                Statement stmt = Connections.mySqlStmt(url, username, password);
                 stmt.executeUpdate(query);
 
             } catch (Exception e) {
                  logger.error("Error Description:", e);
             }
-        } else {
-            try {
-                // load the sqlite-JDBC driver using the current class loader
-                Class.forName("org.sqlite.JDBC");
-                // create a database connection                
-                java.sql.Connection con = (java.sql.Connection) DriverManager.getConnection("jdbc:sqlite:databases\\" + dbname + ".db");
-                java.sql.Statement stmt1 = (java.sql.Statement) con.createStatement();
-                stmt1.setQueryTimeout(30);  // set timeout to 30 sec.
-                stmt1.executeUpdate(query);
+        } 
+        else
+        {
+            try
+            {
+                String url="jdbc:sqlite:databases\\" + dbname + ".db";
+                java.sql.Statement stmt=Connections.sqlLiteStmt(url);
+                stmt.executeUpdate(query);
 
             } catch (Exception e) {
                 logger.error("Error Description:", e);
@@ -76,34 +75,36 @@ public class MyQueries {
     public static ResultSet excQuery(String query) {
 
         ResultSet rs = null;
-        if (Dbmstype.equals("mysql")) {
-            try {
-                Statement stmt;
+        if (Dbmstype.equals("mysql")) 
+        {
+            try
+            {
                 int i = serverurl.indexOf(',');
                 String url = serverurl.substring(0, i);
                 int j = serverurl.indexOf(',', i + 1);
                 String username = serverurl.substring(i+1, j);
                 String password = serverurl.substring(j+1);
-                Class.forName("java.sql.DriverManager");
-                Connection con = (Connection) DriverManager.getConnection(url, username, password);
-                stmt = (Statement) con.createStatement();
+                
+                Statement stmt = Connections.mySqlStmt(url, username, password);
                 rs = stmt.executeQuery(query);
 
-            } catch (Exception e) {
+            } 
+            catch (Exception e)
+            {
                  logger.error("Error Description:", e);
             }
-        } else {
-            java.sql.Statement stmt1;
-            try {
-                // load the sqlite-JDBC driver using the current class loader
-                Class.forName("org.sqlite.JDBC");
-                // create a database connection
-                java.sql.Connection con = (java.sql.Connection) DriverManager.getConnection("jdbc:sqlite:databases\\" + dbname + ".db");
-                stmt1 = (java.sql.Statement) con.createStatement();
-                stmt1.setQueryTimeout(30);  // set timeout to 30 sec.
-                rs = stmt1.executeQuery(query);
+        } 
+        else 
+        {
+            try
+            {
+                String url="jdbc:sqlite:databases\\" + dbname + ".db";
+                java.sql.Statement stmt=Connections.sqlLiteStmt(url);
+                rs = stmt.executeQuery(query);
 
-            } catch (Exception e) {
+            } 
+            catch (Exception e)
+            {
                  logger.error("Error Description:", e);
             }
         }

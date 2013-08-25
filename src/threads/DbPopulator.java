@@ -4,7 +4,6 @@
  */
 package threads;
 
-import Javapackage.AboutUs;
 import Javapackage.Setup;
 import java.awt.image.RenderedImage;
 import java.io.File;
