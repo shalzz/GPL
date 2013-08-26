@@ -58,7 +58,7 @@ public class DbPopulator extends SwingWorker<Void, Void>{
             {
                 try
                 {
-                    RenderedImage img = ImageIO.read(new File(JarLocation.getLocation(new Setup())+"GPL\\src\\" + bc + ".jpg"));
+                    RenderedImage img = ImageIO.read(new File("C:\\Users\\500029490\\Documents\\NetBeansProjects\\GPL\\src\\" + bc + ".jpg"));
                     ImageIO.write(img, "jpg", imageDir);
                 } 
                 catch (java.io.IOException e) 
