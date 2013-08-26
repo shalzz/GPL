@@ -1,7 +1,23 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+    GPL(GNU Public Library) is a Library Management System.
+    Copyright (C) 2012-2013  Shaleen Jain
+
+    This file is part of GPL.
+
+    GPL is a free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package threads;
 
 import Javapackage.Setup;
@@ -24,7 +40,7 @@ public class DbPopulator extends SwingWorker<Void, Void>{
     
     private JLabel l5;
     private JProgressBar jProgressBar1;
-    final static Logger logger = LoggerFactory.getLogger(Setup.class);
+    final static Logger logger = LoggerFactory.getLogger(DbPopulator.class);
     
     // Create a constructor to accept the private components 
     public DbPopulator(JLabel l5,JProgressBar jProgressBar1) {

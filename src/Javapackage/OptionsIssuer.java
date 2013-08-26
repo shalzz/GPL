@@ -29,18 +29,24 @@ import myClasses.Md5Hash;
 import myClasses.MyQueries;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Shaleen
  */
 public class OptionsIssuer extends javax.swing.JFrame {
-String username;
+  
+    String username;
+    final static Logger logger = LoggerFactory.getLogger(OptionsIssuer.class);
+
     /** Creates new form OptionsIssuer */
     public OptionsIssuer() {
         initComponents();
         
     }
+    
     public OptionsIssuer(String username1) {
         username=username1;
         initComponents();
@@ -218,7 +224,7 @@ String username;
    }
       catch(Exception e)
       {
-         JOptionPane.showMessageDialog (this, e.getMessage());
+         logger.error("Error Description:", e);
        }        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -270,7 +276,7 @@ TnC a = new TnC();
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog (this, e.getMessage());
+            logger.error("Error Description:", e);
         }}
     }//GEN-LAST:event_jButton2ActionPerformed
 

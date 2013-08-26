@@ -25,17 +25,12 @@
  */
 package Javapackage;
 
-import myClasses.Img;
 import java.awt.Cursor;
 import java.awt.Desktop;
-import java.awt.Image;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.net.URI;
 import java.net.URL;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.SwingWorker;
 import myClasses.JarLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,63 +42,11 @@ import org.slf4j.LoggerFactory;
 public class AboutUs extends javax.swing.JFrame {
 
     URL url1;
-    final static Logger logger = LoggerFactory.getLogger(StartPage.class);
-    
-    // Create a swingworker thread 
-        public class WorkerThread extends SwingWorker<String, Void> {
-
-            Image img1;
-        @Override
-        protected String doInBackground() {
-         
-            try
-            {
-                //get the images
-                 url1 = new URL("https://graph.facebook.com/shaleen.jain3/picture?width=100&height=100");
-                 img1=Img.enhancedImage(url1);                
-            }
-            catch (java.net.MalformedURLException e) 
-            {
-                logger.error("Error Description:", e);
-                return "error";
-            }
-            
-            try
-            {
-                ImageIO.write((RenderedImage)img1, "jpg", new File(JarLocation.getLocation(new AboutUs())+"\\images\\shalzz.jpg"));
-            }
-            catch(java.io.IOException e)
-            {
-                logger.error("Error Description:", e);
-            }
-            
-         return "done";
-        }
-
-        @Override
-        protected void done() {
-            try 
-            {
-                //set the images
-                pht1.setIcon(new ImageIcon(img1));                                
-            } 
-            catch (Exception e)
-            {
-                logger.error("Error Description:", e);
-            }
-        }
-    }
+    final static Logger logger = LoggerFactory.getLogger(AboutUs.class);
 
     /** Creates new form AboutUs */
     public AboutUs() {
         initComponents();
-        // execute the worker thread
-        if(new File(JarLocation.getLocation(this)+"\\images\\shalzz.jpg").canRead())
-        {
-            pht1.setIcon(new ImageIcon(JarLocation.getLocation(this)+"\\images\\shalzz.jpg"));
-        }
-        WorkerThread task=new WorkerThread();
-        task.execute(); 
     }
 
     /** This method is called from within the constructor to
@@ -124,6 +67,11 @@ public class AboutUs extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                AboutUs.this.windowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pht1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loading.gif"))); // NOI18N
@@ -207,11 +155,15 @@ public class AboutUs extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel7MouseExited
 
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
-        try {
+        try 
+        {
             Desktop desktop = java.awt.Desktop.getDesktop();
             URI uri = new URI("https://www.facebook.com/shaleen.jain3");
             desktop.browse(uri);
-        } catch (Exception e) {
+        } 
+        catch (Exception e)
+        {
+            logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_jLabel7MousePressed
 
@@ -224,12 +176,16 @@ public class AboutUs extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseExited
 
     private void jLabel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MousePressed
-       try {
+       try 
+       {
             Desktop desktop = java.awt.Desktop.getDesktop();
             URI uri = new URI("mailto:shaleen.jain95@gmail.com");
             desktop.mail(uri);
-        } catch (Exception e) {
-        }
+        } 
+       catch (Exception e)
+       {
+            logger.error("Error Description:", e);
+       }
     }//GEN-LAST:event_jLabel8MousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -245,13 +201,27 @@ public class AboutUs extends javax.swing.JFrame {
     }//GEN-LAST:event_pht1MouseExited
 
     private void pht1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pht1MousePressed
-        try {
+        try
+        {
             Desktop desktop = java.awt.Desktop.getDesktop();
             URI uri = new URI("https://www.facebook.com/shaleen.jain3");
             desktop.browse(uri);
-        } catch (Exception e) {
+        } 
+        catch (Exception e)
+        {
+            logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_pht1MousePressed
+
+    private void windowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_windowOpened
+        if(new File(JarLocation.getLocation(new AboutUs())+"\\images\\11510497108122122.jpg").canRead())
+        {
+            pht1.setIcon(new ImageIcon(JarLocation.getLocation(new AboutUs())+"\\images\\11510497108122122.jpg"));
+        }
+        // execute the worker thread
+        threads.ProfileHandler task=new threads.ProfileHandler(pht1);
+        task.execute(); 
+    }//GEN-LAST:event_windowOpened
     /**
      * @param args the command line arguments
      */

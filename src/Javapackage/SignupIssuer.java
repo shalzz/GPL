@@ -29,12 +29,16 @@ import myClasses.Md5Hash;
 import myClasses.MyQueries;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  *
  * @author Shaleen
  */
 public class SignupIssuer extends javax.swing.JFrame {
 
+    final static Logger logger = LoggerFactory.getLogger(SignupIssuer.class);
+    
     /** Creates new form SignupIssuer */
     public SignupIssuer() {
         initComponents();
@@ -203,7 +207,7 @@ public class SignupIssuer extends javax.swing.JFrame {
               }
                catch(Exception e)
               {
-                 JOptionPane.showMessageDialog (this, e.getMessage());
+                 logger.error("Error Description:", e);
               }
        
       if(name.isEmpty())
@@ -249,15 +253,15 @@ public class SignupIssuer extends javax.swing.JFrame {
                   }
                   else
                   {    
-                    JOptionPane.showMessageDialog (this, e.getMessage());
+                    logger.error("Error Description:", e);
                   }
              
               }
           }
           else if(!(a.equals(b)))
-        {JOptionPane.showMessageDialog(null,"Passwords do not match");}
-          
-      }
+        {
+            JOptionPane.showMessageDialog(null,"Passwords do not match");}
+        }
          
      
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -273,11 +277,15 @@ public class SignupIssuer extends javax.swing.JFrame {
 
     private void t5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t5KeyTyped
         char kc = evt.getKeyChar();
-        if (!(kc >= '0' && kc <= '9')) {
+        String num = t5.getText();
+        
+        if (!(kc >= '0' && kc <= '9')) 
+        {
             evt.consume();
         }
-        String num = t5.getText();
-        if (num.length() >= 10) {
+        
+        if (num.length() >= 10)
+        {
             evt.consume();
         }
     }//GEN-LAST:event_t5KeyTyped

@@ -36,6 +36,8 @@ import java.net.URL;
 import java.sql.ResultSet;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -43,18 +45,16 @@ import javax.swing.JOptionPane;
  */
 public class BookRecords extends javax.swing.JFrame {
 String username;
-
+final static Logger logger = LoggerFactory.getLogger(BookRecords.class);
 
     /** Creates new form BookRecords */
     public BookRecords() {
-        initComponents();
-        
-        
+        initComponents();           
     }
+    
     public BookRecords(String username1) {
         initComponents();
-        username=username1;
-       
+        username=username1;     
     }
 
     /** This method is called from within the constructor to
@@ -272,7 +272,8 @@ String username;
        }
        else
        {
-        try{
+        try
+        {
               
               if(cb1.isSelected())
               {
@@ -286,28 +287,33 @@ String username;
               MyQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this, "Book Record Succesfully inserted");
        }
-      catch(Exception e)
+        catch (Exception e)
         {
-         JOptionPane.showMessageDialog (this, e.getMessage());
+               logger.error("Error Description:", e);
         }
-        URL url1=null;
-           try {
-            url1= new URL (url);
-        } catch (java.net.MalformedURLException e) {
+           URL url1 = null;
+           try 
+           {
+               url1 = new URL(url);
+           }
+           catch (java.net.MalformedURLException e) 
+           {
+               logger.error("Error Description:", e);
+           }
+            Image img = Img.resizedplusImage(url1, 200, 300);
+            BufferedImage resizedImage = (BufferedImage) img;
+            try
+            {
+                String path = JarLocation.getLocation(this);
+                new File(path + "\\images").mkdirs();
+                ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + code + ".jpg"));
+            } 
+            catch (java.io.IOException e)
+            {
+                 logger.error("Error Description:", e);
+            }
+
         }
-         Image img= Img.resizedplusImage(url1, 200, 300);
-          BufferedImage resizedImage = (BufferedImage)img;
-          try
-          {
-              String path = JarLocation.getLocation(this);
-              new File(path+"\\images").mkdirs();
-              ImageIO.write(resizedImage, "jpg", new File(path+"images\\"+code+".jpg")); }
-          catch(java.io.IOException e)
-          {
-              JOptionPane.showMessageDialog (this, e.getMessage());
-          }
-          
-       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void t1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t1KeyTyped
@@ -373,7 +379,7 @@ else
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog (this, e.getMessage());
+             logger.error("Error Description:", e);
         }
         }
         

@@ -25,6 +25,8 @@ import myClasses.Md5Hash;
 import myClasses.MyQueries;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /*
@@ -43,6 +45,8 @@ import javax.swing.JOptionPane;
  * @author Shaleen,Abhik,Anushree
  */
 public class signup extends javax.swing.JFrame {
+    
+    final static Logger logger = LoggerFactory.getLogger(signup.class);
 
     /** Creates new form signup */
     public signup() {
@@ -163,7 +167,7 @@ public class signup extends javax.swing.JFrame {
               }
                catch(Exception e)
               {
-                 JOptionPane.showMessageDialog (this, e.getMessage());
+                 logger.error("Error Description:", e);
               }
       if(name.isEmpty())
       {JOptionPane.showMessageDialog(null,"Please enter your Name");}
@@ -189,12 +193,13 @@ public class signup extends javax.swing.JFrame {
               }
                catch(Exception e)
               {
-                 JOptionPane.showMessageDialog (this, e.getMessage());
+                 logger.error("Error Description:", e);
               }
           }
           else if(!(a.equals(b)))
-        {JOptionPane.showMessageDialog(null,"Passwords do not match");}
-      }
+        {
+            JOptionPane.showMessageDialog(null,"Passwords do not match");}
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
