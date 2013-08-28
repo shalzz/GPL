@@ -67,6 +67,7 @@ public class ALLusers extends javax.swing.JFrame {
         {
             logger.error("Error Description:", e);
         }
+        myClasses.Connections.close(); // Close connection to prevent Database lock
     }
 
     /** This method is called from within the constructor to
@@ -264,6 +265,7 @@ public class ALLusers extends javax.swing.JFrame {
             {
                 logger.error("Error Description:", e);
             }
+            myClasses.Connections.close(); // Close connection to prevent Database lock
         }
     }//GEN-LAST:event_jTable1MousePressed
 
@@ -292,6 +294,7 @@ public class ALLusers extends javax.swing.JFrame {
             {
                 logger.error("Error Description:", e);
             }
+       myClasses.Connections.close(); // Close connection to prevent Database lock
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyPressed
@@ -329,6 +332,7 @@ public class ALLusers extends javax.swing.JFrame {
             {
                 logger.error("Error Description:", e);
             }
+         myClasses.Connections.close(); // Close connection to prevent Database lock   
         }
     }//GEN-LAST:event_jTable1KeyPressed
 

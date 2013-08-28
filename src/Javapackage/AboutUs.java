@@ -74,8 +74,6 @@ public class AboutUs extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pht1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loading.gif"))); // NOI18N
-        pht1.setText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to go to the facebook page</p>\n</body>\n</html>");
         pht1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pht1MouseEntered(evt);

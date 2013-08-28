@@ -62,7 +62,7 @@ public class MyQueries {
         {
             try
             {
-                String url="jdbc:sqlite:databases\\" + dbname + ".db";
+                String url="jdbc:sqlite:databases/" + dbname + ".db";
                 java.sql.Statement stmt=Connections.sqlLiteStmt(url);
                 stmt.executeUpdate(query);
 
@@ -98,7 +98,7 @@ public class MyQueries {
         {
             try
             {
-                String url="jdbc:sqlite:databases\\" + dbname + ".db";
+                String url="jdbc:sqlite:databases/" + dbname + ".db";
                 java.sql.Statement stmt=Connections.sqlLiteStmt(url);
                 rs = stmt.executeQuery(query);
 

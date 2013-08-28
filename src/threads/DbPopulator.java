@@ -67,14 +67,12 @@ public class DbPopulator extends SwingWorker<Void, Void>{
                     logger.error("Error Description:", e);
                 }
                 
-                // calculate image progress
+                // Calculate image progress
                 progress=((bc-1000)/51)*100/2;
                 logger.debug("Progress: "+progress);
             }
         }        
-        // Insert Records
-        // TODO: Split up the queries into an array and calulate progress 
-         
+        // Insert Records         
         //<editor-fold defaultstate="collapsed" desc=" Book Records ">
          String[] query={"Insert into books values (1001,\"Harry Potter and the Sorcerers Stone\",\"J. K. Rowling\",\"26 June 1997\",223,\"Fantasy\",\"Harry Potter and the Philosopher s Stone is the first novel in the Harry Potter series written by J. K. Rowling and featuring Harry Potter, a young wizard. It describes how Harry discovers he is a wizard, makes close friends and a few enemies at the Hogwarts School of Witchcraft and Wizardry, and with the help of his friends thwarts an attempted comeback by the evil wizard Lord Voldemort, who killed Harrys parents when Harry was one year old. \",\"null\");\n"
                 , "Insert into books values (1002,\"Harry Potter and the Chamber of Secrets\",\"J. K. Rowling\",\"2 July 1998\",251,\"Fantasy\",\"Harry Potter and the Chamber of Secrets begins as Harry spends a miserable summer with his only remaining family, the Dursleys. During a dinner party hosted by his uncle and aunt, Harry is visited by Dobby, a house-elf. Dobby warns Harry not to return to Hogwarts, the magical school for wizards that Harry attended the previous year, explaining that terrible things will happen there. Harry politely disregards the warning, and Dobby wreaks havoc in the kitchen, infuriating the Dursleys.\",\"null\");\n"
@@ -131,6 +129,8 @@ public class DbPopulator extends SwingWorker<Void, Void>{
         for (int i = 0; i <= 50; i++) 
         {
         MyQueries.excUpdate(query[i]);
+        myClasses.Connections.close(); // Close connection to prevent Database lock
+        // Caluculate progress;
         progress=50+i;
         logger.debug("Progress: "+progress);
         }

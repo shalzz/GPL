@@ -30,12 +30,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="pht1">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/loading.gif"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;body bgcolor=&quot;white&quot;&gt;&#xa;&lt;p align=&quot;center&quot;&gt;Click to go to the facebook page&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&lt;/html&gt;"/>
-      </Properties>
       <Events>
         <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pht1MouseEntered"/>
         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pht1MouseExited"/>
