@@ -382,16 +382,18 @@ public class Setup extends javax.swing.JFrame {
             }
             
             // Create the required tables
-            String q1 = "create table settings(fine integer,issuetime integer,maxbooks integer);\n"
-                    + "create table users (issuerId integer(5) ,fname varchar(15), lname varchar(15),username varchar(20) Primary key,password varchar(32),gender varchar(10),address varchar(40), phoneno long , type varchar(10));\n"
-                    + "create table books( bookcode integer Primary Key,bookname varchar(50),author varchar(40),Releasedate varchar(25),Pages integer,genre varchar(30),review varchar(1000),imgurl varchar(150));\n";
-            MyQueries.excUpdate(q1);
-            String query1 = "create table accounts(IssuerId integer,username Varchar(10),BookCode integer Primary Key,Bookname Varchar(50),IssueDate date,ReturnDate date);";
-            String query2 = "insert into settings values(1,7,3);";
-            String query3 = "Insert into users values (100,\"admin\",\"admin\",\"admin\",\"c75af13c992650118785608ba2506a3\",\"Male\",\"7/87,Dallas Street,Houston\",9764578654,\"admin\");";
-            MyQueries.excUpdate(query1);
-            MyQueries.excUpdate(query2);
-            MyQueries.excUpdate(query3);
+            String query[] = {"create table settings(fine integer,issuetime integer,maxbooks integer);"
+                    ,"create table users (issuerId integer(5) ,fname varchar(15), lname varchar(15),username varchar(20) Primary key,password varchar(32),gender varchar(10),address varchar(40), phoneno long , type varchar(10));"
+                    ,"create table books( bookcode integer Primary Key,bookname varchar(50),author varchar(40),Releasedate varchar(25),Pages integer,genre varchar(30),review varchar(1000),imgurl varchar(150));"
+                    ,"create table accounts(IssuerId integer,username Varchar(10),BookCode integer Primary Key,Bookname Varchar(50),IssueDate date,ReturnDate date);"
+                    ,"insert into settings values(1,7,3);"
+                    ,"Insert into users values (100,\"admin\",\"admin\",\"admin\",\"c75af13c992650118785608ba2506a3\",\"Male\",\"null\",9764578654,\"admin\");"};
+ 
+            for(int i=0;i<=5;i++)
+            {
+                 MyQueries.excUpdate(query[i]);
+                 myClasses.Connections.close(); // Close connection to prevent Database lock
+            }
             
             if (rb3.isSelected()) 
             {
@@ -413,7 +415,7 @@ public class Setup extends javax.swing.JFrame {
                 
             }
             
-            //prefs.putBoolean(SETUP_HAS_RUN, true);
+            prefs.putBoolean(SETUP_HAS_RUN, true);
             JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");
             try
             {

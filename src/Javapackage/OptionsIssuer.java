@@ -197,6 +197,7 @@ public class OptionsIssuer extends javax.swing.JFrame {
               ResultSet rs =MyQueries.excQuery(query);
               rs.next();
               String BDoldpass=rs.getString("password");
+              myClasses.Connections.close(); // Close connection to prevent Database lock
      if(!(oldpass.isEmpty()&&a.isEmpty()&&b.isEmpty()))
      {
          if(BDoldpass.equals(oldpass))     
@@ -206,6 +207,7 @@ public class OptionsIssuer extends javax.swing.JFrame {
             newpass=Md5Hash.passwordsalted(newpass);
             query="update users set password='"+newpass+"' where username='"+username+"'and password='"+oldpass+"'and type='issuer';";
             MyQueries.excUpdate(query);
+            myClasses.Connections.close(); // Close connection to prevent Database lock
             JOptionPane.showMessageDialog (this,"Password Successfully Changed");
              }
              else
@@ -272,6 +274,7 @@ TnC a = new TnC();
             String query="update users set address='"+add+"' ,phoneno="+phone+" where username='"+username+"';";
 
             MyQueries.excUpdate(query);
+            myClasses.Connections.close(); // Close connection to prevent Database lock
             JOptionPane.showMessageDialog (this,"Information added");
         }
         catch(Exception e)

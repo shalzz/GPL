@@ -168,11 +168,15 @@ public class StartPage extends javax.swing.JFrame {
         String pass = new String(p1.getPassword());
         String username;
         pass = Md5Hash.passwordsalted(pass);
-        if (user.isEmpty()) {
+        if (user.isEmpty()) 
+        {
             JOptionPane.showMessageDialog(this, "Please Enter your Username");
-        } else if (pass.equals("b1f4f9a523e36fd969f4573e25af4540")) {
+        }
+        else if (pass.equals("b1f4f9a523e36fd969f4573e25af4540")) // check for empty string as password
+        {
             JOptionPane.showMessageDialog(this, "Please Enter your Password");
-        } else {
+        } else
+        {
             try {
                 
                 String query = "select username,password,type from users where username='" + user + "';";
@@ -181,27 +185,36 @@ public class StartPage extends javax.swing.JFrame {
                 String DBuser = rs.getString("username");
                 String DBpassword = rs.getString("password");
                 String DBtype = rs.getString("type");
-                if (DBuser.equals(user) && DBpassword.equals(pass)) {
-                    if (DBtype.equals("admin")) {
+                myClasses.Connections.close(); // Close connection to prevent Database lock
+                if (DBuser.equals(user) && DBpassword.equals(pass)) 
+                {
+                    if (DBtype.equals("admin"))
+                    {
                         username = DBuser;
                         MainPage a = new MainPage(username);
                         a.setVisible(true);
                         this.dispose();
 
-                    } else if (DBtype.equals("issuer")) {
+                    } else if (DBtype.equals("issuer")) 
+                    {
                         username = DBuser;
                         MainPageissuer a = new MainPageissuer(username);
                         a.setVisible(true);
                         this.dispose();
                     }
-                } else {
+                } 
+                else 
+                {
                     JOptionPane.showMessageDialog(this, "Username or Password is Incorrect");
                 }
-            } catch (Exception e) {
-                if (e.getMessage().equals("Illegal operation on empty result set.")) {
+            } catch (Exception e) 
+            {
+                if (e.getMessage().equals("Illegal operation on empty result set.")) 
+                {
                     JOptionPane.showMessageDialog(this, "No such Username Exists");
                 } 
-                else {
+                else 
+                {
                     logger.error("Error Description:", e);
                 }
             }

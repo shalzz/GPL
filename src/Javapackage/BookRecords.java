@@ -283,9 +283,11 @@ final static Logger logger = LoggerFactory.getLogger(BookRecords.class);
                   code=rs.getInt("max(bookcode)")+1;
                   t8.setText(""+code);
               }
+              myClasses.Connections.close(); // Close connection to prevent Database lock
               query="INSERT INTO books VALUES('"+code+"','"+name+"','"+author+"','"+rdate+"','"+pages+"','"+genre+"','"+review+"','"+url+"');";
               MyQueries.excUpdate(query);
               JOptionPane.showMessageDialog (this, "Book Record Succesfully inserted");
+              myClasses.Connections.close(); // Close connection to prevent Database lock
        }
         catch (Exception e)
         {
@@ -374,7 +376,8 @@ else
         {
         
         query="Delete from books where bookcode='"+bookcode+"';";
-        MyQueries.excUpdate(query);  
+        MyQueries.excUpdate(query); 
+        myClasses.Connections.close(); // Close connection to prevent Database lock
         JOptionPane.showMessageDialog(this, "Book Record succesfully Deleted");
         }
         catch(Exception e)

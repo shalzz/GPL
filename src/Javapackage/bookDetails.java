@@ -67,21 +67,28 @@ public class bookDetails extends javax.swing.JFrame {
             String genre = rs.getString("genre");
             String review = rs.getString("review");
             l1.setIcon(new ImageIcon(path + "images/" + bookcode + ".jpg"));
+            myClasses.Connections.close(); // Close connection to prevent Database lock
 
             File dir = new File(path + "images/" + bookcode + ".jpg");
-            if (!dir.canRead()) {
+            if (!dir.canRead())
+            {
                 ResultSet rs1 = MyQueries.excQuery("select imgURL from books where bookcode=" + bookcode + ";");
                 rs1.next();
                 String url = rs1.getString("imgURL");
                 URL url1 = new URL(url);
                 l1.setIcon(Img.resizedplusImageIcon(url1, 200, 300));
+                myClasses.Connections.close(); // Close connection to prevent Database lock
+                
                 //write the Img on the drive
                 Image img = Img.resizedplusImage(url1, 200, 300);
                 BufferedImage resizedImage = (BufferedImage) img;
-                try {
+                try
+                {
                     new File(path + "\\images").mkdirs();
                     ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode + ".jpg"));
-                } catch (java.io.IOException f) {
+                }
+                catch (java.io.IOException f) 
+                {
                     JOptionPane.showMessageDialog(null, f.getMessage());
                 }
             }
@@ -99,25 +106,32 @@ public class bookDetails extends javax.swing.JFrame {
             query = "SELECT bookcode FROM books order by  bookcode;";
             ResultSet rs1 = MyQueries.excQuery(query);
             int j = 0;
-            while (rs1.next()) {
+            while (rs1.next()) 
+            {
                 int bookcode1 = rs1.getInt("bookcode");
                 ImageIcon img = new ImageIcon(path + "images\\" + bookcode1 + ".jpg");
+                
 
                 dir = new File(path + "images/" + bookcode1 + ".jpg");
                 if (!dir.canRead()) {
                     ResultSet rs2 = MyQueries.excQuery("select imgURL from books where bookcode=" + bookcode1 + ";");
                     rs2.next();
                     String url = rs2.getString("imgURL");
+                    myClasses.Connections.close(); // Close connection to prevent Database lock
+                    
                     URL url1 = new URL(url);
                     img = Img.resizedplusImageIcon(url1, 200, 300);
 
                     //write the Img on the drive
                     Image img1 = Img.resizedplusImage(url1, 200, 300);
                     BufferedImage resizedImage = (BufferedImage) img1;
-                    try {
+                    try 
+                    {
                         new File(path + "\\images").mkdirs();
                         ImageIO.write(resizedImage, "jpg", new File(path + "images\\" + bookcode1 + ".jpg"));
-                    } catch (java.io.IOException f) {
+                    }
+                    catch (java.io.IOException f)
+                    {
                         JOptionPane.showMessageDialog(null, f.getMessage());
                     }
                 }
@@ -133,6 +147,7 @@ public class bookDetails extends javax.swing.JFrame {
                 j++;
             }
             jList1.setModel(listModel);
+            myClasses.Connections.close(); // Close connection to prevent Database lock
 
         } catch (Exception e) {
             logger.error("Error Description:", e);
@@ -276,16 +291,19 @@ public class bookDetails extends javax.swing.JFrame {
 
             String query = "SELECT bookcode FROM books order by bookcode;";
             ResultSet rs = MyQueries.excQuery(query);
-            while (rs.next()) {
+            while (rs.next())
+            {
 
-                if (i == value)//check to ensure column index(mysql) and imageindex(jList1 index) match.
+                if (i == value) // check to ensure column index(mysql) and imageindex(jList1 index) match.
                 {
                     bookcode = rs.getInt("bookcode");
                     break;
                 }
                 i++;
             }
-        } catch (Exception e) {
+            myClasses.Connections.close(); // Close connection to prevent Database lock
+        } catch (Exception e) 
+        {
         }
         try {
 
@@ -300,6 +318,7 @@ public class bookDetails extends javax.swing.JFrame {
             String genre = rs.getString("genre");
             String review = rs.getString("review");
             l1.setIcon(new ImageIcon(path + "images\\" + bookcode + ".jpg"));
+            myClasses.Connections.close(); // Close connection to prevent Database lock
 
             File dir = new File(path + "images/" + bookcode + ".jpg");
             if (!dir.canRead()) {
@@ -308,6 +327,8 @@ public class bookDetails extends javax.swing.JFrame {
                 String url = rs1.getString("imgURL");
                 URL url1 = new URL(url);
                 l1.setIcon(Img.resizedplusImageIcon(url1, 200, 300));
+                myClasses.Connections.close(); // Close connection to prevent Database lock
+                
                 //write the Img on the drive
                 Image img = Img.resizedplusImage(url1, 200, 300);
                 BufferedImage resizedImage = (BufferedImage) img;

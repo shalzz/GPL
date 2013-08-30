@@ -62,6 +62,7 @@ public class Options extends javax.swing.JFrame {
              int issuetime = rs.getInt("issuetime");
              int fine = rs.getInt("fine");
              int maxbooks = rs.getInt("maxbooks");
+             myClasses.Connections.close(); // Close connection to prevent Database lock
              t2.setText("" + fine);
              cb2.setSelectedIndex(maxbooks-1);
              if (issuetime == 1) 
@@ -289,11 +290,6 @@ public class Options extends javax.swing.JFrame {
 
         cb2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cb2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
-        cb2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb2ActionPerformed(evt);
-            }
-        });
         jPanel1.add(cb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 100, -1));
 
         jButton6.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
@@ -332,11 +328,11 @@ public class Options extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-1016)/2, (screenSize.height-722)/2, 1016, 722);
+        setSize(new java.awt.Dimension(1016, 722));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -370,6 +366,7 @@ public class Options extends javax.swing.JFrame {
               ResultSet rs =MyQueries.excQuery(query);
               rs.next();
               String BDoldpass=rs.getString("password");
+              myClasses.Connections.close(); // Close connection to prevent Database lock
           if(BDoldpass.equals(oldpass))     
           {   if((a.equals(b)))
             { 
@@ -410,6 +407,7 @@ public class Options extends javax.swing.JFrame {
             query="update users set password='"+newpass+"' where username='"+username+"'and type='issuer';";
         }
               MyQueries.excUpdate(query);
+              myClasses.Connections.close(); // Close connection to prevent Database lock
               JOptionPane.showMessageDialog (this,"Password Successfully Changed");
        }
       catch(Exception e)
@@ -427,6 +425,7 @@ public class Options extends javax.swing.JFrame {
              String query="update users set address='"+add+"',phoneno='"+phone+"' where username='"+username+"'and type='issuer';";
         
               MyQueries.excUpdate(query);
+              myClasses.Connections.close(); // Close connection to prevent Database lock
               JOptionPane.showMessageDialog (this,"User Info Successfully Changed");
        }
       catch(Exception e)
@@ -466,6 +465,7 @@ public class Options extends javax.swing.JFrame {
               
               String query="update settings set fine='"+fine+"',issuetime='"+issuetime+"',maxbooks="+maxbooks+";";
               MyQueries.excUpdate(query);
+              myClasses.Connections.close(); // Close connection to prevent Database lock
               JOptionPane.showMessageDialog (this,"Settings Changed");
        }
       catch(Exception e)
@@ -503,6 +503,7 @@ public class Options extends javax.swing.JFrame {
                 {
                  query = "Delete from users where username='"+username+"'";
                 MyQueries.excUpdate(query);  
+                myClasses.Connections.close(); // Close connection to prevent Database lock
                 JOptionPane.showMessageDialog(this, "Account succesfully Deactivated");
                 }
             }else
@@ -515,10 +516,6 @@ public class Options extends javax.swing.JFrame {
                 logger.error("Error Description:", e);
             }
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb2ActionPerformed
 
     /**
     * @param args the command line arguments

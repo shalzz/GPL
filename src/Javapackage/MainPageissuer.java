@@ -290,10 +290,12 @@ public class MainPageissuer extends javax.swing.JFrame {
             ResultSet rs0 = MyQueries.excQuery(query);
             rs0.next();
             fine = rs0.getInt("fine");
+            myClasses.Connections.close(); // Close connection to prevent Database lock
             query = "SELECT * FROM accounts where username='" + username1 + "';";
             ResultSet rs = MyQueries.excQuery(query);
             model.setRowCount(0);
-            while (rs.next()) {
+            while (rs.next())
+            {
                 int Bookid = rs.getInt("Bookcode");
                 String Bookname = rs.getString("Bookname");
                 Date iDate = rs.getDate("issueDate");
@@ -303,8 +305,10 @@ public class MainPageissuer extends javax.swing.JFrame {
                 Calendar returnDate = Calendar.getInstance();
                 returnDate.setTime(rDate);
                 Calendar curdate = Calendar.getInstance();
-                if (curdate.after(returnDate)) {
-                    while (curdate.after(returnDate)) {
+                if (curdate.after(returnDate))
+                {
+                    while (curdate.after(returnDate)) 
+                    {
                         returnDate.add(Calendar.DAY_OF_MONTH, 1);
                         FineDue++;
                     }
@@ -323,7 +327,10 @@ public class MainPageissuer extends javax.swing.JFrame {
                 model.addRow(new Object[]{Bookid, Bookname, idate, rdate, FineDue});
                 FineDue = 0;
             }
-        } catch (Exception e) {
+            myClasses.Connections.close(); // Close connection to prevent Database lock
+        } 
+        catch (Exception e) 
+        {
             logger.error("Error Description:", e);
         }
 }//GEN-LAST:event_jButton1ActionPerformed
@@ -352,19 +359,27 @@ public class MainPageissuer extends javax.swing.JFrame {
                 rs1.next();
                 username1 = rs1.getString("username");
                 issuerid = rs1.getInt("issuerid");
+                myClasses.Connections.close(); // Close connection to prevent Database lock
+                
                 query = "select count(*) from accounts where username = '" + username1 + "';";
                 ResultSet rs2 = MyQueries.excQuery(query);
                 rs2.next();
                 count = rs2.getInt("count(*)");
+                myClasses.Connections.close(); // Close connection to prevent Database lock
+                
                 query = "select * from settings;";
                 ResultSet rs3 = MyQueries.excQuery(query);
                 rs3.next();
                 int issuetime = rs3.getInt("issuetime");
                 int maxbooks = rs3.getInt("maxbooks");
+                myClasses.Connections.close(); // Close connection to prevent Database lock
 
-                if (count >= maxbooks) {
+                if (count >= maxbooks) 
+                {
                     JOptionPane.showMessageDialog(this, "Sorry! You cannot Issue more than " + maxbooks + " books");
-                } else {
+                } 
+                else 
+                {
                     Calendar curdate = Calendar.getInstance();
                     Calendar returndate;
                     curdate.add(Calendar.DAY_OF_MONTH, issuetime);
@@ -380,12 +395,18 @@ public class MainPageissuer extends javax.swing.JFrame {
                     String rdate = "" + ryear + "/" + rmonth + "/" + rdayOfMonth;
                     query = "insert into accounts values(" + issuerid + ",'" + username1 + "'," + bookcode + ",'" + bookname + "','" + idate + "','" + rdate + "');";
                     MyQueries.excUpdate(query);
+                    myClasses.Connections.close(); // Close connection to prevent Database lock
                     JOptionPane.showMessageDialog(this, "Book Succesfully issued");
                 }
-            } catch (Exception f) {
-                if (f.getMessage().equals("Duplicate entry '" + bookcode + "' for key 'PRIMARY'")) {
+            } 
+            catch (Exception f) 
+            {
+                if (f.getMessage().equals("Duplicate entry '" + bookcode + "' for key 'PRIMARY'")) 
+                {
                     JOptionPane.showMessageDialog(this, "This book has already been issued by you or someone else");
-                } else {
+                } 
+                else
+                {
                     JOptionPane.showMessageDialog(this, f.getMessage());
                 }
             }
@@ -402,14 +423,18 @@ public class MainPageissuer extends javax.swing.JFrame {
             String query = "SELECT * FROM books;";
             ResultSet rs = MyQueries.excQuery(query);
             model1.setRowCount(0);
-            while (rs.next()) {
+            while (rs.next()) 
+            {
                 int Bookid = rs.getInt("Bookcode");
                 String Bookname = rs.getString("Bookname");
                 String author = rs.getString("author");
                 String genre = rs.getString("genre");
                 model1.addRow(new Object[]{Bookid, Bookname, author, genre});
             }
-        } catch (Exception e) {
+            myClasses.Connections.close(); // Close connection to prevent Database lock
+        }
+        catch (Exception e) 
+        {
             logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -421,38 +446,49 @@ public class MainPageissuer extends javax.swing.JFrame {
         int bookcode = 0;
         int n = 0;
         String query;
-        try {
+        try
+        {
             bookcode = Integer.parseInt(t5.getText());
-        } catch (NumberFormatException e) {
+        }
+        catch (NumberFormatException e) 
+        {
             n = 1;
         }
 
-        try {
-            
-            if (!(n == 1)) {
+        try {           
+            if (!(n == 1)) 
+            {
                 query = "SELECT * FROM books where bookcode like '" + bookcode + "%';";
                 ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
-                while (rs.next()) {
+                while (rs.next()) 
+                {
                     int Bookid = rs.getInt("Bookcode");
                     String Bookname = rs.getString("Bookname");
                     String author = rs.getString("author");
                     String genre = rs.getString("genre");
                     model1.addRow(new Object[]{Bookid, Bookname, author, genre});
                 }
-            } else {
+                myClasses.Connections.close(); // Close connection to prevent Database lock
+            } 
+            else 
+            {
                 query = "SELECT * FROM books;";
                 ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
-                while (rs.next()) {
+                while (rs.next()) 
+                {
                     int Bookid = rs.getInt("Bookcode");
                     String Bookname = rs.getString("Bookname");
                     String author = rs.getString("author");
                     String genre = rs.getString("genre");
                     model1.addRow(new Object[]{Bookid, Bookname, author, genre});
                 }
+                myClasses.Connections.close(); // Close connection to prevent Database lock
             }
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
             logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_t5CaretUpdate
@@ -465,7 +501,8 @@ public class MainPageissuer extends javax.swing.JFrame {
         String query;
         try {
             
-            if (!(bookname.isEmpty())) {
+            if (!(bookname.isEmpty())) 
+            {
                 query = "SELECT * FROM books where bookname like '" + bookname + "%';";
                 ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
@@ -476,17 +513,22 @@ public class MainPageissuer extends javax.swing.JFrame {
                     String genre = rs.getString("genre");
                     model1.addRow(new Object[]{Bookid, Bookname, author, genre});
                 }
-            } else {
+                myClasses.Connections.close(); // Close connection to prevent Database lock
+            }
+            else
+            {
                 query = "SELECT * FROM books;";
                 ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
-                while (rs.next()) {
+                while (rs.next())
+                {
                     int Bookid = rs.getInt("Bookcode");
                     String Bookname = rs.getString("Bookname");
                     String author = rs.getString("author");
                     String genre = rs.getString("genre");
                     model1.addRow(new Object[]{Bookid, Bookname, author, genre});
                 }
+                myClasses.Connections.close(); // Close connection to prevent Database lock
             }
         } catch (Exception e) {
             logger.error("Error Description:", e);
@@ -501,30 +543,39 @@ public class MainPageissuer extends javax.swing.JFrame {
         String query;
         try {
             
-            if (!(author1.isEmpty())) {
+            if (!(author1.isEmpty())) 
+            {
                 query = "SELECT * FROM books where author like '" + author1 + "%';";
                 ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
-                while (rs.next()) {
+                while (rs.next()) 
+                {
                     int Bookid = rs.getInt("Bookcode");
                     String Bookname = rs.getString("Bookname");
                     String author = rs.getString("author");
                     String genre = rs.getString("genre");
                     model1.addRow(new Object[]{Bookid, Bookname, author, genre});
                 }
-            } else {
+                myClasses.Connections.close(); // Close connection to prevent Database lock
+            }
+            else
+            {
                 query = "SELECT * FROM books;";
                 ResultSet rs = MyQueries.excQuery(query);
                 model1.setRowCount(0);
-                while (rs.next()) {
+                while (rs.next()) 
+                {
                     int Bookid = rs.getInt("Bookcode");
                     String Bookname = rs.getString("Bookname");
                     String author = rs.getString("author");
                     String genre = rs.getString("genre");
                     model1.addRow(new Object[]{Bookid, Bookname, author, genre});
                 }
+                myClasses.Connections.close(); // Close connection to prevent Database lock
             }
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
             logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_t7CaretUpdate
@@ -537,30 +588,39 @@ public class MainPageissuer extends javax.swing.JFrame {
         String query;
         try {
             
-            if (!(genre1.isEmpty())) {
+            if (!(genre1.isEmpty()))
+            {
                 query = "SELECT * FROM books where genre like '" + genre1 + "%';";
                 ResultSet rs = MyQueries.excQuery(query);
                 model.setRowCount(0);
-                while (rs.next()) {
+                while (rs.next())
+                {
                     int Bookid = rs.getInt("Bookcode");
                     String Bookname = rs.getString("Bookname");
                     String author = rs.getString("author");
                     String genre = rs.getString("genre");
                     model.addRow(new Object[]{Bookid, Bookname, author, genre});
                 }
-            } else {
+                myClasses.Connections.close(); // Close connection to prevent Database lock
+            } 
+            else 
+            {
                 query = "SELECT * FROM books;";
                 ResultSet rs = MyQueries.excQuery(query);
                 model.setRowCount(0);
-                while (rs.next()) {
+                while (rs.next()) 
+                {
                     int Bookid = rs.getInt("Bookcode");
                     String Bookname = rs.getString("Bookname");
                     String author = rs.getString("author");
                     String genre = rs.getString("genre");
                     model.addRow(new Object[]{Bookid, Bookname, author, genre});
                 }
+                myClasses.Connections.close(); // Close connection to prevent Database lock
             }
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
             logger.error("Error Description:", e);
         }
     }//GEN-LAST:event_t8CaretUpdate

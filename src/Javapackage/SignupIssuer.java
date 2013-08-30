@@ -204,6 +204,7 @@ public class SignupIssuer extends javax.swing.JFrame {
               ResultSet rs=MyQueries.excQuery(query);
               rs.next();
               issuerid=rs.getInt("max(issuerId)")+1;
+              myClasses.Connections.close(); // Close connection to prevent Database lock
               }
                catch(Exception e)
               {
@@ -242,6 +243,7 @@ public class SignupIssuer extends javax.swing.JFrame {
               
               String query="INSERT INTO users VALUES("+issuerid+",'"+name+"','"+secname+"','"+username+"','"+passwordmd5+"','"+gender+"','"+add+"','"+num+"','"+type+"');";
               MyQueries.excUpdate(query);
+              myClasses.Connections.close(); // Close connection to prevent Database lock
               JOptionPane.showMessageDialog (this,"Account Successfully created");
               this.dispose();
               }
