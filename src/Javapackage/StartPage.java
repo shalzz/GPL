@@ -20,9 +20,11 @@
 
 package Javapackage;
 
+import java.awt.HeadlessException;
 import myClasses.Md5Hash;
 import myClasses.MyQueries;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -175,7 +177,8 @@ public class StartPage extends javax.swing.JFrame {
         else if (pass.equals("b1f4f9a523e36fd969f4573e25af4540")) // check for empty string as password
         {
             JOptionPane.showMessageDialog(this, "Please Enter your Password");
-        } else
+        } 
+        else
         {
             try {
                 
@@ -185,7 +188,6 @@ public class StartPage extends javax.swing.JFrame {
                 String DBuser = rs.getString("username");
                 String DBpassword = rs.getString("password");
                 String DBtype = rs.getString("type");
-                myClasses.Connections.close(); // Close connection to prevent Database lock
                 if (DBuser.equals(user) && DBpassword.equals(pass)) 
                 {
                     if (DBtype.equals("admin"))
@@ -207,16 +209,24 @@ public class StartPage extends javax.swing.JFrame {
                 {
                     JOptionPane.showMessageDialog(this, "Username or Password is Incorrect");
                 }
-            } catch (Exception e) 
+            } 
+            catch (SQLException | HeadlessException e) 
             {
-                if (e.getMessage().equals("Illegal operation on empty result set.")) 
-                {
-                    JOptionPane.showMessageDialog(this, "No such Username Exists");
-                } 
-                else 
-                {
-                    logger.error("Error Description:", e);
+                switch (e.getMessage()) {
+                    case "Illegal operation on empty result set.":
+                        JOptionPane.showMessageDialog(this, "No such Username Exists");
+                        break;
+                    case "ResultSet closed":
+                        JOptionPane.showMessageDialog(this, "No such Username Exists");
+                        break;
+                    default:
+                        logger.error("Error Description:" ,e );
+                        break;
                 }
+            }
+            finally
+            {
+              myClasses.Connections.close(); // Close connection to prevent Database lock
             }
 
         }

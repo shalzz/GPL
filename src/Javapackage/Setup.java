@@ -38,7 +38,6 @@ public class Setup extends javax.swing.JFrame {
     private static final String DBMS_TYPE = "DbmsType";
     private static final String SERVER_URL = "serverURL";
     private static final String DB_NAME = "DatabaseName";
-    static final Preferences prefs1 = Preferences.userRoot().node("/Javapackage");
     final static Logger logger = LoggerFactory.getLogger(Setup.class);
 
     /**
@@ -448,24 +447,8 @@ public class Setup extends javax.swing.JFrame {
                 threads.DbPopulator task = new threads.DbPopulator(l5,jProgressBar1);   
                 task.execute(); 
                // task.addPropertyChangeListener(evt);
-                l5.setText("Copying images and Inserting Records...");
-                
+                l5.setText("Copying images and Inserting Records...");             
             }
-            
-            // prefs.putBoolean(SETUP_HAS_RUN, true);
-            JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");
-            try
-            {
-                prefs.flush();
-            }
-            catch (Exception e)
-            {
-                logger.error("Error Description:", e);
-            }
-            StartPage a = new StartPage();
-            a.setVisible(true);
-            JOptionPane.showMessageDialog(a, "An imperative admin account has been created for you.\n Please use the following info to login and change the password asap\n Username: admin\n Password: password");
-            this.dispose();
         }
         else
         {
