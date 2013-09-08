@@ -92,12 +92,15 @@ public class Setup extends javax.swing.JFrame {
         t4 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         t5 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         l4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         t6 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
@@ -105,6 +108,7 @@ public class Setup extends javax.swing.JFrame {
         rb3 = new javax.swing.JRadioButton();
         rb4 = new javax.swing.JRadioButton();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jButton8 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -166,11 +170,11 @@ public class Setup extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         l3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        l3.setText("<HTML>\n<body>\nPlease enter the MySQL Database Details:<br> Please make sure the database exits and has the required tables.\n</body>\n</HTML>");
+        l3.setText("<HTML>\n<body>\nPlease enter the MySQL Database Details:\n</body>\n</HTML>");
         l3.setToolTipText("\n");
         jPanel2.add(l3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
-        jButton3.setText("Start");
+        jButton3.setText("Next");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -194,6 +198,11 @@ public class Setup extends javax.swing.JFrame {
         jPanel2.add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 90, -1));
 
         t2.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Eg:3306,80</p>\n</body>\n</html>");
+        t2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                t2KeyTyped(evt);
+            }
+        });
         jPanel2.add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 90, -1));
 
         t3.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Eg:root</p>\n</body>\n</html>");
@@ -207,6 +216,17 @@ public class Setup extends javax.swing.JFrame {
 
         t5.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Eg:test</p>\n</body>\n</html>");
         jPanel2.add(t5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 90, -1));
+
+        jLabel12.setText("Note: Please make sure the database exists.");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, -1, 20));
+
+        jButton7.setText("Back");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -231,6 +251,14 @@ public class Setup extends javax.swing.JFrame {
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
         jPanel3.add(t6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, 90, -1));
 
+        jButton6.setText("Back");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, -1, -1));
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -253,13 +281,21 @@ public class Setup extends javax.swing.JFrame {
         buttonGroup1.add(rb3);
         rb3.setText("Yes");
         rb3.setOpaque(false);
-        jPanel4.add(rb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
+        jPanel4.add(rb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
 
         buttonGroup1.add(rb4);
         rb4.setText("No");
         rb4.setOpaque(false);
-        jPanel4.add(rb4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 50, -1));
+        jPanel4.add(rb4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 50, -1));
         jPanel4.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 410, 20));
+
+        jButton8.setText("Back");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -277,7 +313,7 @@ public class Setup extends javax.swing.JFrame {
             StartPage a = new StartPage();
             a.setVisible(true);
             this.dispose();
-            prefs.putBoolean(SETUP_HAS_RUN, false);
+            prefs.putBoolean(SETUP_HAS_RUN, false); // for testing setup
 
         }
         else 
@@ -374,6 +410,7 @@ public class Setup extends javax.swing.JFrame {
             } 
             catch (Exception e)
             {
+                logger.error("Error Description:", e);
             }
             File dir1 = new File(JarLocation.getLocation(this) + "\\databases\\");
             if (!dir1.canRead()) 
@@ -415,7 +452,7 @@ public class Setup extends javax.swing.JFrame {
                 
             }
             
-            prefs.putBoolean(SETUP_HAS_RUN, true);
+            // prefs.putBoolean(SETUP_HAS_RUN, true);
             JOptionPane.showMessageDialog(this, "Setup Completed Succsesfully");
             try
             {
@@ -423,10 +460,11 @@ public class Setup extends javax.swing.JFrame {
             }
             catch (Exception e)
             {
+                logger.error("Error Description:", e);
             }
             StartPage a = new StartPage();
             a.setVisible(true);
-            JOptionPane.showMessageDialog(a, "An imperative admin account has been created for you.\n Please use the following info to login\n Username: admin\n Password: password");
+            JOptionPane.showMessageDialog(a, "An imperative admin account has been created for you.\n Please use the following info to login and change the password asap\n Username: admin\n Password: password");
             this.dispose();
         }
         else
@@ -434,6 +472,45 @@ public class Setup extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select one of the options");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void t2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t2KeyTyped
+        char kc = evt.getKeyChar();        
+        if (!(kc >= '0' && kc <= '9')) 
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_t2KeyTyped
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+            jPanel3.setVisible(false);
+            jPanel1.setVisible(true);
+            jButton4.setVisible(false);
+            jButton2.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+            jPanel2.setVisible(false);
+            jPanel1.setVisible(true);
+            jButton3.setVisible(false);
+            jButton2.setVisible(true);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        jPanel4.setVisible(false);
+        jButton5.setVisible(false);
+        String dbtype= prefs.get(DBMS_TYPE, "sqlite");
+        switch (dbtype) 
+        {
+            case "mysql":
+                jPanel2.setVisible(true);
+                jButton3.setVisible(true);
+                break;
+            case "sqlite":
+                jPanel3.setVisible(true);
+                jButton4.setVisible(true);
+                break;
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
 //    public void propertyChange(PropertyChangeEvent evt) {
 //        Task task = new Task();
@@ -484,9 +561,13 @@ public class Setup extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
