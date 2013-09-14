@@ -19,6 +19,7 @@
  */
 package Javapackage;
 
+import java.beans.PropertyChangeListener;
 import myClasses.JarLocation;
 import myClasses.MyQueries;
 import java.io.File;
@@ -111,6 +112,7 @@ public class Setup extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -135,7 +137,7 @@ public class Setup extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
         jPanel0.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(jPanel0, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 550));
+        getContentPane().add(jPanel0, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 550));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -164,7 +166,7 @@ public class Setup extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 550));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -217,6 +219,7 @@ public class Setup extends javax.swing.JFrame {
         jPanel2.add(t5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 90, -1));
 
         jLabel12.setText("Note: Please make sure the database exists.");
+        // Cannot create a database automatically as we need a database to create a connection
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, -1, 20));
 
         jButton7.setText("Back");
@@ -230,7 +233,7 @@ public class Setup extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 550));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 550));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -261,7 +264,7 @@ public class Setup extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 550));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 550));
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -299,9 +302,9 @@ public class Setup extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 550));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 550));
 
-        setSize(new java.awt.Dimension(699, 554));
+        setSize(new java.awt.Dimension(691, 554));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
   
@@ -444,10 +447,8 @@ public class Setup extends javax.swing.JFrame {
                 }
                               
                 //Call the SwingWorker
-                threads.DbPopulator task = new threads.DbPopulator(l5,jProgressBar1);   
-                task.execute(); 
-               // task.addPropertyChangeListener(evt);
-                l5.setText("Copying images and Inserting Records...");             
+                threads.DbPopulator task = new threads.DbPopulator(l5,jProgressBar1,this);   
+                task.execute();      
             }
         }
         else
@@ -495,14 +496,6 @@ public class Setup extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton8ActionPerformed
 
-//    public void propertyChange(PropertyChangeEvent evt) {
-//        Task task = new Task();
-//        if (!task.isDone()) {
-//            int progress = task.getProgress();
-//            jProgressBar1.setValue(progress);
-//
-//        }
-//   }
     /**
      * @param args the command line arguments
      */
