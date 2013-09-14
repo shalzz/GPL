@@ -25,6 +25,9 @@ import java.awt.Image;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -38,7 +41,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author 500029490
  */
-public class ProfileHandler extends SwingWorker<Void, Void> {
+public class ProfileHandler extends SwingWorker<Image, Void> {
     
     URL url1;
     Image img1;
@@ -51,7 +54,7 @@ public class ProfileHandler extends SwingWorker<Void, Void> {
     }
         
         @Override
-        protected Void doInBackground() {
+        protected Image doInBackground() {
          
             try
             {
@@ -65,6 +68,12 @@ public class ProfileHandler extends SwingWorker<Void, Void> {
                 return null;
             }
             
+            File dir=new File(JarLocation.getLocation(new AboutUs())+"\\images");
+            if(!(dir.canRead()))
+             {
+                dir.mkdir();
+             }
+            
             try
             {
                 ImageIO.write((RenderedImage)img1, "jpg", new File(JarLocation.getLocation(new AboutUs())+"\\images\\11510497108122122.jpg"));
@@ -72,20 +81,38 @@ public class ProfileHandler extends SwingWorker<Void, Void> {
             catch(java.io.IOException e)
             {
                 logger.error("Error Description:", e);
+                return null;
             }
-             return null;
+             return img1;
         }
 
         @Override
         protected void done() {
+            Image img=null;
             try 
             {
-                //set the images
-                pht1.setIcon(new ImageIcon(img1));                                
-            } 
-            catch (Exception e)
+                // get the images
+                img=get(30,TimeUnit.SECONDS);                                           
+            }
+            catch (InterruptedException | ExecutionException | TimeoutException e)
             {
                 logger.error("Error Description:", e);
+            }
+            
+            if(img!=null)
+            {
+              // set the images
+              pht1.setIcon(new ImageIcon(img));  
+            }
+            
+            // release the resources
+             try 
+            {
+                this.finalize();
+            } 
+            catch (Throwable ex) 
+            {
+                logger.error("Error Description:",ex);
             }
         }
     
