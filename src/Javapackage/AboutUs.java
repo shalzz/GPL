@@ -137,7 +137,7 @@ public class AboutUs extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
-        jLabel1.setToolTipText("<html>\n<body bgcolor=\"white\">\n<p align=\"center\">Click to go to the facebook page</p>\n</body>\n</html>");
+        jLabel1.setToolTipText("");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 670));
 
         setSize(new java.awt.Dimension(1000, 694));

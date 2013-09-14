@@ -128,7 +128,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/abstract_color_background_picture_32-1920x1200.jpg"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;body bgcolor=&quot;white&quot;&gt;&#xa;&lt;p align=&quot;center&quot;&gt;Click to go to the facebook page&lt;/p&gt;&#xa;&lt;/body&gt;&#xa;&lt;/html&gt;"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
