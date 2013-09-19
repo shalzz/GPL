@@ -19,6 +19,7 @@
  */
 package Javapackage;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import myClasses.JarLocation;
 import myClasses.MyQueries;
@@ -447,7 +448,19 @@ public class Setup extends javax.swing.JFrame {
                 }
                               
                 //Call the SwingWorker
-                threads.DbPopulator task = new threads.DbPopulator(l5,jProgressBar1,this);   
+                threads.DbPopulator task = new threads.DbPopulator(l5,this);  
+                task.addPropertyChangeListener(
+                new PropertyChangeListener()
+                {
+                    @Override
+                    public void propertyChange(PropertyChangeEvent evt) 
+                    {
+                        if (evt.getPropertyName().equals("progress")) 
+                        {
+                            jProgressBar1.setValue((Integer) evt.getNewValue());
+                        }
+                    }
+                });
                 task.execute();      
             }
         }
@@ -495,7 +508,7 @@ public class Setup extends javax.swing.JFrame {
                 break;
         }
     }//GEN-LAST:event_jButton8ActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -512,13 +525,7 @@ public class Setup extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Setup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>

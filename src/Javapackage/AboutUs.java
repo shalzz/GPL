@@ -28,7 +28,9 @@ package Javapackage;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import myClasses.JarLocation;
@@ -89,8 +91,8 @@ public class AboutUs extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 28)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 255, 153));
-        jLabel2.setText("Gurgaon Public Library");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 320, -1));
+        jLabel2.setText("GNU Public Library");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 260, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 22)); // NOI18N
         jLabel6.setText("Lead programmers:");
@@ -137,7 +139,6 @@ public class AboutUs extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abstract_color_background_picture_32-1920x1200.jpg"))); // NOI18N
-        jLabel1.setToolTipText("");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 670));
 
         setSize(new java.awt.Dimension(1000, 694));
@@ -205,7 +206,7 @@ public class AboutUs extends javax.swing.JFrame {
             URI uri = new URI("https://www.facebook.com/shaleen.jain3");
             desktop.browse(uri);
         } 
-        catch (Exception e)
+        catch (URISyntaxException | IOException e)
         {
             logger.error("Error Description:", e);
         }

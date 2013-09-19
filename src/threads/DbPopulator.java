@@ -25,12 +25,10 @@ import Javapackage.StartPage;
 import java.awt.Component;
 import java.awt.image.RenderedImage;
 import java.io.File;
-import java.util.logging.Level;
 import java.util.prefs.Preferences;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 import myClasses.JarLocation;
 import myClasses.MyQueries;
@@ -44,16 +42,14 @@ import org.slf4j.LoggerFactory;
 public class DbPopulator extends SwingWorker<Void, Void>{
     
     private JLabel l5;
-    private JProgressBar jProgressBar1;
     private Component parentComponent;
     int progress;
     final static Logger logger = LoggerFactory.getLogger(DbPopulator.class);
     static final Preferences prefs = Preferences.userRoot().node("/Javapackage");
     
     // Create a constructor to accept the private components 
-    public DbPopulator(JLabel l5,JProgressBar jProgressBar1,Component parentComponent) {
+    public DbPopulator(JLabel l5,Component parentComponent) {
        this.l5 = l5;
-       this.jProgressBar1 = jProgressBar1;
        this.parentComponent = parentComponent;
     }
     
@@ -84,7 +80,6 @@ public class DbPopulator extends SwingWorker<Void, Void>{
             float temp=(float) ((bc-1000)*(50.0/51));
             progress=(int) temp; // calculate 50% of this progress
             this.setProgress(progress);
-            this.process();
         }
          
             l5.setText("Inserting Records...");
@@ -101,7 +96,6 @@ public class DbPopulator extends SwingWorker<Void, Void>{
                 // Caluculate progress;
                 progress = 50 + i;
                 this.setProgress(progress);
-                this.process();
             }
         } 
         catch (Exception e)
@@ -117,7 +111,6 @@ public class DbPopulator extends SwingWorker<Void, Void>{
         try 
         {
             l5.setText("Done");
-            jProgressBar1.setValue(100);
             // prefs.putBoolean(SETUP_HAS_RUN, true);
             JOptionPane.showMessageDialog(parentComponent, "Setup Completed Succsesfully");
             try
@@ -149,9 +142,5 @@ public class DbPopulator extends SwingWorker<Void, Void>{
             }
         }
     }
-   
-   protected void process() {      
-       jProgressBar1.setValue(getProgress());
-   }
     
 }

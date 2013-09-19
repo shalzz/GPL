@@ -62,7 +62,7 @@ public class ProfileHandler extends SwingWorker<Image, Void> {
                  url1 = new URL("https://graph.facebook.com/shaleen.jain3/picture?width=100&height=100");
                  img1=Img.enhancedImage(url1);                
             }
-            catch (java.net.MalformedURLException e) 
+            catch (Exception e) 
             {
                 logger.error("Error Description:", e);
                 return null;
