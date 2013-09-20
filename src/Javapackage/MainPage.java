@@ -22,11 +22,13 @@ package Javapackage;
 import myClasses.MyQueries;
 import java.awt.*;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.prefs.Preferences;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import myClasses.MyDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /*
@@ -412,54 +414,8 @@ public class MainPage extends javax.swing.JFrame {
             {
                 ResultSet rs = MyQueries.excQuery(query);
                 rs.next();
-                if (!(username.equals("all"))) {
-                    username = rs.getString("username");
-                    myClasses.Connections.close(); // Close connection to prevent Database lock
-                    query = "select fine from settings;";
-                    ResultSet rs0 = MyQueries.excQuery(query);
-                    rs0.next();
-                    fine = rs0.getInt("fine");
-                    myClasses.Connections.close(); // Close connection to prevent Database lock
-
-                    query = "SELECT * FROM accounts where username='" + username + "';";
-                    ResultSet rs1 = MyQueries.excQuery(query);
-                    model.setRowCount(0);
-                    while (rs1.next()) {
-                        int Bookid = rs1.getInt("Bookcode");
-                        String Bookname = rs1.getString("Bookname");
-                        Date iDate = rs1.getDate("issueDate");
-                        Date rDate = rs1.getDate("ReturnDate");
-                        Calendar issueDate = Calendar.getInstance();
-                        issueDate.setTime(iDate);
-                        Calendar returnDate = Calendar.getInstance();
-                        returnDate.setTime(rDate);
-                        Calendar curdate = Calendar.getInstance();
-                        if (curdate.after(returnDate))
-                        {
-                            while (curdate.after(returnDate))
-                            {
-                                returnDate.add(Calendar.DAY_OF_MONTH, 1);
-                                FineDue++;
-                            }
-                            returnDate.add(Calendar.DAY_OF_MONTH, -FineDue);
-                            FineDue = (FineDue - 1) * fine;
-
-                        }
-                        int iyear = issueDate.get(Calendar.YEAR);
-                        int imonth = issueDate.get(Calendar.MONTH) + 1;
-                        int idayOfMonth = issueDate.get(Calendar.DAY_OF_MONTH);
-                        String idate = "" + iyear + "/" + imonth + "/" + idayOfMonth;
-                        int ryear = returnDate.get(Calendar.YEAR);
-                        int rmonth = returnDate.get(Calendar.MONTH) + 1;
-                        int rdayOfMonth = returnDate.get(Calendar.DAY_OF_MONTH);
-                        String rdate = "" + ryear + "/" + rmonth + "/" + rdayOfMonth;
-                        model.addRow(new Object[]{Bookid, Bookname, idate, rdate, FineDue});
-                        FineDue = 0;
-                    }
-                    myClasses.Connections.close(); // Close connection to prevent Database lock
-                } 
-                else 
-                {
+                if (username.equals("all")) {
+                    
                     query = "select fine from settings;";
                     ResultSet rs0 = MyQueries.excQuery(query);
                     rs0.next();
@@ -475,13 +431,15 @@ public class MainPage extends javax.swing.JFrame {
                         username = rs1.getString("username");
                         Date iDate = rs1.getDate("issueDate");
                         Date rDate = rs1.getDate("ReturnDate");
-                        Calendar issueDate = Calendar.getInstance();
-                        issueDate.setTime(iDate);
+                        
+                        // Calculate the fine
                         Calendar returnDate = Calendar.getInstance();
                         returnDate.setTime(rDate);
                         Calendar curdate = Calendar.getInstance();
-                        if (curdate.after(returnDate)) {
-                            while (curdate.after(returnDate)) {
+                        if (curdate.after(returnDate))
+                        {
+                            while (curdate.after(returnDate)) 
+                            {
                                 returnDate.add(Calendar.DAY_OF_MONTH, 1);
                                 FineDue++;
                             }
@@ -489,21 +447,59 @@ public class MainPage extends javax.swing.JFrame {
                             FineDue = (FineDue - 1) * fine;
 
                         }
-                        int iyear = issueDate.get(Calendar.YEAR);
-                        int imonth = issueDate.get(Calendar.MONTH) + 1;
-                        int idayOfMonth = issueDate.get(Calendar.DAY_OF_MONTH);
-                        String idate = "" + iyear + "/" + imonth + "/" + idayOfMonth;
-                        int ryear = returnDate.get(Calendar.YEAR);
-                        int rmonth = returnDate.get(Calendar.MONTH) + 1;
-                        int rdayOfMonth = returnDate.get(Calendar.DAY_OF_MONTH);
-                        String rdate = "" + ryear + "/" + rmonth + "/" + rdayOfMonth;
-                        model.addRow(new Object[]{Bookid, username, idate, rdate, "Rs" + FineDue});
+                        model.addRow(new Object[]{Bookid, username, iDate, rDate, FineDue});
+                        FineDue = 0;
+                    }
+                    myClasses.Connections.close(); // Close connection to prevent Database lock
+                    
+                   
+                } 
+                else 
+                {
+                    username = rs.getString("username");
+                    myClasses.Connections.close(); // Close connection to prevent Database lock
+                    query = "select fine from settings;";
+                    ResultSet rs0 = MyQueries.excQuery(query);
+                    rs0.next();
+                    fine = rs0.getInt("fine");
+                    myClasses.Connections.close(); // Close connection to prevent Database lock
+
+                    query = "SELECT * FROM accounts where username='" + username + "';";
+                    ResultSet rs1 = MyQueries.excQuery(query);
+                    model.setRowCount(0);
+                    while (rs1.next()) 
+                    {
+                       int Bookid = rs1.getInt("Bookcode");
+                        String Bookname = rs1.getString("Bookname");
+                        Calendar curdate = Calendar.getInstance();
+                        Date iDate = rs1.getDate("issueDate",curdate);
+                        Date rDate = rs1.getDate("ReturnDate",curdate);
+                        
+                        // Calculate the fine
+                        System.out.println(iDate);
+                        System.out.println(rDate);
+                        Calendar returnDate = Calendar.getInstance();
+                        returnDate.setTime(rDate);
+                       // Calendar curdate = Calendar.getInstance();
+                        if (curdate.after(returnDate))
+                        {
+                            while (curdate.after(returnDate)) 
+                            {
+                                returnDate.add(Calendar.DAY_OF_MONTH, 1);
+                                FineDue++;
+                            }
+                            returnDate.add(Calendar.DAY_OF_MONTH, -FineDue);
+                            FineDue = (FineDue - 1) * fine;
+
+                        }
+                        
+                        model.addRow(new Object[]{Bookid, Bookname, iDate, rDate, FineDue});
                         FineDue = 0;
                     }
                     myClasses.Connections.close(); // Close connection to prevent Database lock
                 }
             } 
-            catch (Exception e)
+            catch (SQLException | HeadlessException e)
             {
                 logger.error("Error Description:", e);
             }
@@ -571,38 +567,36 @@ public class MainPage extends javax.swing.JFrame {
                 query = "select * from settings;";
                 ResultSet rs3 = MyQueries.excQuery(query);
                 rs3.next();
-                int issuetime = rs3.getInt("issuetime");
                 int maxbooks = rs3.getInt("maxbooks");
                 myClasses.Connections.close(); // Close connection to prevent Database lock
                 
-                if (count >= maxbooks) {
+                if (count >= maxbooks)
+                {
                     r = JOptionPane.showConfirmDialog(this, "This user has already issued " + maxbooks + " books do you still want to continue?", "Warning!", JOptionPane.YES_NO_OPTION);
                 }
-                if (r == 0) {
-                    Calendar curdate;
-                    curdate = Calendar.getInstance();
-                    Calendar returndate;
-                    curdate.add(Calendar.DAY_OF_MONTH, issuetime);
-                    returndate = curdate;
-                    curdate = Calendar.getInstance();
-                    int iyear = curdate.get(Calendar.YEAR);
-                    int imonth = curdate.get(Calendar.MONTH) + 1;
-                    int idayOfMonth = curdate.get(Calendar.DAY_OF_MONTH);
-                    int ryear = returndate.get(Calendar.YEAR);
-                    int rmonth = returndate.get(Calendar.MONTH) + 1;
-                    int rdayOfMonth = returndate.get(Calendar.DAY_OF_MONTH);
-                    String idate = "" + iyear + "/" + imonth + "/" + idayOfMonth;
-                    String rdate = "" + ryear + "/" + rmonth + "/" + rdayOfMonth;
+                if (r == 0) 
+                {
+                    String idate = MyDate.issueDate();
+                    String rdate = MyDate.returnDate();
                     query = "insert into accounts values(" + issuerid + ",'" + username + "'," + bookcode + ",'" + bookname + "','" + idate + "','" + rdate + "');";
                     MyQueries.excUpdate(query);
                     myClasses.Connections.close(); // Close connection to prevent Database lock
                     JOptionPane.showMessageDialog(this, "Book Succesfully issued");
                 }
-            } catch (Exception f) {
-                if (f.getMessage().equals("Duplicate entry '" + bookcode + "' for key 'PRIMARY'")) {
+            } 
+            catch (SQLException | HeadlessException e) 
+            {
+                if (e.getMessage().equals("Duplicate entry '" + bookcode + "' for key 'PRIMARY'")) 
+                {
                     JOptionPane.showMessageDialog(this, "This book has already been issued by you or someone else");
-                } else {
-                    JOptionPane.showMessageDialog(this, f.getMessage());
+                } 
+                else if((e.getMessage().equals("Duplicate entry '" + bookcode + "' for key 'PRIMARY'")))
+                {
+                    
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
                 }
             }
         }
@@ -622,41 +616,58 @@ public class MainPage extends javax.swing.JFrame {
         int m = 0;
         String username = t2.getText();
 
-        if (row == -1) {
+        if (row == -1)
+        {
             JOptionPane.showMessageDialog(this, "Please Select a Book");
-        } else {
+        } 
+        else
+        {
             bookcode = (Integer) model.getValueAt(row, 0);
             bookname = (String) model.getValueAt(row, 1);
         }
-        try {
+        try 
+        {
             issuerid = Integer.parseInt(t1.getText());
-        } catch (NumberFormatException e) {
+        } 
+        catch (NumberFormatException e) 
+        {
             m = 1;
         }
 
-        if (!(m == 1)) {
+        if (!(m == 1))
+        {
             query1 = "select issuerid , username from users where issuerid=" + issuerid + ";";
-        } else if (!(username.isEmpty())) {
+        }
+        else if (!(username.isEmpty())) 
+        {
             query1 = "select issuerid , username from users where username='" + username + "';";
 
-        } else if (!(n == 1 && username.isEmpty())) {
+        }
+        else if (!(n == 1 && username.isEmpty())) 
+        {
             JOptionPane.showMessageDialog(this, "Please Enter any one of the user identifiers");
-        } else {
+        } 
+        else 
+        {
             JOptionPane.showMessageDialog(this, "Please Enter the User details");
         }
-        if (row != -1 && query1 != null) {
+        if (row != -1 && query1 != null) 
+        {
             try {
 
                 ResultSet rs = MyQueries.excQuery(query1);
                 rs.next();
                 issuerid = rs.getInt("issuerid");
                 username = rs.getString("username");
+                myClasses.Connections.close(); // Close connection to prevent Database lock
                 query = "delete from accounts where bookcode=" + bookcode + " and bookname='" + bookname + "'and issuerid=" + issuerid + " and username='" + username + "';";
                 MyQueries.excUpdate(query);
                 myClasses.Connections.close(); // Close connection to prevent Database lock
                 jButton1.doClick();
                 JOptionPane.showMessageDialog(this, "Book Succesfully Returned");
-            } catch (Exception f) {
+            }
+            catch (SQLException | HeadlessException f) 
+            {
                 JOptionPane.showMessageDialog(this, f.getMessage());
             }
         }
@@ -703,7 +714,10 @@ public class MainPage extends javax.swing.JFrame {
         {
             logger.error("Error Description:", e);
         }
-        myClasses.Connections.close(); // Close connection to prevent Database lock
+        finally
+        {            
+            myClasses.Connections.close(); // Close connection to prevent Database lock
+        } 
     }//GEN-LAST:event_t8CaretUpdate
 
     private void t7CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_t7CaretUpdate
@@ -747,7 +761,10 @@ public class MainPage extends javax.swing.JFrame {
         {
             logger.error("Error Description:", e);
         }
-        myClasses.Connections.close(); // Close connection to prevent Database lock
+       finally
+        {            
+            myClasses.Connections.close(); // Close connection to prevent Database lock
+        } 
     }//GEN-LAST:event_t7CaretUpdate
 
     private void t6CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_t6CaretUpdate

@@ -39,7 +39,7 @@ public class JarLocation {
     public static String getLocation(Component parentComponent) {
         URL url = parentComponent.getClass().getProtectionDomain().getCodeSource().getLocation();
         String loc = url.toString();
-        int index = loc.lastIndexOf("GPL");
+        int index = loc.lastIndexOf("GPL")+4;
         String path = loc.substring(6, index);
         path=path.replace('/', '\\');        
         return path;

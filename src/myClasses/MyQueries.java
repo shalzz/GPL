@@ -54,9 +54,12 @@ public class MyQueries {
                 Statement stmt = Connections.mySqlStmt(url, username, password);
                 stmt.executeUpdate(query);
 
-            } catch (Exception e) {
-                 logger.error("Error Description:", e);
-            }
+            } 
+            catch (Exception e) 
+            {
+                logger.error("Error Description:", e);
+                e.addSuppressed(e);
+            }        
         } 
         else
         {
@@ -66,14 +69,17 @@ public class MyQueries {
                 java.sql.Statement stmt=Connections.sqlLiteStmt(url);
                 stmt.executeUpdate(query);
 
-            } catch (Exception e) {
-                logger.error("Error Description:", e);
+            }
+            catch (Exception e) 
+            {
+               logger.error("Error Description:", e);
+               e.addSuppressed(e);
             }
         }
     }
 
     public static ResultSet excQuery(String query) {
-
+        Exception f=null;
         ResultSet rs = null;
         if (Dbmstype.equals("mysql")) 
         {
@@ -90,8 +96,9 @@ public class MyQueries {
 
             } 
             catch (Exception e)
-            {
+            {                
                  logger.error("Error Description:", e);
+                 e.addSuppressed(e);
             }
         } 
         else 
@@ -106,6 +113,7 @@ public class MyQueries {
             catch (Exception e)
             {
                  logger.error("Error Description:", e);
+                 e.addSuppressed(e);
             }
         }
         return rs;

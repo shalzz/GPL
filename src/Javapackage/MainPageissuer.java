@@ -25,12 +25,15 @@
  */
 package Javapackage;
 
+import java.awt.HeadlessException;
 import myClasses.MyQueries;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import myClasses.MyDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -300,8 +303,6 @@ public class MainPageissuer extends javax.swing.JFrame {
                 String Bookname = rs.getString("Bookname");
                 Date iDate = rs.getDate("issueDate");
                 Date rDate = rs.getDate("ReturnDate");
-                Calendar issueDate = Calendar.getInstance();
-                issueDate.setTime(iDate);
                 Calendar returnDate = Calendar.getInstance();
                 returnDate.setTime(rDate);
                 Calendar curdate = Calendar.getInstance();
@@ -316,15 +317,7 @@ public class MainPageissuer extends javax.swing.JFrame {
                     FineDue = (FineDue - 1) * fine;
 
                 }
-                int iyear = issueDate.get(Calendar.YEAR);
-                int imonth = issueDate.get(Calendar.MONTH) + 1;
-                int idayOfMonth = issueDate.get(Calendar.DAY_OF_MONTH);
-                String idate = "" + iyear + "/" + imonth + "/" + idayOfMonth;
-                int ryear = returnDate.get(Calendar.YEAR);
-                int rmonth = returnDate.get(Calendar.MONTH) + 1;
-                int rdayOfMonth = returnDate.get(Calendar.DAY_OF_MONTH);
-                String rdate = "" + ryear + "/" + rmonth + "/" + rdayOfMonth;
-                model.addRow(new Object[]{Bookid, Bookname, idate, rdate, FineDue});
+                model.addRow(new Object[]{Bookid, Bookname, iDate, rDate, FineDue});
                 FineDue = 0;
             }
             myClasses.Connections.close(); // Close connection to prevent Database lock
@@ -370,7 +363,6 @@ public class MainPageissuer extends javax.swing.JFrame {
                 query = "select * from settings;";
                 ResultSet rs3 = MyQueries.excQuery(query);
                 rs3.next();
-                int issuetime = rs3.getInt("issuetime");
                 int maxbooks = rs3.getInt("maxbooks");
                 myClasses.Connections.close(); // Close connection to prevent Database lock
 
@@ -380,26 +372,15 @@ public class MainPageissuer extends javax.swing.JFrame {
                 } 
                 else 
                 {
-                    Calendar curdate = Calendar.getInstance();
-                    Calendar returndate;
-                    curdate.add(Calendar.DAY_OF_MONTH, issuetime);
-                    returndate = curdate;
-                    curdate = Calendar.getInstance();
-                    int iyear = curdate.get(Calendar.YEAR);
-                    int imonth = curdate.get(Calendar.MONTH) + 1;
-                    int idayOfMonth = curdate.get(Calendar.DAY_OF_MONTH);
-                    int ryear = returndate.get(Calendar.YEAR);
-                    int rmonth = returndate.get(Calendar.MONTH) + 1;
-                    int rdayOfMonth = returndate.get(Calendar.DAY_OF_MONTH);
-                    String idate = "" + iyear + "/" + imonth + "/" + idayOfMonth;
-                    String rdate = "" + ryear + "/" + rmonth + "/" + rdayOfMonth;
+                    String idate = MyDate.issueDate();
+                    String rdate = MyDate.returnDate();
                     query = "insert into accounts values(" + issuerid + ",'" + username1 + "'," + bookcode + ",'" + bookname + "','" + idate + "','" + rdate + "');";
                     MyQueries.excUpdate(query);
                     myClasses.Connections.close(); // Close connection to prevent Database lock
                     JOptionPane.showMessageDialog(this, "Book Succesfully issued");
                 }
             } 
-            catch (Exception f) 
+            catch (SQLException | HeadlessException f) 
             {
                 if (f.getMessage().equals("Duplicate entry '" + bookcode + "' for key 'PRIMARY'")) 
                 {
