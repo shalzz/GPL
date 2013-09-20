@@ -45,6 +45,7 @@ public class DbPopulator extends SwingWorker<Void, Void>{
     private Component parentComponent;
     int progress;
     final static Logger logger = LoggerFactory.getLogger(DbPopulator.class);
+    private static final String SETUP_HAS_RUN = "setupHasRun";
     static final Preferences prefs = Preferences.userRoot().node("/Javapackage");
     
     // Create a constructor to accept the private components 
@@ -111,7 +112,7 @@ public class DbPopulator extends SwingWorker<Void, Void>{
         try 
         {
             l5.setText("Done");
-            // prefs.putBoolean(SETUP_HAS_RUN, true);
+            prefs.putBoolean(SETUP_HAS_RUN, true);
             JOptionPane.showMessageDialog(parentComponent, "Setup Completed Succsesfully");
             try
             {

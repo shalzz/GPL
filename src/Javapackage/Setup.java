@@ -316,7 +316,6 @@ public class Setup extends javax.swing.JFrame {
             StartPage a = new StartPage();
             a.setVisible(true);
             this.dispose();
-            prefs.putBoolean(SETUP_HAS_RUN, false); // for testing setup
 
         }
         else 
