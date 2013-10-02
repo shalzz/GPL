@@ -220,7 +220,7 @@ public class StartPage extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "No such Username Exists");
                         break;
                     default:
-                        logger.error("Error Description:" ,e );
+                        logger.error("Error Description",e );
                         break;
                 }
             }

@@ -39,6 +39,7 @@ public class MyQueries {
     private static final String DB_NAME = "DatabaseName";
     private static final String dbname = prefs.get(DB_NAME, "project");
     final static Logger logger = LoggerFactory.getLogger(MyQueries.class);
+    static Exception f;
 
     public static void excUpdate(String query) {
         if (Dbmstype.equals("mysql"))
@@ -58,7 +59,7 @@ public class MyQueries {
             catch (Exception e) 
             {
                 logger.error("Error Description:", e);
-                e.addSuppressed(e);
+                f.addSuppressed(e);
             }        
         } 
         else
@@ -73,13 +74,12 @@ public class MyQueries {
             catch (Exception e) 
             {
                logger.error("Error Description:", e);
-               e.addSuppressed(e);
+               f.addSuppressed(e);
             }
         }
     }
 
     public static ResultSet excQuery(String query) {
-        Exception f=null;
         ResultSet rs = null;
         if (Dbmstype.equals("mysql")) 
         {
@@ -98,7 +98,7 @@ public class MyQueries {
             catch (Exception e)
             {                
                  logger.error("Error Description:", e);
-                 e.addSuppressed(e);
+                 f.addSuppressed(e);
             }
         } 
         else 
@@ -113,7 +113,7 @@ public class MyQueries {
             catch (Exception e)
             {
                  logger.error("Error Description:", e);
-                 e.addSuppressed(e);
+                 f.addSuppressed(e);
             }
         }
         return rs;

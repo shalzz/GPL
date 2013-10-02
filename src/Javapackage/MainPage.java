@@ -48,6 +48,7 @@ import org.slf4j.LoggerFactory;
 public class MainPage extends javax.swing.JFrame {
 
     Preferences prefs = Preferences.userNodeForPackage(this.getClass());
+    private static final String SETUP_HAS_RUN = "setupHasRun";
     final static Logger logger = LoggerFactory.getLogger(MainPage.class);
     /**
      * Creates new form MainPage
@@ -584,19 +585,19 @@ public class MainPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Book Succesfully issued");
                 }
             } 
-            catch (SQLException | HeadlessException e) 
+            catch (Exception e) 
             {
                 if (e.getMessage().equals("Duplicate entry '" + bookcode + "' for key 'PRIMARY'")) 
                 {
                     JOptionPane.showMessageDialog(this, "This book has already been issued by you or someone else");
                 } 
-                else if((e.getMessage().equals("Duplicate entry '" + bookcode + "' for key 'PRIMARY'")))
+                else if(e.getMessage().equals("PRIMARY KEY must be unique"))
                 {
-                    
+                    JOptionPane.showMessageDialog(this, "This book has already been issued by you or someone else");
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(this, e.getMessage());
+                   logger.error(e.getMessage());
                 }
             }
         }
@@ -964,6 +965,7 @@ public class MainPage extends javax.swing.JFrame {
     private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
         int i = JOptionPane.showConfirmDialog(null, "Are you sure you want to rerun the setup? ", "Confirmation Dialog!", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
+            prefs.putBoolean(SETUP_HAS_RUN, false);
             Setup a = new Setup();
             a.setVisible(true);
             this.dispose();

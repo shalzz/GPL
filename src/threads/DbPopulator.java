@@ -135,6 +135,7 @@ public class DbPopulator extends SwingWorker<Void, Void>{
         {
             try 
             {
+                // try another method
                 this.finalize();
             } 
             catch (Throwable ex) 
