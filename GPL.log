@@ -1,0 +1,146 @@
+2013-09-23 12:30:29,614 [AWT-EventQueue-0] ERROR m.Connections 69 Error Description:
+ java.sql.SQLException: path to 'databases/kjggg.db': 'C:\Users\500029490\Documents\NetBeansProjects\GPL\databases' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+2013-09-23 12:30:29,622 [AWT-EventQueue-0] ERROR m.MyQueries 115 Error Description:
+ java.lang.NullPointerException: null
+	at myClasses.MyQueries.excQuery(MyQueries.java:110)
+	at Javapackage.StartPage.jButton1ActionPerformed(StartPage.java:186)
+	at Javapackage.StartPage.access$000(StartPage.java:46)
+2013-09-23 21:32:39,258 [AWT-EventQueue-0] ERROR m.MyQueries 61 Error Description:
+ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'settings' already exists
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+2013-09-23 21:33:56,370 [AWT-EventQueue-0] ERROR m.MyQueries 61 Error Description:
+ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'settings' already exists
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+2013-09-23 21:34:01,229 [AWT-EventQueue-0] ERROR m.MyQueries 61 Error Description:
+ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'settings' already exists
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+2013-09-23 21:34:36,543 [AWT-EventQueue-0] ERROR m.MyQueries 61 Error Description:
+ com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'settings' already exists
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+2013-09-23 21:36:47,557 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:38:53,798 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:40:00,473 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:41:17,805 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:41:33,978 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:41:34,306 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:41:34,556 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:43:03,435 [AWT-EventQueue-0] ERROR m.MyQueries 76 PRIMARY KEY must be unique
+ 2013-09-23 21:44:17,376 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:44:19,439 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:44:19,486 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:44:21,814 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:44:23,002 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:44:24,486 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:44:27,986 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:44:28,908 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:44:29,111 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:44:29,299 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:45:01,416 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 21:46:42,732 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-09-23 22:11:53,442 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)
+2013-10-11 01:12:57,238 [AWT-EventQueue-0] ERROR m.Connections 69 Error Description:
+ java.sql.SQLException: path to 'databases/asd.db': 'C:\Users\500029490\Documents\NetBeansProjects\GPL\databases' does not exist
+	at org.sqlite.Conn.open(Conn.java:103)
+	at org.sqlite.Conn.<init>(Conn.java:57)
+	at org.sqlite.JDBC.createConnection(JDBC.java:77)
+2013-10-11 01:12:57,252 [AWT-EventQueue-0] ERROR m.MyQueries 115 Error Description:
+ java.lang.NullPointerException: null
+	at myClasses.MyQueries.excQuery(MyQueries.java:110)
+	at Javapackage.StartPage.jButton1ActionPerformed(StartPage.java:186)
+	at Javapackage.StartPage.access$000(StartPage.java:46)
+2013-10-11 01:17:17,225 [AWT-EventQueue-0] ERROR m.MyQueries 76 Error Description:
+ java.sql.SQLException: PRIMARY KEY must be unique
+	at org.sqlite.NativeDB.throwex(NativeDB.java:210)
+	at org.sqlite.NativeDB._exec(Native Method)
+	at org.sqlite.Stmt.executeUpdate(Stmt.java:152)

@@ -131,18 +131,6 @@ public class DbPopulator extends SwingWorker<Void, Void>{
         {
          logger.error("Error Description:", e);
         }
-        finally
-        {
-            try 
-            {
-                // try another method
-                this.finalize();
-            } 
-            catch (Throwable ex) 
-            {
-                logger.error("Error Description:",ex);
-            }
-        }
     }
     
 }

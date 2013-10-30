@@ -104,16 +104,6 @@ public class ProfileHandler extends SwingWorker<Image, Void> {
               // set the images
               pht1.setIcon(new ImageIcon(img));  
             }
-            
-            // release the resources
-             try 
-            {
-                this.finalize();
-            } 
-            catch (Throwable ex) 
-            {
-                logger.error("Error Description:",ex);
-            }
         }
     
 }
